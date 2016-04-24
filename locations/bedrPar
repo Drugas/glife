@@ -18,7 +18,7 @@ if sisboyday + 1 = daystart and hour = 18:gt'sisterQW','sisboyQW_expel'
 '<center><b><font color="maroon">Your bedroom</font></b></center>'
 ! WD: Correct Image path ~ "images/qwest/alter/<<$loc>>.jpg"
 '<center><img src="images/qwest/alter/bedrPar.jpg"></center>'
-'A small room in which you and your sister live. It contains a <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">wardrobe</a> for your clothes, your <a href="exec:gt ''bed2''">bed</a>, a <a href="exec:gt ''stol'' ,''stolPar''">desk</a> and your sister''s bed. You hide your birth control in a drawer in your desk.'
+'A small room in which you and your sister live. It contains a wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>), on top of it there''s a <a href="exec:gt ''clothing'', ''view_clothing_list'', ''store''">suitcase</a> you can store some clothes in. Also your <a href="exec:gt ''bed2''">bed</a>, a <a href="exec:gt ''stol'' ,''stolPar''">desk</a> and your sister''s bed. You hide your birth control in a drawer in your desk.'
 if komp = 1:'Your <a href="exec:gorodokKomp = 1 & GT ''Komp'',''start''">laptop</a> is on the desk.'
 gorodokKomp = 0
 

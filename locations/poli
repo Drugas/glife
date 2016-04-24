@@ -36,7 +36,7 @@ if $ARGS[0] = 'start':
 				money -= 1000
 				minut += 60
 				health = vital * 10 + stren * 5 + 1000
-				if pillcon > 0:pillcon -= rand(0,2000)
+				if pillcon > 0:pillcon -= rand(0,2)
 				if hosprand = 0:gt 'poli', '0'
 				if hosprand = 1:gt 'poli', '1'
 				if hosprand = 2:gt 'poli', '2'
@@ -71,7 +71,7 @@ if $ARGS[0] = 'start':
 				minut += 15
 				tabletkishot = rand(84,91)
 				tabletkicheck = 2
-				pillcon = 40000
+				pillcon = 40
 				money -= 1000
 				gs 'stat'
 				'<center><img src="images/etogame/poli.jpg"></center>'
@@ -304,29 +304,56 @@ if $ARGS[0] = 'start':
 			money -= 20000
 			pregtime = 0
 			pregtalk = 0
+			preg = 0
+			cycle = 4
+			RecovH += pregchem
+			knowpregloss = 2
 			abortrand = rand(0, 10)
 
 			if age > 18:
-				if abortrand < 10:preg = 0 & sterilewb += 2
+				if abortrand < 10:sterilewb += 2
 				if abortrand = 10:sterilewb += 20
 			else
-				if abortrand < 4:preg = 0 & sterilewb += 2
-				if abortrand >= 5:preg = 0 & sterilewb += 20
+				if abortrand < 4:sterilewb += 2
+				if abortrand >= 5:sterilewb += 20
 			end
 
 			! WD: Correct Image path ~ "images/etogame/abort.jpg"
 			'<center><img src="images/add-on/abort.JPG"></center>'
 			'You spread out on a gynecological chair, from which angle you are fortunate not to be able to see what is going on. You feel nauseous and violated.'
+			preg = 0
+			nextbaby = arrsize('yearkid')
+			:poliabortloop
+			if Babyptype[nextbaby] < 200
+				KILLVAR 'polkid',nextbaby
+				KILLVAR '$kidname',nextbaby
+				KILLVAR 'kidage',nextbaby
+				KILLVAR 'daykid',nextbaby
+				KILLVAR 'monthkid',nextbaby
+				KILLVAR 'yearkid',nextbaby
+				KILLVAR 'Babyptype',nextbaby
+				KILLVAR '$ChildFath',nextbaby
+				KILLVAR '$ChildThFath',nextbaby
+				KILLVAR 'hairkid',nextbaby
+				KILLVAR 'eyeskid',nextbaby
+				KILLVAR 'cumarrcon',nextbaby
+				BabyEmbryo -= 1
+				nextbaby -= 1
+			end
+			nextbaby -= 1
+			if nextbaby > 0:
+				jump 'poliabortloop'
+			end
 
 			act 'Leave':gt 'poli', 'start'
 		end
 	end
-
+	
 	if preg = 2:
 		act 'Give birth':
-			:multikidloop
 			*clr
 			cla
+			:multikidloop
 			$ImageNeededPlacholder
 			! WD: IMAGE NEEDED ~ '<center><img src="images/etogame/abort.jpg"></center>'
 			'You lay on the bed and your feet are put in stirups.'
@@ -339,7 +366,7 @@ if $ARGS[0] = 'start':
 			preg = 0
 			pregtalk = 0
 			sterilewb += 1
-			!nextbaby = ARRPOS('yearkid',0)
+			nextbaby = ARRPOS('yearkid',0)
 			kid += 1
 			BabyEmbryo -= 1
 			daykid[nextbaby] = day
@@ -1070,6 +1097,7 @@ if $ARGS[0] = '0':
 	act 'Have some fun':
 		picrand = 11
 		guy += 1
+		dynamic $CatName, 'Doctor'
 		xgt 'sex', 'var'
 	end
 end
@@ -1083,8 +1111,8 @@ if $ARGS[0] = '1':
 	act 'Storm out':gt 'poli', 'start'
 
 	act 'Have some fun':
-		$boy = 'Doctor'
-		$boy1 = 'Doctor'
+		dynamic $CatName, 'Doctor'
+		dynamic $CatName, 'Doctor', '$boy1'
 		picrand = 11
 		guy += 2
 		xgt 'sexdvoe', 'var'
@@ -1110,6 +1138,7 @@ if $ARGS[0] = '2':
 		act 'Let her':
 			cla
 			*clr
+			dynamic $CatName, 'Doctor'
 			guy += 1
 			girl += 1
 			lesbian += 1
@@ -1122,7 +1151,7 @@ if $ARGS[0] = '2':
 				'<center><img src="images/img/spaln/hospsex6.jpg"></center>'
 				'You lay her on the couch and sink your lips into her pussy, the smell of her sex drives you crazy, you could not put her down and lick her pussy to put your tongue inside her pussy and ass, in this state you are found by the returning doctor.'
 
-				act 'Threesome':gs 'sex' & picrand = 11 & gt 'podrsex', 'suck'
+				act 'Threesome':picrand = 11 & gt 'podrsex', 'suck'
 			end
 		end
 	end

@@ -54,6 +54,8 @@ elseif temprand = 3:
 	Ovulate = 0
 	daylastperiod -= 10+(ferteggage/24)
 end
+temp[1] = daystart-daylastperiod
+$cycreport_txt = 'It has been <<temp[1]>> days since you last had a period.'
 if menoage <= 0:
 	menoage = rand(40,50)
 	temprand = rand(0,10)

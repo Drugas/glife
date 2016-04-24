@@ -226,7 +226,6 @@ if $ARGS[0] = 'end':
 	dvsxanal = 0
 	sexvar = 0
 	sameboy = 0
-	SkipNameCycle = 0
 	sexstart = 0
 	temp1 = rand(2,9)
 	temp2 = rand(2,9)

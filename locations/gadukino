@@ -41,43 +41,44 @@ if $ARGS[0] = '':
 		if month >= 5 and month <= 9:
 			act 'Walking through the village':
 
-			cls
-			minut += 15
-			gs 'stat'
-			temp = RAND(0,100)
-			if temp < 4 and meadow = 0:
-				gt 'gadukino', '1'
-			elseif temp >= 4 and temp < 10:
-				gt 'gadukino', '2'
-			elseif temp >= 10 and temp < 30 and temper >= 30 and sunWeather = 1 and miragopQW = 7:
-				gt 'gadukino', '3'
-			elseif miragopQW >= 11 and temp = 30 and temper >= 25 and sunWeather = 1:
-				gt 'gadukino', '4'
-			elseif miragopQW >= 11 and temp = 31 and temper >= 25 and sunWeather = 1:
-				gt 'gadukino', '5'
-			elseif miragopQW >= 11 and temp = 32 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '6'
-			elseif miragopQW >= 15 and temp = 33 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '7'
-			elseif miragopQW >= 20 and temp = 34 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '8'
-			elseif miragopQW >= 20 and temp = 35 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '9'
-			elseif miragopQW >= 30 and mirasextimes > 50 and temp = 36 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '10'
-			elseif miragopQW >= 20 and temp = 36 and temper >= 20 and sunWeather = 1:
-				gt 'gadukino', '11'
-			elseif temp = 37 and temper >= 20:
-				gt 'gadukino', '12'
-			elseif temp = 38 and temper >= 20:
-				gt 'gadukino', '13'
-			elseif temp >= 39 and temp < 50:
-				gt 'gadukino', '14'
-			elseif temp = 50 and temper >= 25 and sunWeather = 1:
-				gt 'gadukino', '15'
-			else
-				gt 'gadukino', '16'
-			end
+                cls
+                minut += 15
+                gs 'stat'
+                temp = RAND(0,100)
+                if temp < 4 and meadow = 0:
+                    gt 'gadukino', '1'
+                elseif temp >= 4 and temp < 10:
+                    gt 'gadukino', '2'
+                elseif temp >= 10 and temp < 30 and temper >= 30 and sunWeather = 1 and miragopQW = 7:
+                    gt 'gadukino', '3'
+                elseif miragopQW >= 11 and temp = 30 and temper >= 25 and sunWeather = 1:
+                    gt 'gadukino', '4'
+                elseif miragopQW >= 11 and temp = 31 and temper >= 25 and sunWeather = 1:
+                    gt 'gadukino', '5'
+                elseif miragopQW >= 11 and temp = 32 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '6'
+                elseif miragopQW >= 15 and temp = 33 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '7'
+                elseif miragopQW >= 20 and temp = 34 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '8'
+                elseif miragopQW >= 20 and temp = 35 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '9'
+                elseif miragopQW >= 30 and mirasextimes > 50 and temp = 36 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '10'
+                elseif miragopQW >= 20 and temp = 36 and temper >= 20 and sunWeather = 1:
+                    gt 'gadukino', '11'
+                elseif temp = 37 and temper >= 20:
+                    gt 'gadukino', '12'
+                elseif temp = 38 and temper >= 20:
+                    gt 'gadukino', '13'
+                elseif temp >= 39 and temp < 50:
+                    gt 'gadukino', '14'
+                elseif temp = 50 and temper >= 25 and sunWeather = 1:
+                    gt 'gadukino', '15'
+                else
+                    gt 'gadukino', '16'
+                end
+            end
 		end
 	end
 end
@@ -383,7 +384,7 @@ if $ARGS[0] = '14':
 	act 'Pass by':gt 'gadukino'
 end
 
-if $ARGS[0] = '15'
+if $ARGS[0] = '15':
 	cls
 	minut += 5
 	gs 'stat'
@@ -392,7 +393,7 @@ if $ARGS[0] = '15'
 	act 'Escape':gt 'gadukino'
 end
 
-if $ARGS[0] = '16'
+if $ARGS[0] = '16':
 	'<center><H4>Village Gadyukino</H4></center>'
 	'<center><img src="images/qwest/gadukino/walk.jpg"></center>'
 	'You kill time, walking through the village.'

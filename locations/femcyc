@@ -198,12 +198,12 @@ elseif cycle = 1:
 		temprand = rand(0,1000)
 		temprand -= sterileov
 		if temprand <= 0: EggRH -= 1
-		if pillcon > 7000: EggRH -= 1
+		if pillcon > 7: EggRH -= 1
 	else
 !{If you are ready to ovulate, it creates a chance to double ovulate. That chance is increased by your age. Then it does the same for a triple ovulation. Then it sets the ovulation tag, ovulation hour count, and begins a ticker for the life of the eggs.}
 		Temprand = rand(0,20)
 		Temprand += age/15
-		Temprand -= pillcon/1000
+		Temprand -= pillcon
 		if temprand > 20:
 			EggRH += 205
 			Temprand = rand(0,20)
@@ -221,7 +221,7 @@ elseif cycle = 2:
 	if Ovulate > 0 and arrmodtmp > 0:
 		Temprand = rand(1,250000)
 		if pillcon < 0: pillcon = 0
-		Temprand += pillcon
+		Temprand += pillcon*1000
 		if steriletu = 1: Temprand += Temprand*30
 		cumarrtemp = 0
 		:cumloop
@@ -272,7 +272,7 @@ elseif cycle = 2:
 		end
 	end
 !{Ovulation to Luteal. It checks to see if you are on the ovulation cycle. If you are, it checks you for your pillcon. If it is high enough, no egg is released. Under high concentrations of pill chemical, ovulation ticks away quicker. Otherwise, it checks to see if your ovulation hormone is high enough, and if it is it gives you an egg and drops a good chunk down on your ovulation hormone. if its still high, it drops another egg. Then it checks your ovulation hours. If its down to 0, it starts the Luteal phase. Otherwise, it adds an hour to the egg age and reduces the ovulation window by an hour.}
-	if pillcon > 26000:
+	if pillcon > 26:
 		if rand(0,400) ! 1:
 			EggRH = 0
 		end
@@ -354,24 +354,25 @@ elseif cycle = 3:
 		else
 			KILLVAR '$wombpotfath'
 			temprand = rand(0,10)
-			if pillcon < 30000 or temprand = 0
-			Cycle = 0
-			if cyccustom = 0:
-				daylastperiod = daystart
-			end
-			temprand = rand(0,10)
-			if temprand = 0:
-				mesec = 120
-			elseif temprand < 9:
-				mesec = 96
+			if pillcon < 30 or temprand = 0:
+				Cycle = 0
+				if cyccustom = 1:
+					daylastperiod = daystart
+				end
+				temprand = rand(0,10)
+				if temprand = 0:
+					mesec = 120
+				elseif temprand < 9:
+					mesec = 96
+				else
+					mesec = 72
+				end
 			else
-				mesec = 72
+				FocH = 0
+				EggRH = 0
+				Cycle = 1
+				mesec = 0
 			end
-		else
-			FocH = 0
-			EggRH = 0
-			Cycle = 1
-			mesec = 0
 		end
 	else
 		if preg = 1:PregChem += 1
@@ -381,7 +382,7 @@ elseif cycle = 3:
 elseif cycle = 4:
 	if RecovH <= 0:
 		Cycle = 1
-		if cyccustom = 0:
+		if cyccustom = 1:
 			knowpregloss = 0
 			knowpregrecover = 0
 		end
@@ -402,9 +403,9 @@ elseif cycle = 5:
 	PregChem += 1
 	temprand = rand(-400,800)
 	temprand -= (babyembryo-1)*588
-	if PregChem > 6573 + temprand:
+	if PregChem > 6573 + temprand and preg ! 2:
 		'A sharp pain pierces your abdomen, and you feel something flow down your legs. Your water has broken!'
-		$cycreport_txt = 'In Labor.'
+		$cycreport_txt = 'In labour'
 		arrmodtmp =arrsize('$ChildFath')
 		arrmodtmp -= (babyembryo+1)
 		:babyfinalpreploop

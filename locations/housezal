@@ -157,9 +157,9 @@ if week < 6 and hour > 8 and hour < 20:
 										cla
 										*clr
 										spafinloc = 12
-gs 'cum_manage'
+										gs 'cum_manage'
 										spafinloc = 4
-gs 'cum_manage'
+										gs 'cum_manage'
 										'<center><img src="images/img/centr/nikzal8.jpg"></center>'
 										'While you are going to continue to stand by cancer, Nicholas walked up to you and put in the ass twisted bill'
 
@@ -312,7 +312,7 @@ elseif hour > 17 and hour < 20 and housezalrand < 3 and nikslut = 1 and niksexda
 	'"Yeah, no, you do not understand how you her ass, though very best." says Nicholas baring your buttocks. "Short allowance and she gets up it." Nicholas continues. In the meantime you stand with your bare ass and smiling stupidly looking at the man, and Nicholas did not let up, "Want it show? <<$name>> And you do not mind to serve the host along with his guest?" gororit he puts a couple of bills on the table. A man looks at you and in his pants markedly increases bump in the groin area.'
 	'"With pleasure, " you reply, kneeling.'
 
-	act 'Start':SkipNameCycle = 1 & xgt 'sexdvoe', 'var'
+	act 'Start':xgt 'sexdvoe', 'var'
 elseif hour > 17 and hour < 20 and housezalrand > 8 and nikslut = 1 and niksexday ! daystart:
 	cla
 	*clr
@@ -338,7 +338,7 @@ elseif hour > 17 and hour < 20 and housezalrand > 8 and nikslut = 1 and niksexda
 		'<center><img src="images/img/th/s2.jpg"></center>'
 		'You lay on the floor and he lay down behind you, he smeared fingers slaver your pussy and slowly introduced dick in you. You were not excited and a couple of minutes you were hurt a little vagina until moistened. Entering into a little taste you started podmahivat him. Once you pick up the pace in the room returned Nicholas "Yes you already have everything in full swing, I seem almost too late, " he said, starting to undress.'
 
-		act 'Continue':SkipNameCycle = 1 & xgt 'sexdvoe', 'var'
+		act 'Continue':xgt 'sexdvoe', 'var'
 	end
 end
 

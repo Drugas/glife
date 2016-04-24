@@ -1,0 +1,148 @@
+# clothing_QV
+
+if $ARGS[0] = 'list':
+
+	act 'Strip':gt 'clothing_QV', 'strip'
+	act 'Leave':gt $loc, $metka
+
+	i = 1
+	:loopcheap
+		if cheap[i] = 1 and cheapH[i] > 0 and cheapB[i] > (bedra - 8) and cheapB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''cheap'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/1cheap/Cheap<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 85:jump 'loopcheap'
+
+	i = 1
+	:loopaverage
+		if average[i] = 1 and averageH[i] > 0 and averageB[i] > (bedra - 8) and averageB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''average'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/2average/Average<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 125:jump 'loopaverage'
+
+	i = 1
+	:loopexpensive
+		if expensive[i] = 1 and expensiveH[i] > 0 and expensiveB[i] > (bedra - 8) and expensiveB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''expensive'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/3expensive/Expensive<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 147:jump 'loopexpensive'
+
+	i = 1
+	:loopformal
+		if formal[i] = 1 and formalH[i] > 0 and formalB[i] > (bedra - 8) and formalB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''formal'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/4formal/Formal<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 14:jump 'loopformal'
+
+	i = 1
+	:loopoffice
+		if office[i] = 1 and officeH[i] > 0 and officeB[i] > (bedra - 8) and officeB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''office'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/5office/Office<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 30:jump 'loopoffice'
+
+	i = 1
+	:loopschool
+		if school[i] = 1 and schoolH[i] > 0 and schoolB[i] > (bedra - 8) and schoolB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''school'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/6school/School<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+		if i = 6: i = 7
+	if i <= 14:jump 'loopschool'
+
+	i = 1
+	:loopexercise
+		if exercise[i] = 1 and exerciseH[i] > 0 and exerciseB[i] > (bedra - 8) and exerciseB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''exercise'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/7exercise/Exercise<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 26:jump 'loopexercise'
+
+	i = 1
+	:loopnaughty
+		if naughty[i] = 1 and naughtyH[i] > 0 and naughtyB[i] > (bedra - 8) and naughtyB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''naughty'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/8naughty/Naughty<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 67:jump 'loopnaughty'
+
+	i = 1
+	:loopexhibit
+		if exhibit[i] = 1 and exhibitH[i] > 0 and exhibitB[i] > (bedra - 8) and exhibitB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''exhibit'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/9exhibit/Exhibit<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 30:jump 'loopexhibit'
+
+	i = 1
+	:loopuniform
+		if uniform[i] = 1 and uniformH[i] > 0 and uniformB[i] > (bedra - 8) and uniformB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''uniform'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/10uniform/Uniform<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 24:jump 'loopuniform'
+end
+
+if $ARGS[0] = 'cloak':
+	i = 1
+	:loopcoat
+		if coat[i] = 1 and coatH[i] > 0 and coatB[i] > (bedra - 8) and coatB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''coat'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/11coat/Coat<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 12:jump 'loopcoat'
+end
+
+if $ARGS[0] = 'changing':
+	i = 1
+	:loopswimwear
+		if swimwear[i] = 1 and swimwearH[i] > 0 and swimwearB[i] > (bedra - 8) and swimwearB[i] < (bedra + 8):*p '<a href="exec:gt ''clothing_QV'', ''change'', ''swimwear'', <<i>>"><div style="width:100%; max-width:250px; max-height:250px;"><img src="images/Clothing/12swimwear/Swimwear<<i>>.jpg" 	height="250" /></div></a>'
+		i += 1
+	if i <= 30:jump 'loopswimwear'
+
+end
+
+if $ARGS[0] = 'strip':
+
+	if tanga = 1:
+		'<center><img src="images/clothes/nude.jpg"></center>'
+		'<center>You strip down to your panties.</center>'
+	else
+		'<center><img src="images/clothes/nude1.jpg"></center>'
+		'<center>You strip completely naked.</center>'
+	end
+
+	gs 'clothing', 'strip'
+	act 'Choose something to wear':gt 'clothing_QV', 'list'
+	act 'Leave':gt $loc, $metka
+end
+
+if $ARGS[0] = 'change':
+	*clr
+	cla
+	'<center><img src="<<FUNC(''$clothing_image'',  $ARGS[1], ARGS[2])>>"></center>'
+	$RESULT = FUNC('$short_description', $ARGS[1])
+	$RESULT += '<<ARGS[2]>>'
+	'<<$RESULT>>'
+	gs 'clothing_attributes', $ARGS[1], ARGS[2]
+	if $ARGS[1] ! 'coat' and $ARGS[1] ! 'swimwear':
+		gs 'clothing_descriptions'
+		'<<$description>>'
+	else
+		FUNC('$clothing_name', $ARGS[1], ARGS[2])
+	end
+
+	if CloBimbo = 1:'This item is considered bimbo clothing.'
+
+	if $ARGS[1] = 'naughty' and CloQuality < 4:'This outfit can be used for prostitution.'
+	if $ARGS[1] = 'uniform':
+		if CloStyle2 = 1:
+			'This outfit is considered to be a maid uniform.'
+		else
+			'This outfit is a server uniform, suitable for jobs that require one.'
+		end
+	end
+
+	if $ARGS[1] = 'naughty' and CloQuality < 4:'This outfit can be used for prostitution.'
+	if $ARGS[1] = 'uniform':
+		if CloStyle2 = 1:
+			'This outfit is considered to be a maid uniform.'
+		else
+			'This outfit is a server uniform, suitable for jobs that require one.'
+		end
+	end
+
+	act 'Wear this outfit':
+		gs 'clothing', 'wear', $ARGS[1], ARGS[2]
+		dynamic $ARGS[1] + 'W[<<ARGS[2]>>] = 1'
+		gt $loc, $metka
+	end
+	act 'Choose another outfit': gt 'clothing_QV', 'list'
+	act 'Leave':gt $loc, $metka
+end
+
+
+--- clothing_QV ---------------------------------
+

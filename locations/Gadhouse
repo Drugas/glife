@@ -136,7 +136,7 @@ $villagecat = {
 
 '<center><H4>Cottage</H4></center>'
 '<center><img src="images/qwest/gadukino/izba.jpg"></center>'
-'Simple village hut. In a small room is <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">cupboard</a> and <a href="exec:gad = 1 & gt ''bed2''">bed</a> where you can sleep. In a large room is <a href="exec:gt ''tvPar''">tv_set</a>. TV stands next to an ancient <a href="exec:gt ''mirror'', ''start''">trellis</a>'
+'Simple village hut. In a small room is a wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) and <a href="exec:gad = 1 & gt ''bed2''">bed</a> where you can sleep. In a large room is <a href="exec:gt ''tvPar''">tv_set</a>. TV stands next to an ancient <a href="exec:gt ''mirror'', ''start''">trellis</a>'
 if catday = daystart:
 	'On the table by the window lazily lying cat <a href="exec: dynamic $villagecat ">Boniface</a>.'
 else

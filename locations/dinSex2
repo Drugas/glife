@@ -668,5 +668,50 @@ $stamina_npc = {
 	'<center>Stamina: <<$ind_npc>></center>'
 }
 
+!Call looks like: dynamic $CatName, 'Courier', '$boy1'
+!second argument ($ARGS[1]) can be left out, in that case it calls for '$boy'
+$CatName = {
+	if $ARGS[1] = '$boy1':
+		$boy1 = $ARGS[0]
+		if arrpos('$cumarrnam',$boy1) ! -1:
+			boycount = 2
+			:naming
+				$boyname = '#<<boycount>> '+$boy1
+				arrmodtmp = arrpos('$cumarrnam',$boyname)
+			if $cumarrnam[arrmodtmp] = $boyname:boycount += 1 & jump 'naming'
+			$boy1 = $boyname
+		end
+	elseif $ARGS[1] = '$boy2':
+		$boy2 = $ARGS[0]
+		if arrpos('$cumarrnam',$boy2) ! -1:
+			boycount = 2
+			:naming
+				$boyname = '#<<boycount>> '+$boy2
+				arrmodtmp = arrpos('$cumarrnam',$boyname)
+			if $cumarrnam[arrmodtmp] = $boyname:boycount += 1 & jump 'naming'
+			$boy2 = $boyname
+		end
+	elseif $ARGS[1] = '$boy3':
+		$boy3 = $ARGS[0]
+		if arrpos('$cumarrnam',$boy3) ! -1:
+			boycount = 2
+			:naming
+				$boyname = '#<<boycount>> '+$boy3
+				arrmodtmp = arrpos('$cumarrnam',$boyname)
+			if $cumarrnam[arrmodtmp] = $boyname:boycount += 1 & jump 'naming'
+			$boy3 = $boyname
+		end
+	else
+		$boy = $ARGS[0]
+		if arrpos('$cumarrnam',$boy) ! -1:
+			boycount = 2
+			:naming
+				$boyname = '#<<boycount>> '+$boy
+				arrmodtmp = arrpos('$cumarrnam',$boyname)
+			if $cumarrnam[arrmodtmp] = $boyname:boycount += 1 & jump 'naming'
+			$boy = $boyname
+		end
+	end
+}
 --- dinSex2 ---------------------------------
 

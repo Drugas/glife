@@ -79,8 +79,8 @@ if $ARGS[0] = 'dysh':
 		borMir = 1
 		gt 'mirror', 'start'
 	end
-	act 'Clothes locker':
-		gt 'clothing', 'view_clothing_list', 'wardrobe', 'brothel'
+	act 'Change your clothes':
+		gt 'clothing_QV', 'list'
 	end
 end
 

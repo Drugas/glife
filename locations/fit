@@ -119,9 +119,9 @@ if $ARGS[0] = 'dressing room':
 		gt 'mirror', 'start'
 	end
 
-	act 'Check clothes in locker':
+	act 'Change clothes':
 		cla
-		gt 'clothing', 'view_clothing_list', 'wardrobe'
+		gt 'clothing_QV', 'list'
 	end
 
 	if razdtumbler = 1 and $clothingworntype = 'exercise':

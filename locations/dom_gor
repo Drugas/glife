@@ -12,7 +12,7 @@ bcolor = rgb(255, 255, 255)
 lcolor = rgb(106, 90, 205)
 '<center><b><font color="maroon">Your room</font></b></center>'
 '<center><img src="images/etogame/kom_gor.jpg"></center>'
-'Your room in a hostel. The room is small, there is only the minimum necessary. 2 <a href="exec:gt ''bed'', ''start''">beds</a>, a <a href="exec:gt ''gor_mirror'', ''start''">mirror</a>, <a href="exec:gt ''clothing'', a ''view_clothing_list'', ''wardrobe''">wardrobe</a> for your clothes and a small TV.'
+'Your room in a hostel. The room is small, there is only the minimum necessary. 2 <a href="exec:gt ''bed'', ''start''">beds</a>, a <a href="exec:gt ''gor_mirror'', ''start''">mirror</a>, a wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) and a small TV.'
 
 if $clothingworntype = 'exercise' and teachlevel > 20 and parkrunday ! daystart and hour < 21 and hour > 6:
 	act 'Go for a jog around the Square (1:00)':

@@ -1,14 +1,19 @@
 # clothing
 
+
 $clothing_list_line = {
 	!! a single line in a clothing list (wardrobe, etc)
-	!! ARGS 0 - action type (wardrobe, sell)
+	!! ARGS 0 - action type (wardrobe, sell, resize, store, forsale)
 	!! ARGS 1 - clothing type
 	!! ARGS 2 - clothing index
 
+	$bgcolor = iif($bgcolor='#f3f4ee','#ffffff','#f3f4ee')
+
 	!$RESULT = FUNC('$short_description', $ARGS[1])
 	!$RESULT += '<<ARGS[2]>>'
-	$RESULT = '<TR><TD><<FUNC(''$short_description'', $ARGS[1])>> <<ARGS[2]>></TD>'
+	$RESULT = '<TR bgcolor='+$bgcolor+'>'
+	$RESULT +='<TD><a href="exec:gt ''clothing'', ''view_clothing_item'', ''<<$ARGS[0]>>'', ''<<$ARGS[1]>>'', <<ARGS[2]>>"><img src="<<FUNC(''$clothing_image'', $ARGS[1], ARGS[2])>>" width="75"></a></TD>'
+	!$RESULT +='<TD><<FUNC(''$short_description'', $ARGS[1])>> <<ARGS[2]>></TD>'
 	if $ARGS[1] ! 'school' or ARGS[2] ! 6:
 		!$RESULT += ' (strength ' + dyneval '$RESULT += <<$ARGS[1]>>H[<<ARGS[2]>>]'
 		$RESULT += '<TD>' + dyneval '$RESULT += <<$ARGS[1]>>H[<<ARGS[2]>>]' + '</TD>'
@@ -22,12 +27,12 @@ $clothing_list_line = {
 
 		!$RESULT += ')'
 	else
-		$RESULT += '<TD td colspan="2"></TD>'
+		$RESULT += '<TD colspan="2"></TD>'
 	end
 	gs 'clothing_attributes', $ARGS[1], ARGS[2]
 	if $ARGS[1] ! 'coat' and $ARGS[1] ! 'swimwear':
 		gs 'clothing_descriptions'
-		$RESULT += '<TD><<$description>></TD>'
+		$RESULT += '<TD><<FUNC(''$short_description'', $ARGS[1])>> <<ARGS[2]>><br/><br/><<$description>></TD>'
 	else
 		$RESULT += '<TD>' + FUNC('$clothing_name', $ARGS[1], ARGS[2]) + '</TD>'
 	end
@@ -57,92 +62,123 @@ $clothing_list_line = {
 			$RESULT += '</TD>'
 		end
 	end
+	$RESULT += '<TD>'
+	if cloc ! 1:$RESULT += ' <a href="exec:gt ''clothing'', ''dest1'', ''<<$ARGS[0]>>'', ''<<$ARGS[1]>>'', <<ARGS[2]>>">Store it</a>'
+	if cloc ! 0:$RESULT += ' <a href="exec:gt ''clothing'', ''dest0'', ''<<$ARGS[0]>>'', ''<<$ARGS[1]>>'', <<ARGS[2]>>">Put in wardrobe</a>'
+	if cloc ! 2:$RESULT += ' <a href="exec:gt ''clothing'', ''dest2'', ''<<$ARGS[0]>>'', ''<<$ARGS[1]>>'', <<ARGS[2]>>">Unwanted</a>'
+	$RESULT += '</TD>'
 }
+
+if $ARGS[0] = 'dest0':
+	*clr
+	dynamic '<<$ARGS[2]>>S[<<ARGS[3]>>] = 0'
+	gt 'clothing', 'view_clothing_list', $ARGS[1]
+end
+
+if $ARGS[0] = 'dest1':
+	*clr
+	dynamic '<<$ARGS[2]>>S[<<ARGS[3]>>] = 1'
+	gt 'clothing', 'view_clothing_list', $ARGS[1]
+end
+
+if $ARGS[0] = 'dest2':
+	*clr
+	dynamic '<<$ARGS[2]>>S[<<ARGS[3]>>] = 2'
+	gt 'clothing', 'view_clothing_list', $ARGS[1]
+end
+
 
 if $ARGS[0] = 'view_clothing_list':
 	!! ARGS 0 - view_clothing_list
-	!! ARGS 1 - action type (wardrobe, sell, resize)
+	!! ARGS 1 - action type (wardrobe, sell, resize, store, unwanted)
 	!! ARGS 2 - brothel flag (brothel)
 
 	act 'Leave':gt $loc, $metka
 
-	'<table border=1><TH>Name</TH><TH>Strength</TH><TH>Hip size</TH><TH>Description</TH><TH>Bimbo</TH><TH>Prostitute</TH><TH>Actions</TH>'
+	'<center><table border=1><TH><a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">Wardrobe </a></TH><TH><a href="exec:gt ''clothing'', ''view_clothing_list'', ''store''">Storage</a></TH><TH><a href="exec:gt ''clothing'', ''view_clothing_list'', ''unwanted''">Unwanted</a></TH></center>'
+
+	$bgcolor='#f3f4ee'
+	
+	'<table border=0 cellspacing=0 cellpadding=5><TH></TH><TH>Strength</TH><TH>Hip size</TH><TH>Description</TH><TH>Bimbo</TH><TH>Prostitute</TH><TH>Actions</TH><TH>Move</TH>'
 
 	if $ARGS[1] = 'wardrobe':
+		cloc = 0
 		if $clothingworntype ! 'nude':act 'Strip':gs 'clothing', 'strip' & gt $loc, $metka
 		if StoryLine = 1 and SchoolAtestat = 0 and SchoolBlock = 0 and ($clothingworntype ! 'school' or clothingwornnumber ! 6):*P dyneval($clothing_list_line, $ARGS[1], 'school', 6)
+	end
+	
+	if $ARGS[1] = 'store':
+		cloc = 1
+	end
+	
+	if $ARGS[1] = 'unwanted':
+		cloc = 2
 	end
 
 	i = 1
 	:loopcheap
-		if cheap[i] = 1 and ($clothingworntype ! 'cheap' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'cheap', i)
+		if cheap[i] = 1 and cheapS[i] = cloc and ($clothingworntype ! 'cheap' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'cheap', i)
 		i += 1
 	if i <= 85:jump 'loopcheap'
 
 	i = 1
 	:loopaverage
-		if average[i] = 1 and ($clothingworntype ! 'average' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'average', i)
+		if average[i] = 1 and averageS[i] = cloc and ($clothingworntype ! 'average' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'average', i)
 		i += 1
 	if i <= 125:jump 'loopaverage'
 
 	i = 1
 	:loopexpensive
-		if expensive[i] = 1 and ($clothingworntype ! 'expensive' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'expensive', i)
+		if expensive[i] = 1 and expensiveS[i] = cloc and ($clothingworntype ! 'expensive' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'expensive', i)
 		i += 1
 	if i <= 147:jump 'loopexpensive'
 
 	i = 1
 	:loopformal
-		if formal[i] = 1 and ($clothingworntype ! 'formal' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'formal', i)
+		if formal[i] = 1 and formalS[i] = cloc and ($clothingworntype ! 'formal' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'formal', i)
 		i += 1
 	if i <= 14:jump 'loopformal'
 
 	i = 1
 	:loopoffice
-		if office[i] = 1 and ($clothingworntype ! 'office' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'office', i)
+		if office[i] = 1 and officeS[i] = cloc and ($clothingworntype ! 'office' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'office', i)
 		i += 1
 	if i <= 30:jump 'loopoffice'
 
 	i = 1
 	:loopschool
-		if school[i] = 1 and ($clothingworntype ! 'school' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'school', i)
+		if school[i] = 1 and schoolS[i] = cloc and ($clothingworntype ! 'school' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'school', i)
 		i += 1
 		if i = 6: i = 7
 	if i <= 14:jump 'loopschool'
 
 	i = 1
 	:loopexercise
-		if exercise[i] = 1 and ($clothingworntype ! 'exercise' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'exercise', i)
+		if exercise[i] = 1 and exerciseS[i] = cloc and ($clothingworntype ! 'exercise' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'exercise', i)
 		i += 1
 	if i <= 26:jump 'loopexercise'
 
 	i = 1
 	:loopnaughty
-		if naughty[i] = 1 and ($clothingworntype ! 'naughty' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'naughty', i)
+		if naughty[i] = 1 and naughtyS[i] = cloc and ($clothingworntype ! 'naughty' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'naughty', i)
 		i += 1
 	if i <= 67:jump 'loopnaughty'
 
 	i = 1
 	:loopexhibit
-		if exhibit[i] = 1 and ($clothingworntype ! 'exhibit' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'exhibit', i)
+		if exhibit[i] = 1 and exhibitS[i] = cloc and ($clothingworntype ! 'exhibit' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'exhibit', i)
 		i += 1
 	if i <= 30:jump 'loopexhibit'
 
 	i = 1
 	:loopuniform
-		if uniform[i] = 1 and ($clothingworntype ! 'uniform' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'uniform', i)
+		if uniform[i] = 1 and uniformS[i] = cloc and ($clothingworntype ! 'uniform' or clothingwornnumber ! i):*P dyneval($clothing_list_line, $ARGS[1], 'uniform', i)
 		i += 1
 	if i <= 24:jump 'loopuniform'
 
 	i = 1
-	:loopcoat
-		if coat[i] = 1:*P dyneval($coat_list_line, $ARGS[1], 'coat', i)
-		i += 1
-	if i <= 12:jump 'loopcoat'
-
-	i = 1
 	:loopswimwear
-		if swimwear[i] = 1:*P dyneval($clothing_list_line, $ARGS[1], 'swimwear', i)
+		if swimwear[i] = 1 and swimwearS[i] = cloc :*P dyneval($clothing_list_line, $ARGS[1], 'swimwear', i)
 		i += 1
 	if i <= 30:jump 'loopswimwear'
 
@@ -507,6 +543,7 @@ end
 if $ARGS[0] = 'wear_last_worn':
 	gs 'clothing', 'wear', $lastwornclothingtype, lastwornclothingnumber
 end
+
 
 --- clothing ---------------------------------
 

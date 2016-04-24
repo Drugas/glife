@@ -13,7 +13,7 @@ if $ARGS[0] = 'start':
 	'<center><b>Your room</b></center>'
 	'<center><img src="images/img/centr/obroom.jpg"></center>'
 	'This is your room, with you in it lives another girl Vika'
-	'Right next door is the old <a href="exec:GT ''clothing'', ''view_clothing_list'', ''wardrobe''">cupboard</a>.'
+	'Right next to the door is an old wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>), on top of it there''s a <a href="exec:gt ''clothing'', ''view_clothing_list'', ''store''">suitcase</a> you can store some clothes in.'
 	'On the wall, near the hanging cabinet <a href="exec:GT ''mirror'',''start''">mirror</a>.'
 	'Near the wall is your <a href="exec:GT ''bed'',''start''">bed</a>.'
 	if komp = 1:'On your bed lying <a href="exec:GT ''Komp'',''start''">notebook</a>.'

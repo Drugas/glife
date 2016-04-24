@@ -7,7 +7,7 @@ cls
 gs 'stat'
 '<center><img src="images/BDSM_Club/Hallways/dressingroom.jpg"></center>'
 'A huge dressing room. Mostly used by submissives to dress as staff and because of this, it is a safe space and games are not allowed.'
-'It contains several <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">wardrobes</a> where you can change your clothes.'
+'It contains several wardrobes (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>).'
 
 act 'Go to foyer': gt 'MHall', 'foyer'
 act 'Goto east wing hall': gt 'MHall', 'east'

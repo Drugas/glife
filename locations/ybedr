@@ -11,7 +11,7 @@ gs 'stat'
 if ymanrem[4] = 0:'<center><img src="images/etogame/ynill.jpg"></center>'
 if ymanrem[4] = 1:'<center><img src="images/etogame/yrem.jpg"></center>'
 if ymanrem[4] = 2:'<center><img src="images/etogame/ybedr.jpg"></center>'
-if ymanrem[4] = 2:'Bright and beautiful room, with a nice <a href="exec:gt ''bed'', ''start''">double bed</a>. Near the entrance is a modern <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">wardrobe</a>. Against the wall are a table and a <a href="exec:gt ''mirror'', ''start''">mirror</a>'
+if ymanrem[4] = 2:'Bright and beautiful room, with a nice <a href="exec:gt ''bed'', ''start''">double bed</a>. Near the entrance is a modern wardrobe(where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>). You have a <a href="exec:gt ''clothing'', ''view_clothing_list'', ''store''">chest</a> at the end of your bed where you can store some clothes.. Against the wall are a table and a <a href="exec:gt ''mirror'', ''start''">mirror</a>'
 
 act 'Leave the room':minut += 1 & gt 'ymans'
 

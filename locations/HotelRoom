@@ -13,7 +13,7 @@ $loc = $CURLOC
 	'<center><b><font color = maroon>Your normal hotel room</font></b></center>'
 	'<center>You have paid to stay for <<hotelroom1day - daystart>> more nights in the room.</center>'
 	'<center><img src="images/nigma/gor/Hotel/hotel.room.normal.jpg"></center>'
-	'Your hotel room is not very large, but it has everything you need and is quite stylish. The large <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">closet</a> for your clothes stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
+	'Your hotel room is not very large, but it has everything you need and is quite stylish. The large <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
 	'Your hotel room also has a <a href="exec:GT ''hotelroom'',''tv''">TV</a>.'
 	act'Go to the hotel lobby':
 		if $clothingworntype ! 'nude':
@@ -41,7 +41,7 @@ $loc = $CURLOC
 	'<center><b><font color = maroon>Your luxury room</font></b></center>'
 	'<center>You have paid to stay for <<hotelroom1day - daystart>> more nights in the room.</center>'
 	'<center><img src="images/nigma/gor/Hotel/hotel.room.better.jpg"></center>'
-	'Your hotel room is not very large, but it has everything you need and is quite stylish. The large <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">closet</a> for your clothes stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
+	'Your hotel room is not very large, but it has everything you need and is quite stylish. The large <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
 	'Your hotel room also has a small flat-screen <a href="exec:GT ''hotelroom'',''tv''">TV</a>, right across the bed.'
 	act'Go to the hotel lobby':
 		if $clothingworntype ! 'nude':
@@ -66,7 +66,7 @@ $loc = $CURLOC
 	'<center><b><font color = maroon>Your royal suite</font></b></center>'
 	'<center>You have paid to stay for <<hotelroom1day - daystart>> more nights in the room.</center>'
 	'<center><img src="images/nigma/gor/Hotel/hotel.room.best.jpg"></center>'
-	'Your hotel room is quite spacious, and is beautifully furnished. For a second, you wonder why a hotel in a town like Pavlovsk even has such a luxurious suite. The room is filled with expensive appliances. The gorgeous <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">closet</a> for your clothes stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
+	'Your hotel room is quite spacious, and is beautifully furnished. For a second, you wonder why a hotel in a town like Pavlovsk even has such a luxurious suite. The room is filled with expensive appliances. The gorgeous <a href="exec:gt ''bed2''">double bed</a> takes up most of the room. A modern wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) stands near the entrance of the room. Next to the door, you can find a <a href="exec:GT ''mirror'',''start''">mirror</a>. The door to the <a href="exec:GT ''hotelroom'',''shower1''">bathroom</a> is to the right.'
 	'Your hotel room also has a huge flat-screen <a href="exec:GT ''hotelroom'',''tv''">TV</a>, right across the bed.'
 	act'Go to the hotel lobby':
 		if $clothingworntype ! 'nude':

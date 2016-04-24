@@ -880,17 +880,11 @@ If month = 12:$month = 'December' & $mons = 'December'
 if minut < 10:$nilmin = '0'
 if minut >= 10:$nilmin = ''
 if kid > 0:
-	i = 0
+	i = arrsize('yearkid')
 	:LoopKidAgeCounter
-	if i <= ARRPOS('yearkid',0):
-		if monthkid[i] = month and daykid[i] = day:
-			if daystartkid[i] ! daystart:
-				daystartkid[i] = daystart
-				yearkid[i] += 1
-				msg'It is <<$kidname[i]>>s birthday today.'
-			end
-		end
-		i += 1
+	if 	i >= 0
+		if yearkid[i] = year + 1 and monthkid[i] = month and daykid[i] = day: msg'It is <<$kidname[i]>>''s birthday today.'
+		i -= 1
 		jump 'LoopKidAgeCounter'
 	end
 end

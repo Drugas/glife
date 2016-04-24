@@ -26,14 +26,14 @@ end
 if $ARGS[0] = 'pal0':
 	cla
 	*clr
-	$boy = 'Soldier'
-	$boy1 = 'Soldier'
 	'<center><img src="images/img/military/pal0.jpg"></center>'
 	'Once you begin to change as the tent includes two soldiers and see you half-naked, running up to you with the members on the edge, you hvaete for their members, but what to do to squeeze harder and get them out of the tent or relax after a hard day.'
 
 	act 'Send':gt 'palatka', 'start'
 
 	act 'Post':
+		dynamic $CatName, 'Soldier'
+		dynamic $CatName, 'Soldier', $boy1
 		guy += 2
 		picrand = 22
 		xgt 'sexdvoe', 'var'
@@ -50,13 +50,7 @@ if $ARGS[0] = 'pal1':
 
 	act 'Repay in full':
 		sexpartkno = 1
-		$boy = 'Black soldier'
-		soldercount = 1
-		:soldiernaming
-			$boycount = '#<<soldercount>> '+$boy
-			arrmodtmp = arrpos('$cumarrnam',$boycount)
-		if $cumarrnam[arrmodtmp] = $boycount:soldercount += 1 & jump 'soldiernaming'
-		$boy=$boycount
+		dynamic $CatName, 'Black Soldier'
 		guy += 1
 		picrand = 43
 		gt 'sex', 'minet'

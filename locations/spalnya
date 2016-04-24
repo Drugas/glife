@@ -13,7 +13,7 @@ gs 'stat'
 '<center><img src="images/img/centr/spaln.jpg"></center>'
 
 'The room is a very good size, there is  a <a href="exec:gt ''bed'', ''start''">double bed</a> and an <a href="exec:gt ''budilnik'', ''start''">alarm clock</a>.'
-'Also, an expensive <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">wardrobe</a> standing against a wall, bestide which stands a make-up table with a <a href="exec:gt ''mirror'', ''start''">mirror</a> on it.'
+'Also, an expensive wardrobe (where you can <a href="exec:gt ''clothing'', ''view_clothing_list'', ''wardrobe''">organize your clothes</a> or <a href="exec:gt ''clothing_QV'', ''list''">pick something to wear</a>) stands against a wall, beside which stands a make-up table with a <a href="exec:gt ''mirror'', ''start''">mirror</a> on it.'
 if komp = 1:
 	$komp = ' with your <a href="exec:gt ''Komp'', ''start''">laptop</a> on it'
 else

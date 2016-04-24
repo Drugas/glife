@@ -174,6 +174,7 @@ end
 cycletemp[4] = arrsize('$ChildFath')
 if cycletemp[4] > 0:
 	cycletemp = 0
+	if $wombthfath ! 'Unknown': 'Current father set as the father you think is of the children in the womb: <<$wombthfath>>'
 	'Babies and Children (of <<cycletemp[4]>>):'
 	'<Table border=1><TR><TH>Index number</TH><TH>Name of the kid</TH><TH>Age</TH><TH>Born(M/D/Y)</TH><TH>Sex</TH><TH>Pregnancy Type</TH><TH>Biological Father</TH><TH>Believed Father</TH><TH>Child Eye Color</TH><TH>Child Hair Color</TH><TH>Child Contraceptive Type</TH></TR>'
 	:cumcbcloop

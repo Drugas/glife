@@ -98,8 +98,8 @@ if $ARGS[0] = 'pro0':
 	act 'Refuse':gt 'Military', 'start'
 
 	act 'Agree':
-		$boy = 'Soldier'
-		$boy1 = 'Soldier'
+		dynamic $CatName, 'Soldier'
+		dynamic $CatName, 'Soldier', '$boy1'
 		cla
 		*clr
 		'<center><img src="images/img/military/pro0.jpg"></center>'
@@ -149,7 +149,7 @@ if $ARGS[0] = 'pro1':
 end
 
 if $ARGS[0] = 'rape':
-	$boy = 'Rapist'
+	dynamic $CatName, 'Rapist'
 	cla
 	*clr
 	rape += 1

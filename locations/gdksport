@@ -47,9 +47,9 @@ if $ARGS[0] = 'start':
 			gt 'gdksport', 'start'
 		end
 	end
-	if albinaQWdance > 0 or gsAboDance > 0 or gsAboBeg > 0 or gsAboVolley > 0:
-		act 'Change clothes in the locker room':gt 'clothing', 'view_clothing_list', 'wardrobe'
-	end	
+
+	act 'Change clothes in the locker room':gt 'clothing_QV', 'list'
+
 	if  $clothingworntype ! 'exercise' and (albinaQWdance > 0 or gsAboDance > 0 or gsAboBeg > 0 or gsAboVolley > 0):'You are not dressed in sports clothes.'
 	if sweat >= 0:
 		act 'Wash in the shower':gt 'gdksport', 'shower'

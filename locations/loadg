@@ -22,6 +22,8 @@ if bankAccount = 0 and karta > 0:
 	if bankDebtLimit = 0: bankDebtLimit = 5000
 end
 
+temp[1] = daystart-daylastperiod
+$cycreport_txt = 'It has been <<temp[1]>> days since you last had a period.'
 if menoage = 0:
 	menoage = rand(40,50)
 	temprand = rand(0,10)
