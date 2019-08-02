@@ -1,0 +1,602 @@
+# swamphouse
+
+if $ARGS[0] = 'start' or $ARGS[0] = '':
+	$location_type = 'indoors'
+	$loc = 'swamphouse'
+	$metka = 'start'
+	$menu_loc = 'swamphouse'
+	$menu_arg = 'start'
+	menu_off = 0
+	frost = 0
+	bonusZ = 0
+	clr
+	gs 'stat'
+	gs 'themes', 'indoors'
+	huntslutsexrand = rand(1,3)
+	temp_sh = rand(1,5)
+	clothesAtLocation = FUNC('lost_clothes_here','swamphouse')
+
+	gs 'hunter_ambient', 'schedule'
+
+	'<center><H4>Hut</H4></center>'
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swampizba.jpg"></center>'
+	*nl
+	'A small hunting cabin. The cabin contains a small room with a low ceiling.'
+	*nl
+	'You see a <a href="exec: gt ''bed'', ''start''">couch</a> where you can lie down and sleep.'
+	*nl
+	if bucket > 0:
+		'There''s a <a href="exec: gs ''swamphouse'', ''bucket'' ">bucket</a> placed in the corner, filled with water collected from the spring.'
+	else
+		'There''s an empty bucket placed in the corner. It needs refilling with water from the spring.'
+	end
+	'You see an old <a href="exec: gs ''swamphouse'', ''washstand'' ">washstand</a> you can use to wash your hands and face. There is a well-used <a href="exec: gs ''swamphouse'', ''tub''">tub</a> nearby, that you can use to bathe in.'
+	*nl
+	'There''s a stack of old <a href="exec: gs ''swamphouse'', ''stackmagazines''">magazines</a>, most likely used for ignition.'
+	*nl
+	if clothesAtLocation = 1:'Your clothes are laying on the shelf.'
+	*nl
+	if hour >= 23 and hunters = 1 and huntersKnow > 0:
+		'You see the <a href="exec: gs ''hunters'', ''check_opinion''">hunters</a> hanging out in the hut.'
+	elseif hunters = 1 and huntersKnow > 0 and hour >= 0 and hour < 7 and hunters = 1 and huntersKnow > 0:
+		'The hunters are sleeping on the couch.'
+	else
+		'The hunters aren''t here right now'
+	end
+
+	*nl
+	
+	act 'Go outside':
+		minut += 2 & gt 'swamp_yard'
+	end	
+
+	!re-arrange it, there should be no logic error now by illume
+	if $clothingworntype ! 'nude':
+		!have cloth, or rag on
+		act 'Get undressed':
+			if hunter_sexual_comfort > 50 or hour >= 8 and hour < 20:
+				cla
+				*clr
+				minut+=5
+				if $clothingworntype ! 'nude':
+					gs 'clothing', 'strip', 'swamphouse'
+				end
+				gs 'underwear', 'remove'
+				gs 'stat'
+
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphouseundress.jpg"></center>'
+				'Feeling the heat in the cabin, you start removing your clothes.'
+				act 'Back': gt 'swamphouse', 'start'
+			else
+				cla
+				*clr
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/noundress.jpg"></center>'
+				'Despite the heat you''re still too shy to get undressed - what if someone suddenly comes in?'
+				act 'Back': gt 'swamphouse', 'start'
+			end
+		end
+	end
+	
+	if clothesAtLocation = 1 and swamp_clothes = 0:
+		!clothes are ready
+		if $clothingworntype = 'nude' and forced_naked_day < daystart:
+			act 'Get dressed':
+				cla
+				*clr
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swampdvornude1.jpg"</center>'
+				*nl
+				'You put your clothes back on.'
+				gs 'underwear', 'wear'
+				gs 'clothing', 'recover_lost_clothes', 'swamphouse', 1
+				gs 'stat'
+				act 'Back': gt 'swamphouse', 'start'
+			end
+		elseif $clothingworntype ! 'nude':
+			act 'Pick up your clothes':
+				cla
+				*clr
+				gs 'clothing', 'recover_lost_clothes', 'swamphouse'
+				'You picked up your clothes.'
+				act 'Back': gt 'swamphouse', 'start'
+			end
+		end
+	elseif swamp_clothes = 1 and forced_naked_day < daystart:
+		if $clothingworntype = 'nude':
+			act 'Wear hessian sack':
+				cla
+				*clr
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/tkan_cloth.jpg"></center>'
+				*nl
+				'You cover yourself with the hessian sack'
+				gs 'clothing', 'recover_lost_clothes', 'swamphouse'
+				gs 'clothing', 'swamp_clothes', 1
+				gs 'stat'
+				act 'Back': gt 'swamphouse', 'start'
+			end
+		end
+	end
+
+	if pcs_horny >= 50 and hunters = 0 or pcs_horny >= 50 and hunters = 1 and hour >= 8 and hour < 20:
+		!TODO: Add content for hunters being around or walking in
+		act 'Masturbate':
+			gt 'selfplay', 'start'
+		end
+	end
+	
+	if $clothingworntype = 'nude' and swamp_clothes = 0 and clothesAtLocation = 0 and forced_naked_day < daystart:
+		act 'Look for some clothes':
+			cla
+			*clr
+			minut += 10
+			
+			gs 'clothing', 'swamp_clothes', 1
+			gs 'stat'
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphouse_tkancloth.jpg"></center>'
+			'You find a piece of burlap... "Well, at least it''s something." you think to yourself.'
+			act 'Back.': gt 'swamphouse', 'start'	
+		end
+	end
+	if breastpump > 0 and bp_unbox >= 1:
+		act 'Use breast pump':
+			gt 'lact_bp', 'bp_milking'
+		end
+	end
+
+	if dirty_swamphouse > 25:act 'Clean the hut':hunter_collective_opinion += 3 & gs 'hunter_favors', 'dirty_swamphouse'
+	
+	!TODO: Move hunter behavior into its own code block
+	if hour >= 20 and hour <= 23 and rand(1,2) = 1:
+		huntersdrink = 1
+	else
+		huntersdrink = 0
+	end	
+
+	act 'Relax on the couch': gt 'bed', 'start'
+	!sex with Igor
+	if huntersIgorLove > 0 and hour > 8 and hour < 19 and huntersIgorQw >= 10 and temp_sh = 1 and huntersIgorsex = 0:
+		*clr & cla
+		huntersIgorsex += rand(12,36)
+		gs 'stat'
+
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterlove1.4.jpg"></center>'
+		'Entering the hut you see Igor. He smiles and walks over to you, grabs hold of you and gives you a passionate kiss.'
+		'"<<$pcs_nickname>>, I want you," he whispers.'
+		gs 'arousal', 'kiss', 5
+		gs 'stat'
+		act 'Agree':
+			*clr & cla
+			minut += 5
+			huntersIgorQw += 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterflirt2.'+rand(4,6)+'.jpg"></center>'
+			'Smiling you look straight into Igor''s eyes telling him all he needs to know. Without any hesitation he takes you by the hand and leads you...'
+			act 'Go with Igor': gt 'hunterLoveSex','Igor'
+		end
+		act 'Refuse':
+			*clr & cla
+			minut += 5
+			huntersIgorQw -= 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/pc/speak_to_the_hand.jpg"></center>'
+			'"I''m sorry, Igor. I''m not in the mood." you say avoiding eye contact. Igor leaves disappointed...'
+			act 'Walk away': gt 'swamphouse', 'start'
+		end
+	end
+	!sex with Sergei
+	if huntersSergeiLove > 0 and pcs_horny <= 60 and huntersSergeiQw >= 10 and temp_sh = 1 and huntersSergeisex = 0 and hour > 8 and hour < 19:
+		*clr & cla
+		huntersSergeisex += rand(9,30)
+		gs 'stat'
+
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterlove1.4.jpg"></center>'
+		'Entering the hut you see Sergei. He smiles and walks over to you, grabs hold of you and gives you a passionate kiss.'
+		'"<<$pcs_nickname>>, I want you," he whispers.'
+		gs 'arousal', 'kiss', 5
+		gs 'stat'
+		act 'Agree':
+			*clr & cla
+			minut += 5
+			huntersSergeiQw += 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterflirt2.'+rand(4,6)+'.jpg"></center>'
+			'Smiling you look straight into Sergei''s eyes telling him all he needs to know. Without any hesitation he takes you by the hand and leads you...'
+			act 'Go with Sergei': gt 'hunterLoveSex','Sergei'
+		end
+		act 'Refuse':
+			*clr & cla
+			minut += 5
+			huntersSergeiQw -= 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/pc/speak_to_the_hand.jpg"></center>'
+			'"I''m sorry, Sergei. I''m not in the mood." you say avoiding eye contact. Sergei leaves disappointed...'
+			act 'Walk away': gt 'swamphouse', 'start'
+		end
+	end
+	! sex with Andrew
+	if huntersAndreiLove > 0 and pcs_horny <= 60 and huntersAndreiQw >= 10 and temp_sh = 1 and huntersAndreisex = 0 and hour > 8 and hour < 19:
+		*clr & cla
+		huntersAndreisex += rand(6,24)
+		gs 'stat'
+
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterlove1.4.jpg"></center>'
+		'Entering the hut you see Andrei. He smiles and walks over to you, grabs hold of you and gives you a passionate kiss.'
+		'"<<$pcs_nickname>>, I want you," he whispers.'
+		gs 'arousal', 'kiss', 5
+		gs 'stat'
+		act 'Agree':
+			*clr & cla
+			minut += 5
+			huntersAndreiQw += 1
+			pcs_horny += 5
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterhands.jpg"></center>'
+			'Smiling you look straight into Andrei''s eyes telling him all he needs to know. Without any hesitation he takes you by the hand and leads you...'
+			act 'Go with Andrei': gt 'hunterLoveSex','Andrei'
+		end
+		act 'Refuse':
+			*clr & cla
+			minut += 5
+			huntersAndreiQw -= 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/pc/speak_to_the_hand.jpg"></center>'
+			'"I''m sorry, Andrei. I''m not in the mood." you say avoiding eye contact. Andrei leaves disappointed...'
+			act 'Walk away': gt 'swamphouse', 'start'
+		end
+	end
+	! trio of HS, Andrei and Sergei, if love
+	if hunters > 0 and doublehunterlove = 1 and hour >= 8 and hour < 20 and (huntersAndreisex = 0 or huntersSergeisex = 0):
+		*clr & cla
+		minut += 5
+		huntersAndreisex += rand(6,24)
+		huntersSergeisex += rand(9,30)
+		gs 'stat'
+
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterswork1.2.jpg"></center>'
+		'You see Andrei talking with Sergei in the hut.'
+		'"Come in <<$pcs_nickname>>, it''s time to consummate the marriage," Andrew jokingly remarked. "I hope you''re willing to do anything we say.'
+		if klismaday ! daystart:'"I''m sorry, I don''t know if I''m ready yet..." you say . "I haven''t been able to clean myself as you asked, maybe we could skip it this time?.'
+		if klismaday ! daystart:'Well, we could <<$pcs_nickname>>..." said Andrew. "But since you''re already here, you not being all dolled up doesn''t matter to us. But don''t dare to try to fool us next time, we will not forget."'
+		'"There are some bushes not far from here, we could take her with us there, no one would be able to find us. Should we tell Igor to join us?" said Sergei. "Nevermind Igor, it would take him to long time to join us."'
+
+!!ToDo: The huntersex location doesn''t exist
+!!		act 'Follow the guys':
+!!			*clr & cla
+!!			minut += 5
+!!			huntersAndreiQw += 1
+!!			huntersSergeiQw += 1
+!!			pcs_horny += 5
+!!			doublelovesex = 1
+!!			hunterslut += 1
+!!			temphunt = 1
+!!			if klismaday ! daystart:hunterslut += 1
+!!			gs 'stat'
+
+!!			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/doublehanterlove.jpg"></center>'
+!!			'The men hold your hands leading you away from the hut. You''re fully aware of their plans but you don''t really mind.'
+!!			act 'Continue': gt 'huntersex', 'doublelovesex'
+!!		end
+		act 'Refuse':
+			*clr & cla
+			minut += 5
+			huntersAndreiQw -= 1
+			huntersSergeiQw -= 1
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/pc/speak_to_the_hand.jpg"></center>'
+			'"No, I refuse, this is something I don''t want part of," you say and without hesitating you turn around and walk away.'
+			act 'Walk away': gt 'swamphouse', 'start', 'doublelovesex'
+		end
+	end
+	
+	!if GG naked and hunters in the hut
+	if $clothingworntype = 'nude' and hunters = 1 and hour >= 20 and hour < 23 and hunterknowday ! daystart or $clothingworntype = 'nude' and hunters = 1 and hour = 7 and hunterknowday ! daystart:
+		cla
+		*clr
+		temp_sh =rand(1,3)
+		gs 'stat'
+		if huntersKnowSlut = 0:
+			cla
+			*clr
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphousenude.jpg"></center>'
+			'You hear the hunters nearing the hut, grabbing the handle, about to open the door. You quickly hide your privare parts behind the hands...'
+
+			if clothesAtLocation = 1:
+				act 'Get dressed':
+					cla
+					*clr
+					minut += 5
+					gs 'underwear', 'wear'
+					gs 'clothing', 'recover_lost_clothes', 'swamphouse', 1
+					!tkan_cloth = 0
+
+					'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swampdvornude1.jpg"></center>'
+					'You look around searching for your clothes. When you spot them, you dash over to grab them.'
+					act 'Continue': gt 'swamphouse', 'start'
+				end
+			else
+				act 'Cover yourself':
+					cla
+					*clr
+					minut+=5
+					gs 'clothing', 'swamp_clothes', 1
+					gs 'stat'
+					'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/tkan_cloth.jpg"></center>'
+					'You look around searching for your clothes but can''t seem to find them, instead you hide behind a piece of hessian... It''s better than nothing.'
+					act 'Continue': gt 'swamphouse', 'start'
+				end
+			end
+			act 'Stay naked':
+				cla
+				*clr
+				hunterslut += 1
+				hunterknowday = daystart
+				gs 'stat'
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphousenude1.jpg"></center>'
+				'You take a deep breath and decided to disregard your nerves and leave it as it is. Upon entering the hut, the hunters can''t help themselves, they start staring at your most private parts.'
+				'"Damn, <<$pcs_nickname>>, you look really good. The things I would want to do to you..." said a somewhat aroused Andrei.'
+				act 'Continue': gt 'swamphouse', 'start'
+			end
+		end
+		if huntersKnowSlut > 0:
+!!ToDo: The huntersex location doesn''t exist		
+!!			if huntslutsex = 0:
+!!				*clr & cla
+!!				gs 'stat'
+!!				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphousenude1.jpg"></center>'
+!!				'Seeing you naked, the men get quickly aroused...'
+!!				'"Come here <<$pcs_nickname>>, come to us," one of the guys calls out to you.'
+!!				act 'Continue':huntersexnude = 1 & gt 'huntersex', 'huntersexnude'
+!!			else
+				hunterknowday = daystart
+				'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/swamphousenude1.jpg"></center>'
+				'Seeing you naked, the men just shake their heads...'
+				'"Look here <<$pcs_nickname>>, if you want to charm us, you will need to think of something else." said one of the guys.'
+
+				act 'Continue': gt 'swamphouse', 'start'
+!!			end
+		end
+	end
+
+!!ToDo: The huntersex location doesn''t exist
+!!	if hunters > 0 and huntersRape = 5 and huntslutsexrand = 1 and huntslutsex = 0 and hour >= 7 and hour < 23:
+!!		*clr & cla
+!!		minut += 5
+!!		temphunt = rand(1,3)
+!!		sluthomesex = 1
+!!		gs 'stat'
+!!		if temphunt = 1:'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/andreihanter.jpg"></center>'
+!!		if temphunt = 2:'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/sergeihanter.jpg"></center>'
+!!		if temphunt = 3:'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/igorhanter.jpg"></center>'
+!!		if temphunt = 1:'You enter the hut and bump into Andrei. "Come here <<$pcs_nickname>>," not saying anything more while he throws you on the bed.'
+!!		if temphunt = 2:'You enter the hut and bump into Sergei. Noticing you he heads toward you saying "<<$pcs_nickname>>, I''ve got an itch that only you can help scratch."'
+!!		if temphunt = 3:'You enter the hut and bump into Igor. He comes over saying smiling "<<$pcs_nickname>>, I need to empty my sack, help me out..."'
+!!		if pcs_horny < 40:' You obediently follow suit, knowing what he wants.'
+!!		if pcs_horny >= 40 and pcs_horny < 70:'"Come and get me..." is all you manage to say before spreading your legs.'
+!!		if pcs_horny >= 70:'"I was hoping this would happen," you think to yourself, feeling your wet pussy screaming with desire. You jump on him, taking charge, leaving him stunned about who wants it more.'
+
+!!		act 'Go': gt 'huntersex', 'sluthomesex'
+!!	end
+end
+
+if $ARGS[0] = 'bucket':
+	cla
+	*clr
+	menu_off = 1
+	if bucket > 10:bucket = 10
+	minut += 1
+	
+	act 'Move Away': gt 'swamphouse', 'start'
+
+	gs 'stat'
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/vedro2.jpg"></center>'
+	'A bucket of water. There''s still <<bucket>> liters of water left.'
+
+	act 'Drink the water':
+		cla
+		minut+=5
+		cumspclnt = 2 & gs 'cum_cleanup' & pcs_breath = 0
+		bucket -= 1
+		if pcs_hydra >= 100:
+			'You''re not thirsty anymore. You don''t need to drink more water.'
+		else
+			pcs_hydra += 80
+			cumspclnt = 2
+			gs 'cum_cleanup'
+			pcs_breath = 0
+			'You take a sip from bucket, quenching your thirst.'
+		end
+		act 'Continue': gt 'swamphouse', 'start'
+	end
+end
+
+if $ARGS[0] = 'washstand':
+	cla
+	*clr
+	menu_off = 1
+	minut += 1
+	gs 'stat'
+
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/washstand.jpg"></center>'
+	'An old washstand. You can use the basin to clean yourself, if necessary.'
+
+	if bucket > 0:
+		!use current by illume
+		dynamic $basin
+	end
+	act 'Move away': gt 'swamphouse', 'start'
+end
+
+if $ARGS[0] = 'tub':
+	cla
+	*clr
+	minut += 1
+	menu_off = 1
+	gs 'stat'
+
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/basin.jpg"></center>'
+	*nl
+	'An old tub, that you can use to bathe yourself. It''s a lot warmer than using the spring! You just need to warm some water, and get undressed first.'
+
+	if hotwater = 1 and ($clothingworntype = 'nude' or $clothingworntype = 'swimwear'):
+		act 'Bathe in the tub (0:30)':
+			cla
+			*clr
+			dynamic $showerdin
+			face_write = 0
+			body_write = 0
+			lubonus = 0
+			pcs_mood += 5
+			pcs_willpwr += 10
+			minut += 30
+			hotwater = 0
+			gs 'stat'
+
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/basinswim.jpg"></center>'
+			*nl
+			'You fill the tub with warm water, take off your clothes, and climbe into the tub. After a good clean and soak, you feel rejuvenated.'
+
+			act 'Continue': gt 'swamphouse', 'start'
+		end
+	end
+	act 'Move away': gt 'swamphouse', 'start'
+end
+
+if $ARGS[0] = 'clothes_read_magazines':
+	if $clothingworntype ! 'nude':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readmagazines.jpg"></center>'
+	if $clothingworntype = 'nude' and $pantyworntype ! 'none':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readmagazines_tanga.jpg"></center>'
+	if $clothingworntype = 'nude' and $pantyworntype = 'none':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readmagazines_nude.jpg"></center>'
+end
+
+if $ARGS[0] = 'stackmagazines':
+	cla
+	*clr
+	menu_off = 1
+	minut += 1
+	gs 'stat'
+
+	act 'Move away': gt 'swamphouse', 'start'
+
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/stackmagazines.jpg"></center>'
+	*nl
+	'A stack of all kinds of magazines, there''s even one with "interesting" pictures.'
+
+	act 'Read the scientific journal (1:00)':
+		cla
+		*clr
+		if pcs_nerd > 0:
+			lastread = totminut
+			lastreadday = daystart
+			pcs_nerd += 10
+		end
+		if pcs_intel >= 50:intel_exp += RAND(0,1)
+		if pcs_intel < 50:intel_exp += RAND(0,2)
+		blizoruk+=1
+		pcs_mood += 10
+		minut += 60
+		gs 'stat'
+
+		gs 'swamphouse', 'clothes_read_magazines'
+		'You decide to look through the scientific journal, trying to understand all sorts of clever things written in the magazine.'
+
+		act 'Continue': gs 'swamphouse', 'stackmagazines'
+	end
+	act 'Read the literary magazine (1:00)':
+		cla
+		*clr
+		if pcs_nerd > 0:
+			lastread = totminut
+			lastreadday = daystart
+			pcs_nerd += 10
+		end
+		if pcs_sprt >= 50:sprt_exp += RAND(0,1)
+		if pcs_sprt < 50:sprt_exp += RAND(0,2)
+		blizoruk+=1
+		pcs_mood += 10
+		minut += 60
+		pcs_grades+=1
+		gs 'stat'
+
+		gs 'swamphouse', 'clothes_read_magazines'
+		'You decided to look through the literary magazine... It''s a real drag, you almost fall asleep several times while reading it.'
+
+		act 'Continue': gs 'swamphouse', 'stackmagazines'
+	end
+	act 'Read the entertainment magazine (1:00)':
+		cla
+		*clr
+		if pcs_nerd > 0:
+			lastread = totminut
+			lastreadday = daystart
+			pcs_nerd += 10
+		end
+		if pcs_sprt >= 50:sprt_exp += RAND(0,1)
+		if pcs_sprt < 50:sprt_exp += RAND(0,2)
+		blizoruk+=1
+		pcs_mood += 10
+		pcs_willpwr += 100
+		minut += 60
+		gs 'stat'
+
+		gs 'swamphouse', 'clothes_read_magazines'
+		'You flick entertainment magazine, you delve into the world of the rich and famous.'
+
+		act 'Continue': gs 'swamphouse', 'stackmagazines'
+	end
+	act 'Read the porn magazine (1:00)':
+		cla
+		*clr
+		blizoruk+=1
+		pcs_mood += 10
+		pcs_willpwr += 100
+		gs 'stat'
+
+		if $clothingworntype ! 'nude':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readpornomag.jpg"></center>'
+		if $clothingworntype = 'nude' and $pantyworntype ! 'none':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readpornomag_tanga.jpg"></center>'
+		if $clothingworntype = 'nude' and $pantyworntype = 'none':'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/readpornomag_nude.jpg"></center>'
+		*nl
+		'You''re flipping through a porn magazine, reading the stories and looking at pictures, when all of a sudden you realize you''ve started touching yourself.'
+		gs 'arousal', 'voyeur', 60
+		gs 'arousal', 'end'
+		gs 'stat'
+		act 'Continue': gs 'swamphouse', 'stackmagazines'
+	end
+end
+
+if $ARGS[0] = 'huntersrelax':
+	cla
+	*clr
+	minut += 1
+	menu_off = 1
+	gs 'stat'
+
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hantersrelax1.'+rand(1,8)+'.jpg"></center>'
+	*nl
+	'You see the hunters in the hut minding their own business.'
+
+	act 'Speak with Andrei': gt 'Andreihunter'
+	act 'Speak with Sergei': gt 'Sergeihunter'
+	act 'Speak with Igor': gt 'Igorhunter'
+	act 'Move away': gt 'swamphouse', 'start'
+
+end
+
+
+if $ARGS[0] = 'daytime_flavor_events': 
+	!TODO: Add stuff here
+end
+
+if $ARGS[0] = 'nighttime_flavor_events':
+	if rand(1,10) = 1 and hunters_night:
+		gs 'hunter_interactions', 'indoors_naked_encounter'
+	end	
+end
+
+--- swamphouse ---------------------------------

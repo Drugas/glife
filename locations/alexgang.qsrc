@@ -1,0 +1,64 @@
+# alexgang
+
+$locclass = 'livingr'
+menu_off = 1
+frost = 0
+minut += 30
+gs 'stat'
+'Arriving at Alexei''s apartment, he offers you various alcoholic beverages before sitting down at a table in the living room to chat, as always.'
+'Suddenly, the doorbell rings and Alexei walks out to answer it. You hear a man''s voice in the hallway: "Hello Alexei, I hope I''m not disturbing?" Alexey answers, "Not at all, my friend. Come in."'
+
+if alexgangbang = 0:
+	'You''re a little surprised and wondering who it could be. Then you see Alexander E., the nightclub owner, enter the room. He greets you and sits down on a chair.'
+	'Alexei pours alcohol into three glasses, and you spend some time drinking and talking together. Before long, Alexander asked you to call him by his nickname: Sasha.'
+	'After a while, though, Alexei puts the bottle aside and pulls his dick out of his pants. "Come over here, <<$pcs_firstname>>", he says. You look at him in surprise and glance at Sasha. Alexei urges you on, "C''mon, don''t worry, everything is fine."'
+else
+	'You see Alexander E., the nightclub owner, enter the room. He greets you and sits down on a chair.'
+	'Alexei pours alcohol in three glasses, and you spend some time drinking, talking, laughing.'
+	'After a while, Alexei puts the bottle aside and pulls his dick out of his pants. "Get over here, <<$pcs_firstname>>", he says.'
+end
+
+act 'Get on your knees and give head':
+	*clr & cla
+	alexgangbang += 1
+	gs 'stat'
+	picrand = rand(29, 41)
+	'<center><img <<$set_imgh>> src="images/shared/sex/blowjob/bj<<picrand>>.jpg"></center>'
+	'Kneeling before him, you pull Alexei''s pants all the way down and take a firm grasp of his erect cock.'
+	'Leaning in closer, you give it a quick kiss with your <<$liptalk>> before guiding it into your mouth.'
+	'As you suck on his hard dick, Alexei relaxes in his chair, letting you take care of his needs.'
+	'Suddenly, he removes his penis from your mouth, pulls you up on your feet and leads you to the bedroom.'
+	gs 'arousal', 'bj', 10, 'sub', 'group'
+	gs 'stat'
+	'Alexei lifts you up and puts you down in front of the bed where Sasha has seated himself. He puts you on all fours, facing Sasha who is starting to unbutton his pants, leaving no doubt as to what you''re expected to do.'
+
+	act 'Give Sasha a blowjob':
+		*clr & cla
+
+		if sashaclubsex = 0:sashaclubsex = 1 & guy += 1
+
+		gang += 1
+		alexgangbang += 1
+		gs 'boyStat', 'A88'
+		pose = 1
+		spafinloc = 12
+		gs 'cum_manage'
+		swallow += 1
+		gs 'stat'
+		picrand = rand(16, 25)
+		'<center><img <<$set_imgh>> src="images/shared/sex/group/gang<<picrand>>.jpg"></center>'
+		'Standing on all fours, you start sucking Sasha''s limp cock. As you lick, suck and roll your tongue around his dick, you can feel it slowly stiffening in your mouth.'
+		dynamic $sexstart
+		'The position you''re in doesn''t make it easy for you to move your head the right way. However, with some determination you manage to keep Sasha''s cock in your mouth.'
+		gs 'dinsex','vaginal_sex',10
+		'After a while, you feel Sasha''s hard cock begin to throb in your mouth. With a low grunt, he thrusts his hips forward and you feel his sperm coat the insides of your mouth.'
+		'He doesn''t cum a whole lot, and you easily manage to swallow all of it, but that doesn''t diminish the inherent thrill of the threesome you just had.'
+		gs 'arousal', 'bj', 10, 'sub', 'group'
+		gs 'arousal', 'end'
+		gs 'stat'
+		act 'Leave':gt 'nord'
+	end
+end
+
+--- alexgang ---------------------------------
+

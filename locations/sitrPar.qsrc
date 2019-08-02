@@ -1,0 +1,82 @@
+# sitrPar
+CLOSE ALL
+act 'Leave the room':gt 'korrPar'
+
+$metka = ''
+$loc = 'sitrPar'
+$menu_loc = 'sitrPar'
+$menu_arg = ''
+menu_off = 0
+$location_type = 'private'
+$locclass = 'livingr'
+clr
+minut += 1
+gs 'stat'
+gs 'themes', 'indoors'
+'<center><b><font color="maroon">Living Room</font></b></center>'
+! WD: Correct Image path ~ "images/qwest/alter/<<$loc>>.jpg"
+'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/apartment/home/sitrpar.jpg"></center>'
+''
+'The living room has a <a href="exec:gt ''TV'',''pav''">TV</a>, which is near the window. In front of the TV is a <a href="exec:gt ''family'',''sofa''">sofa bed</a>, on which your brother sleeps at night. A large tapestry covers one wall, while the other wall has several shelves on it, stocked with books and other things.'
+*nl
+gs 'family'
+*nl
+gs 'subkid'
+
+if month = 12 and day >= 20:'A Christmas tree stands next to the TV, decorated with tinsel garlands and other ornaments.'
+if month = 12 and day = 31 and hour >= 20:
+	act 'Celebrate the New Year with your family.':
+		cls
+		npc_rel['A29'] = 100
+		npc_rel['A28'] = 100
+		npc_rel['A33'] = 100
+		npc_rel['A34'] = 100
+		money += 5000
+		hour = 23
+		minut = 0
+		minut += 120
+		pcs_sleep = 0
+		pcs_mood += 100
+		wipo += 1000
+		gs 'food', 'l_meal'
+		gs 'stat'
+		'You sit at the festive table laid in front of the TV and celebrate the New Year with your family, the TV providing some background noise. At the table people strike up a conversation and common problems are forgotten for a while, everyone is having fun talking to each other. At midnight, everyone wishes one another a happy New Year and enjoys the champagne and fireworks outside. Your <<$npc_nickname[''A29'']>> gives you an envelope with a greeting card and 5000 <b>₽</b>. For a while you continue to watch TV, enjoying the champagne and company of your family, but after a while everyone is kind of tired and one by one they go to bed.'
+
+		act 'Leave':gt $loc, $metka
+	end
+elseif month = 1 and day = 1:
+	act 'Eat some leftovers at the festive table.':
+		cla
+		*clr
+		frost = 0
+		minut += 15
+		pcs_health += 10
+		pcs_mood += 20
+		fat += 2
+		pcs_energy += 20
+		pcs_hydra += 20
+		cumspclnt = 2
+		gs 'cum_cleanup'
+		pcs_breath = 0
+
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/shared/food/food.jpg"></center>'
+		'You have finished the leftovers remaining on the table from the holidays.'
+
+	act 'Get up from the table':gt $loc, $metka
+
+	end
+end
+
+if ocpd_room = 0 and breastpump = 1 and bp_unbox <= 0:
+	'<a href="exec: gt ''lact_bp'', ''bp_unbox_event''">Unbox</a> your breast pump'
+elseif kid >= 1 and breastpump = 1 and bp_unbox <= 0:
+	'<a href="exec: gt ''lact_bp'', ''bp_unbox_event''">Unbox</a> your breast pump'
+elseif ocpd_room = 0 and breastpump = 1 and bp_unbox = 1 and pcs_inbition > 40:
+	'<a href="exec: gt ''lact_bp'', ''bp_unbox_event''">Try out</a> your breast pump'
+elseif kid >= 1 and breastpump = 1 and bp_unbox = 1 and pcs_inbition > 30:
+	'<a href="exec: gt ''lact_bp'', ''bp_unbox_event''">Try out</a> your breast pump'
+end
+
+--- sitrPar ---------------------------------
+

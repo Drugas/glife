@@ -1,0 +1,84 @@
+# liam
+
+$metka = ''
+$loc = 'liam'
+$location_type = 'public_outdoors'
+$menu_loc = 'liam'
+$menu_arg = ''
+menu_off = 0
+CLOSE ALL
+if sound = 0:PLAY 'sound/street.mp3',30
+cls
+gs'stat'
+palMir = 0
+bordysh = 0
+housrA = 0
+palMir = 0
+obdysh = 0
+tanhouse1 = 0
+obMir = 0
+obLoker = 0
+houseob = 0
+borMir = 0
+minut += 10
+set minut = minut + 5
+'<center><B>Old town center</B></center>'
+if month >= 11 or month <= 3:
+	if hour >= 8 and hour <= 21:
+		'<center><img <<$set_imgh>> src="images/locations/oldtown/townwinter.jpg"></center>'
+	else
+		'<center><img <<$set_imgh>> src="images/locations/oldtown/townwinternight.jpg"></center>'
+	end
+else
+	if hour >= 8 and hour <= 21:
+		'<center><img <<$set_imgh>> src="images/locations/oldtown/liam.jpg" ></center>'
+	else
+		'<center><img <<$set_imgh>> src="images/locations/oldtown/townnight.jpg"></center>'
+	end
+end
+
+'The old part of the city, usually call old town. A couple of centuries ago, this was the village of Pushkin, located near a town that is now the city.'
+'Later, the rich bought land off the poor here and knocked down the wooden shacks and farm houses to build large houses. As the city continued to grow rapidly, it became a desirable suburb.'
+'Since then even the old huts, have been improved, extended and modernized. The old buildings and beautiful park make it popular with tourists.'
+
+'Not far from here is the quiet <a href="exec:gt ''liames'',''start''">high street</a>.'
+'Close by is a narrow street leading to a <a href="exec:gt ''dvor'',''start''">vacant house</a>.'
+'You see a <a href="exec:gt ''ugol'',''start''">passage</a> between the houses lead to a courtyard.'
+if car > 0 and cardrive = 14:
+	'I parked at the curb <a href="exec:GS ''carF'',''start''">your <<$car>></a>.'
+end
+
+if hour >= 13 and hour <= 15 and bodimodel = 1 and arts = 0 and tusa = 1:
+	if RAND(1,100) >= 90:
+		cls
+		minut += 5
+		gs'stat'
+		gs'dibodi'
+
+		'<center><img <<$set_imgh>> src="images/characters/oldtown/marinka/marinka.jpg"></center>'
+		'Suddenly you notice a girlfriend from the local hangouts Marinka, I am standing at the door.'
+
+		act 'Ask':gt 'dibodi', 'sptusa'
+	end
+end
+
+if arts = 1:'Apartment <a href="exec:gt ''Marin'',''start''">Marina</a>'
+
+act 'Walk to the St Petersburg to Pavlovsk road (5 min)':minut += 5 & nroad = 15 & gt'road'
+
+act 'Wait':gs 'obj_din', 'wait'
+
+act 'Walk 1 h':
+	cla
+	minut += 60
+	pcs_mood += 10
+	pcs_willpwr += 10
+	gs 'stat'
+	'You slowly walk along the narrow streets of the Old Town, It became one of the areas of the big city, admiring the beautiful architecture buildings, built long ago and miraculously survived to our times. Breathe in the fresh air, reflecting on the vicissitudes of fate.'
+	act 'Complete outing':gt'liam','start'
+end
+
+!!if rand (0,2) ! 0:gs 'din_bad' & dynamic $mobile_check
+
+--- liam ---------------------------------
+

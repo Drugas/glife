@@ -1,0 +1,35 @@
+# party_boy
+menu_off = 1
+
+if $ARGS[0] = 'party_boy':
+	cls
+	minut += 5
+	party_dj = 1
+	gs'stat'
+	if party_dj = 1 and dj_beer < 1:
+		'<center><b><font color = maroon>DJ</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_boy.jpg"></center>'
+		'The guy messes with the soundboard and makes the sound even louder. "Hello, <<$pcs_nickname>>, get me a beer. You can find all the booze in the kitchen."'
+	elseif dj_beer = 1 and dj_thank < 1:
+		'<center><b><font color = maroon>DJ</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_boy.jpg"></center>'
+		'The guy messes with the soundboard and makes the sound even louder. "Well, <<$pcs_nickname>>, where is our beer?" You go into the kitchen, get two bottles of beer and <a href="exec:gt ''dinParty'', ''dj_beer''">bring</a> it to the guys.'
+	elseif dj_thank = 1 and dj_bad < 1:
+		'<center><b><font color = maroon>DJ</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_boy.jpg"></center>'
+		'The guy messes with the soundboard and makes the sound even louder. You are allowed to <a href="exec:gt ''dinParty'', ''dj_thank''">twist</a> some knobs on the turntable.'
+	elseif dj_bad = 1 and dj_boobs < 1:
+		'<center><b><font color = maroon>DJ</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_boy.jpg"></center>'
+		'"<<$pcs_nickname>>, you won''t get a turn. Don''t even try this time.'
+	elseif dj_boobs = 1:
+		'<center><b><font color = maroon>DJ</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_boy.jpg"></center>'
+		'The guy messes with the soundboard and makes the sound even louder. You are again allowed to <a href="exec:gt ''dinParty'', ''dj_cock''">twist</a> some knobs on the turntable.'
+	end
+	act 'Move away':gt $loc,$metka
+	if dj_bad = 1 and alko >=3: act 'Bare chest':gt 'dinParty', 'dj_boobs'
+end
+
+--- party_boy ---------------------------------
+

@@ -1,0 +1,110 @@
+# hunters
+
+if $ARGS[0] = 'start':
+	gs 'stat'
+
+	act 'Walk away': gt 'swamp_yard'
+	if huntersKnow = 0:
+		act 'Greet them':
+			gs 'hunter_interactions', 'meet_hunters																																	'
+		end
+	end
+end
+
+if $ARGS[0] = 'check_opinion':
+	cla & *clr
+	
+	if $loc = 'swamp_yard':
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hanterstalk.jpg"></center>'
+		'You look at the hunters hanging out at the yard.'
+	elseif $loc = 'swamphouse':
+		'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hantersrelax1.4.jpg"></center>'
+		'You look at the hunters hanging out inside the hut.'	
+	end
+
+	!TODO: More images and flesh out the text
+	!Friendliness:
+	if hunter_collective_opinion > 50:
+		'Igor smiles when notices you looking at them and gives you a friendly wave.'
+	elseif hunter_collective_opinion > 25:
+		'Igor makes eye contact with you and nods before going back to what he was doing.'	
+	else
+		'Igor frowns at you when he notices you looking before you break eye contact.'
+	end
+	
+	!Sexuality
+	if hunter_sexual_comfort > 50:
+		if $clothingworntype ! 'nude':
+			'Andrei then looks at you and says "What is it with all the clothing? Let it all air out!"'
+		else
+			'"Damn, <<$pcs_nickname>>, you look really good without the clothes. The things I would want to do to you..." said a somewhat aroused Andrei.'	
+		end
+	elseif hunter_sexual_comfort > 25:
+		'Andrei then looks at you and throws you an air kiss.'
+	else
+		'The other hunters completely ignore you, pretending you are not even there.'
+	end
+	
+	!Acceptance
+	!Coming soon!
+
+	act 'Further': gt $loc
+end	
+
+if $ARGS[0] = 'huntersgroupfaint':
+	*clr & cla
+	minut += 1
+	pcs_horny += rand(5,10)
+	gs 'stat'
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hantersgroupfaint.jpg"></center>'
+	if shootingfaint = 1:
+		shooting = 2
+		'You feel a pain and everything before you begins to darken, the world starts spinning and you collapse...'
+	else
+		'You suddenly feel an unbearable pain. Your sight begins to darken, the world starts spinning and you collapse...'
+	end
+
+	if huntersRape = 4 or huntdanceslut = 4 or forest_gopsex = 1:
+		act 'Wake up':
+			*clr & cla
+			minut += 10
+			pcs_health += 100
+			pcs_mood = 100
+			pcs_willpwr += 100
+			huntersexnude = 0
+			forest_gopsex = 0
+			slutgosex = 0
+			gs 'stat'
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hantersgroupfaint1.jpg"></center>'
+			'Someone''s pouring water on you making you to wake up...'
+			'"<<$pcs_nickname>>, are you still alive?" You hear <<$boydesc>> asking while making sure that you''ve come around.'
+			'You weakly nod your head.'
+			'"Good, I''m glad you aren''t hurt." he says'
+
+			act 'Further':gt $loc, $metka
+		end
+	else
+		act 'Wake up':
+			*clr & cla
+			minut += 10
+			pcs_health += 100
+			pcs_mood = 100
+			pcs_willpwr += 100
+			shootingfaint = 0
+			huntersexnude = 0
+			forest_gopsex = 0
+			slutgosex = 0
+			gs 'stat'
+			'<center><img <<$set_imgh>> src="images/locations/gadukino/hunters/hantersgroupfaint2.jpg"></center>'
+			'You wake up by someone''s lightly pats on the cheek...'
+			'"<<$pcs_nickname>>, are you still alive?" You hear <<$boydesc>> asking while making sure that you''ve come around.'
+			'You weakly nod your head.'
+			'"You really scared us, you were so fucked up last night. Go to the hut and rest."'
+
+			act 'Further': gt'swamphouse'
+		end
+	end
+end
+
+--- hunters ---------------------------------
+

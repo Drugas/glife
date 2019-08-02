@@ -1,0 +1,392 @@
+# fight
+if $ARGS[0] = 'start':
+	menu_off = 1
+	cla
+	
+	if fight_cheat = 1:
+		xgt 'ender', 'win'
+		exit
+	end
+	
+	inFight = 1
+	gs 'themes', 'indoors'
+	gs'defence'
+	gs'statBat'
+
+	if SasoriBody > 2 and healthV <= 0 or SasoriBody > 2 and manaV <= 0 or SasoriBody > 2 and willpowerV <= 0:
+		SasoriBody = SasoriBody - 1
+		gs'priziv','sasori'
+
+		'<b><font color = red>The doll parts scatter all over and immediately head into battle mode.</font></b>'
+		'<b><font color = red>You hear the sonorous voice of Sasori, "I have a lots of dolls, you can''t beat me."</font></b>'
+	elseif SasoriBody = 2 and healthV <= 0 or SasoriBody = 2 and manaV <= 0 or SasoriBody = 2 and willpowerV <= 0:
+		SasoriBody = SasoriBody - 1
+		gs'priziv','sasori1'
+
+		'<b><font color = red>The last doll crumbles into pieces and you''ve finally reached Sasori.</font></b>'
+	end
+
+	if stunV > 0 and SasoriBody > 1:
+		stunV = 0
+
+		'<b><font color = red>The doll began to move again.</font></b>'
+	end
+
+	if stunV > 0 and SasoriBody = 1:
+		stunV = 0
+
+		'<b><font color = red>Sasori moves again.</font></b>'
+	end
+
+	if GedoMazo = 1 and healthV <= 0 or GedoMazo = 1 and manaV <= 0 or GedoMazo = 1 and willpowerV <= 0:
+		GedoMazo = 2
+		barierV = 0
+
+		'<b><font color = green><<$boydesc>> He fell to the ground and turned to dust.</font></b>'
+
+		gs'priziv','tobi'
+
+		'<b><font color = green><<$boydesc>>Attack</font></b>'
+	end
+
+	if pcs_health <= 0 and heart = 0 and izanagi = 0:
+		'<b><font color = red> You lost!</font></b>'
+
+		xgt'ender','loss'
+		exit
+	elseif healthV <= 0 and heartV = 0 and izanagiV = 0:
+		'<b><font color = green><<$boydesc>> You won!</font></b>'
+
+		xgt'ender','win'
+		exit
+	elseif pcs_mana <= 0 and heart = 0 and izanagi = 0:
+		'<b><font color = red> You won!</font></b>'
+
+		xgt'ender','loss'
+		exit
+	elseif manaV <= 0 and heartV = 0 and izanagiV = 0:
+		'<b><font color = green><<$boydesc>> lost!</font></b>'
+
+		xgt'ender','win'
+		exit
+	elseif pcs_willpwr <= 0 and heart = 0 and izanagi = 0:
+		'<b><font color = red> You lost!</font></b>'
+
+		xgt'ender','loss'
+		exit
+	elseif willpowerV <= 0 and heartV = 0 and izanagiV = 0:
+		'<b><font color = green><<$boydesc>> won!</font></b>'
+
+		xgt'ender','win'
+		exit
+	end
+
+	if izanagiV > 0 and healthV <= 0 or izanagiV > 0 and manaV <= 0 or izanagiV > 0 and willpowerV <= 0:
+		izanagiV = izanagiV - 1
+
+		'<b><font color = red><<$boydesc>> disappeared.</font></b>'
+
+		healthV = vitalV*10 + strenV*5
+		manaV = intelV*magikV + magikV*100 + vitalV*10
+		willpowerV = willV*10
+		stunV = 0
+		if program = 6 and izanagiOnce = 0:izanagiOnce = 1 & unmaterialV = 40 & tobizanagi = 0
+
+		'<b><font color = red><<$boydesc>> appeared in front of you, completely healthy. He folded his arms and made the magic sign for Izanagi, the perfect illusion.</font></b>'
+		'<b><font color = red>The price for this spell was to sacrifice one of my eyes.</font></b>'
+	elseif heartV > 0 and healthV <= 0 or heartV > 0 and manaV <= 0 or heartV > 0 and willpowerV <= 0:
+		heartV = heartV - 1
+
+		'<b><font color = red><<$boydesc>> staggered, as his heart burst.</font></b>'
+
+		healthV = vitalV*10 + strenV*5
+		manaV = intelV*magikV + magikV*100 + vitalV*10
+		willpowerV = willV*10
+		stunV = 0
+
+		'<b><font color = red><<$boydesc>> stood up and got in a frenzy. He must have another heart.</font></b>'
+	elseif izanagi > 0 and pcs_health <= 0 or izanagi > 0 and pcs_mana <= 0 or izanagi > 0 and pcs_willpwr <= 0:
+		izanagi = izanagi - 1
+
+		'<b><font color = green>He vanishes.</font></b>'
+
+		pcs_health = pcs_vital*10 + pcs_stren*5
+		pcs_willpwr = pcs_intel*5 + pcs_sprt*5
+		pcs_mana = (pcs_intel*pcs_magik) + pcs_magik*100 + pcs_vital*10 + rikudo
+		stun = 0
+		zerkaloV = 0
+		poisonV = 0
+		bloodV = 0
+
+		'<b><font color = green>All of a sudden he appears in front of you completely healthy.</font></b>'
+	elseif heart > 0 and pcs_health <= 0 or heart > 0 and pcs_mana <= 0 or heart > 0 and pcs_willpwr <= 0:
+		heart = heart - 1
+		zerkaloV = 0
+		poisonV = 0
+		bloodV = 0
+
+		'<b><font color = green>Your heart took too much of a beating and gave up.</font></b>'
+
+		pcs_health = pcs_vital*10 + pcs_stren*5
+		pcs_willpwr = pcs_intel*5 + pcs_sprt*5
+		pcs_mana = (pcs_intel*pcs_magik) + pcs_magik*100 + pcs_vital*10 + rikudo
+		stun = 0
+
+		'<b><font color = green>You open your eyes as you''re not dead...</font></b>'
+	end
+
+	gs'before'
+	'<b>= = = = = = = = = = = = = (ROUND <<round>>) = = = = = = = = = = = = =</b>'
+	'<b><<$boydesc>></b> life <b><font color = red><<healthV>></font></b>, mana <b><font color = blue><<manaV>></font></b>, willpower <b><font color = green><<willpowerV>></font></b>'
+	if defenceV > 0:'<b><font color = red>Protection <<defenceV>> units</font></b>'
+	if defenceMV > 0:'<b><font color = red>Mana protection <<defenceMV>> units</font></b>'
+	if defenceWV > 0:'<b><font color = red>Will protection <<defenceWV>> units</font></b>'
+	'Your life <b><font color = red><<pcs_health>></font></b>, mana <b><font color = blue><<pcs_mana>></font></b>, willpower <b><font color = green><<pcs_willpwr>></font></b>'
+	if defence > 0:'<b><font color = green>Protection <<defence>> units</font></b>'
+	if defenceM > 0:'<b><font color = green>Mana impact protection <<defenceM>> units</font></b>'
+	if defenceW > 0:'<b><font color = green>Will impact protection <<defenceW>> units</font></b>'
+	if defenceAct > 0:'<b><font color = green><<defenceAct>> Regeneration</font></b>'
+	if defenceActM > 0:'<b><font color = green><<defenceActM>> Mana recovery protection</font></b>'
+	if unmaterial > 0:'<b><font color = green>You''re <<unmaterial>> strokes are not material.</font></b>'
+	'<b>= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =</b>'
+	gs'init'
+
+	if hod = 0:
+		!player attacks
+		'<font color = green>Choose your attack</font>'
+
+		if gun > 0:
+			!Boomstick
+			if bulletIn > 0:
+				'You have <<bulletIn>> bullets loaded in the gun.'
+
+				act 'Pistol shot':
+					cla
+					bulletIn -= 1
+					gunpower = 150
+					buu = 1
+					gunpricel = 1
+					Gcrime += 1
+					gt'strelba'
+				end
+			elseif bulletIn <= 0:
+				if bullet = 0:
+					'You''re out of ammunition.'
+				elseif bullet>0:
+					'You have <<bullet>> left.'
+
+					act 'Reload':
+						cla
+						if bullet < 7:
+							bulletIn = bullet
+							bullet = 0
+
+							'You reload the empty gun.'
+						end
+						if bullet >= 7:
+							bullet -= 7
+							bulletIn = 7
+
+							'You reload all the 7 bullets in the gun.'
+						end
+
+						act 'Further':gt'fight','sta'
+					end
+				end
+			end
+		end
+
+		if Mgun > 0:
+			!Boomstick
+			if mbulletIn > 0:
+				'You have <<mbulletIn>> bullets left in the machine gun.'
+
+				act 'Single shot':
+					cla
+					mbulletIn -= 1
+					buu = 1
+					gunpower = 300
+					gunpricel = 2
+					Gcrime += 1
+					gt'strelba'
+				end
+
+				if mbulletIn >= 3:
+					act 'Burst shot':
+						cla
+						mbulletIn -= 3
+						buu = 3
+						gunpower = 300
+						gunpricel = 1
+						Gcrime += buu
+						gt'strelba'
+					end
+					act 'Automatic shot':
+						cla
+						buu = mbulletIn
+						mbulletIn = 0
+						gunpower = 300
+						gunpricel = 0
+						Gcrime += buu
+						gt'strelba'
+					end
+				end
+			elseif mbulletIn <= 0:
+				if mbullet = 0:
+					'You''ve run out of ammunition.'
+				elseif mbullet > 0:
+					'You have <<mbullet>> bullets left in the machine gun.'
+
+					act 'Reload':
+						cla
+						if mbullet < 7:
+							mbulletIn = mbullet
+							mbullet = 0
+
+							'You reload the empty gun.'
+						end
+						if mbullet >= 30:
+							mbullet -= 30
+							mbulletIn = 30
+
+							'You''ve reloaded 30 bullets for the machine gun.'
+						end
+
+						act 'Further':gt'fight','sta'
+					end
+				end
+			end
+		end
+
+		if tragun > 0:
+			!travmatik
+			if tbulletIn > 0:
+				'You have <<mbulletIn>> bullets left in the non-lethal gun.'
+
+				act 'Pistol shot':
+					cla
+					tbulletIn -= 1
+					gunpower = 50
+					buu = 1
+					gunpricel = 0
+					gt'strelba'
+				end
+			elseif tbulletIn <= 0:
+				if tbullet = 0:
+					'You''ve run out of ammunition.'
+				elseif tbullet > 0:
+					'You have <<mbullet>> bullets left in the non-lethal gun.'
+
+					act 'Charge':
+						cla
+						if tbullet >= 1:
+							tbullet -= 1
+							tbulletIn = 1
+
+							'You reload the empty gun.'
+						end
+
+						act 'Further':gt'fight','sta'
+					end
+				end
+			end
+		end
+		if autocombat_cheat = 0 or pcs_magick > 0:
+			act 'Physical Attack':xgt'boxing'
+			if pcs_magik > 0: act 'Magical Attack':gt'magik'
+			act 'Surrender to your opponent': autocombat_surrender = 1 & gt 'ender', 'loss'
+		elseif autocombat_cheat = 1 and pcs_magick = 0:
+			xgt'boxing'
+		end		
+	elseif hod = 1:
+		!enemy attacks
+		'<font color = red><<$boydesc>> attacks</font>'
+		if autocombat_cheat = 0: 
+			act 'Continue': xgt'enemy','start'
+			act 'Surrender to your opponent': autocombat_surrender = 1 & gt 'ender', 'loss'
+		elseif autocombat_cheat = 1: 
+			xgt'enemy','start'
+		end
+	end
+end
+
+if $ARGS[0] = 'sta':
+	menu_off = 1
+	cla
+	damTip = 0
+	damTipM = 0
+	damTipV = 0
+	damTipMV = 0
+	magweapbonus = 0
+	magweapbonusV = 0
+	bonusSh = 0
+	bonusShV = 0
+	eleSh = 0
+	eleShV = 0
+	poisonAV = 0
+	hidanAtk = 0
+
+	'<b>= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =</b>'
+	'<b><<$boydesc>></b> life <b><font color = red><<healthV>></font></b>, mana <b><font color = blue><<manaV>></font></b>, willpower <b><font color = green><<willpowerV>></font></b>'
+	if defenceV > 0:'<b><font color = red>Protection <<defenceV>> units</font></b>'
+	if defenceMV > 0:'<b><font color = red>Mana protection <<defenceMV>> units</font></b>'
+	if defenceWV > 0:'<b><font color = red>Will protection <<defenceWV>> units</font></b>'
+	'Your life <b><font color = red><<pcs_health>></font></b>, mana <b><font color = blue><<pcs_mana>></font></b>, willpower <b><font color = green><<pcs_willpwr>></font></b>'
+	if defence > 0:'<b><font color = green>Protection <<defence>> units</font></b>'
+	if defenceM > 0:'<b><font color = green>Mana impact protection <<defenceM>> units</font></b>'
+	if defenceW > 0:'<b><font color = green>Will impact protection <<defenceW>> units</font></b>'
+	if defenceAct > 0:'<b><font color = green><<defenceAct>> Regeneration</font></b>'
+	if defenceActM > 0:'<b><font color = green><<defenceActM>> Mana recovery protection</font></b>'
+	'<b>= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =</b>'
+
+	if autocombat_cheat = 0: act 'Continue':gt'fight','start'
+	if autocombat_cheat = 1: gt'fight','start'
+end
+
+if $ARGS[0] = 'Wrestlergen':
+	if nopornowrestling = 0:
+		nopornowrestling = 1
+		NPCnum = 30
+		NPCnow = 1
+		!!shag = 1
+		gs 'npc'
+		NoView = 1
+		NPCrost = 30
+		gs 'generation'
+		NoView = 1
+		NPCrost = 30
+		gs 'generation'
+		NoView = 1
+		NPCrost = 30
+		gs 'generation'
+		NoView = 1
+		NPCrost = 30
+		gs 'generation'
+		NoView = 1
+		NPCrost = 30
+		gs 'generation'
+
+		$nikname[1] = 'schoolgirl'
+		!!musle[0] = 100
+		!!flex[0] = pcs_agil
+		!!stamina[0] = pcs_vital * 3
+		!!wipo[0] = pcs_sprt
+		!!pcs_intel[0] = 10
+		!!krasota[0] = pcs_apprnc
+		!!pcs_hgt[0] = 165
+		!!salo[0] = 100
+		!!fat[0] = 100
+		!!$nikname[1] = 'steel Virgo'
+		!!musle[1] = 100
+		!!flex[1] = 100
+		!!stamina[1] = 300
+		!!wipo[1] = 50
+		!!pcs_intel[1] = 10
+		!!krasota[1] = 10
+		!!pcs_hgt[1] = 165
+		!!salo[1] = 100
+		!!fat[1] = 100
+	end
+end
+--- fight ---------------------------------
+

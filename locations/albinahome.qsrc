@@ -1,0 +1,534 @@
+# albinahome
+CLOSE ALL
+
+if $ARGS[0] = 'start' or $ARGS[0] = '':
+	if beinalbinahome = 0:beinalbinahome = 1
+	*clr & cla
+	menu_off = 1
+	frost = 0
+	gs 'stat'
+
+	'<center><b><font color="maroon"><<$npc_firstname[''A23'']>> <<$npc_lastname[''A23'']>></font></b></center>'
+	'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/head/23.jpg"></center>'
+	''
+
+	if hour < 20:
+		if npcSex[23] = 0:
+			'Albina smiles at you affably and says, "<<$pcs_firstname>> I have a bottle of fine wine here, let''s drink."'
+
+			act 'Drink':
+				*clr & cla
+				minut += 15
+				gs 'drugs', 'alcohol', 'wine'
+				gs 'stat'
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+				'You sat down at the table while Albina grabs a bottle of wine. She deftly opens the bottle and pours wine in two glasses.'
+				'You drink together with Albina. She smiles and says "Once again, you warned me. They still have a case on me, but they''ll have to work very hard to get enough evidence.'
+				'My father is of course not very happy. His political career was doomed to fail anyway, regardless of what I did or didn''t do."'
+
+				act 'Ask her how her father reacted when he learned of her business':
+					*clr & cla
+					minut += 15
+					gs 'drugs', 'alcohol', 'wine'
+					gs 'stat'
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+					'You ask Albina "And how did he react when he found out about your business?"'
+					'Albina laughs and pours more wine in both glasses. "He knew from the beginning."'
+					'Surprised, you look at Albina and ask "How do you know?"'
+					'Laughing, Albina answers "I have a very strange little family, so it''s perhaps not easy for you to understand. Let''s have another drink."'
+					'You sit quietly for a while, sipping on your wine and thinking about what Albina has just told you.'
+					'Suddenly, Albina says: "Actually, my dad is a bastard. If there is a hell, my dad has a special place reserved for him there to atone for what he''s done."'
+
+					act 'Ask her what she''s talking about':
+						*clr & cla
+						minut += 15
+						gs 'drugs', 'alcohol', 'wine'
+						gs 'stat'
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+						'You shake your head in amazement, "What are you talking about?"'
+						'Albina suddenly sobers up and her face turns dark and grim. With a hiss she answers:'
+						'"Fine, you want to get into the belly of the beast, be my guest.'
+						'My dad has raped and abused me from an early age, I don''t even remember when it all began. I''ve spent my entire life being his plaything.'
+						'When my mother found out, my bastard father went to Durkee. Yes, he even had some connections there.'
+						'The truth is now the scum is losing ground constantly. All his life he was a senior cop, but now that he is retired he doesn''t have any money left. All his businesses went bankrupt.'
+						'His political career is his last chance to get back to where he once was." She stops talking for a few seconds to pour more wine in the glasses, and as she does you can clearly see her hands shaking violently. "You see this rich house? Guard at the entrance, expensive furniture, all this luxury? It''s all a charade. My father isn''t even on the verge of bankruptcy, he is already far beyond. Without my business bringing in money, we would be begging for scraps and sleeping under bridges."'
+
+						act 'Ask her how she knows her father is bankrupt':
+							*clr & cla
+							minut += 15
+							gs 'drugs', 'alcohol', 'wine'
+							gs 'stat'
+							'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+							'You asked Albina "How do you know your fathers businesses are bankrupt?"'
+							'Albina shrugged "I''m just guessing. Dad poured all our assets into his election campaign. We still have some money left, but not much. And now it''s over. My business is gone, and so is his political career. There is only a mountain of debts and bad creditors."'
+							'She grabs the bottle and pours more wine.'
+
+							act 'Tell Albina that you didn''t get the whole picture':
+								*clr & cla
+								minut += 15
+								gs 'drugs', 'alcohol', 'wine'
+								gs 'stat'
+								'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+								'You murmur "I''m not quite sure I understand everything."'
+								'Albina smirks and says, "What is there to understand. Dad is a pedophile and fucked me ever since I was a child. His connections were enough to cover his tracks."'
+								'She paused and added, "The worst part is, he made me a monster. I just have not had a chance to grow up like a normal person.'
+								'I understand all this, but there''s nothing I can do about it. I like to fuck, and I don''t care with whom. I''m down and out, a pervert not quite capable of being a normal mother and wife."'
+								'The always cold and ironic Albina has tears in her eyes as she pours more wine into your glasses.'
+
+								act 'Drink':
+									*clr & cla
+									minut += 15
+									gs 'drugs', 'alcohol', 'wine'
+									gs 'stat'
+									'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+									'Once again you sit quietly for a while, sipping your wine.'
+									'After a while Albina speaks again. "Sorry about getting all bleedy. I''m just tired of it all.'
+									'Anyone would be in this backwater town. Everyone is a bigot here. They all want to shove their dicks down your throat and face-fuck you.'
+									'But the men rarely want to use their tongues, they just want to get in your pants without permission or excuse. You feel like a piece of meat.'
+									'And most don''t know anything about giving pleasure, although they all have an ego the size of a planet.'
+									'And kissing! Almost no one knows how to kiss properly."'
+									'She smiles as she tilts her head towards your face.'
+
+									act 'Kiss':
+										*clr & cla
+										gs 'stat'
+										'<center><img <<$set_imgh>> src="images/shared/sex/kiss/kiss2.jpg"></center>'
+										'Unsure if it''s the alcohol or just the fact that she''s so beautiful, you lean towards Albina and pucker your lips.'
+										'She gives you a hot and tender kiss on the lips, and you feel your excitement growing as your skin becomes flush with heat.'
+										gs 'arousal', 'kiss', 5
+										gs 'stat'
+
+										act 'Kiss':
+											*clr & cla
+											gs 'stat'
+											'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/kiss2.jpg"></center>'
+											'As you continue kissing Albina, you feel her hand slowly working its way up your inner thigh.'
+											'Reaching your crotch, she moves it gently over the front of your panties before slowly sliding your panties to the side.'
+											'As her fingers begin exploring your pussy, you moan into her mouth and move your hips to give her easier access.'
+											gs 'arousal', 'kiss', 5
+											gs 'arousal', 'vaginal_finger', 5
+											minut -= 5
+											gs 'stat'
+
+											act 'Kiss':
+												*clr & cla
+												gs 'stat'
+												'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/kiss3.jpg"></center>'
+												'Without breaking your kiss, Albina slowly inserts a finger in your wet vagina, and a rush of pleasure runs through your body.'
+												'As her finger caresses the inside of your pussy, it creates a wet, sloppy sound.'
+												'Albina''s free hand slowly works its way down your body, stopping only to lightly pinch your nipples through your clothing.'
+												'When her hand makes its way down to your legs, she gently pushes them further apart.'
+												gs 'arousal', 'kiss', 5
+												gs 'arousal', 'vaginal_finger', 5
+												minut -= 5
+												gs 'stat'
+												
+												act 'Further':
+													*clr & cla
+
+													if npcSex[23] = 0:npcSex[23] = 1 & girl += 1
+
+													lesbian += 1
+													gs 'stat'
+													'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/lesb.jpg"></center>'
+													'Kneeling down in front of you, Albina begins trailing kisses up your inner thigh.'
+													'As she gets closer and closer to your pussy, you move one hand up to your breasts and begin kneading and pulling on your nipples.'
+													'Soon you feel the warm touch of her lips on your labia, and shudder with pleasure as her tongue finds its way to your clitoris.'
+													'Moaning, you feel a fire begin to burn in your abdomen and you buck your hips to get Albina''s face buried in your pussy.'
+													'Then an intense pleasure overtakes you, and you momentarily lose control of your body. Moaning loudly, you grab hold of Albina''s hair as an intense orgasm washes over you.'
+													'During your orgasm, you black out for a few seconds and when you regain your senses you find yourself sitting next Albina, who''s smiling prettily.'
+													
+													gs 'arousal', 'kiss', 30
+													$orgasm_or = 'yes'
+													gs 'arousal', 'cuni', 30
+													gs 'arousal', 'end'
+													minut -= 30
+													gs 'stat'
+													
+													act 'Say goodbye and go home':gt 'pavResidential'
+												end
+											end
+										end
+									end
+								end
+							end
+						end
+					end
+				end
+			end
+		else
+			if albsporthome = 0:
+				*clr & cla
+				gs 'stat'
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/train.jpg"></center>'
+				'Albina is training in her room, doing some stretching exercises.'
+
+				act 'Chat':
+					*clr & cla
+					albsporthome = 1
+					minut += 15
+					gs 'stat'
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/head/23.jpg"></center>'
+					'Albina smiles at you and says, "I can''t afford to pay the gym, so I have to exercise at home if I want to stay in shape.'
+					'By the way, I could teach you to about stripping and poledancing if you want."'
+
+					act 'Further':gt 'albinahome'
+				end
+			else
+				if albsportday ! daystart:
+					*clr & cla
+					gs 'stat'
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/train.jpg"></center>'
+					'Albina is training in her room, doing some stretching exercises.'
+					'She smiles at you and asks "Well? Want me to teach you?"'
+
+					act 'Learn striptease (2:00)':
+						cla
+						*clr
+						albsportday = daystart
+						minut += 120
+						fat -= 5
+						agil_exp += rand (1, 3)
+						pcs_mood -= 8
+						pcs_sweat += 30
+						gs 'stat'
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/stripdance.jpg"></center>'
+						if pcs_inhib < 60:inhib_exp += rand(2,3)
+
+						if pcs_danc >= 40:
+							dancero_exp += rand(2, 10)
+							'Albina taught you how to passionately dance to the music while stripping.'
+
+							if pcs_dancero >= 100:'But you could not learn anything new, you already know everything she could teach you.'
+						else
+							danc_exp += rand(5, 15)
+							'Striptease is too complex for you, you''re not able to dance and strip at the same time.'
+							'Albina recommends that you start with learning to dance.'
+						end
+
+						act 'Rest':gt 'albinahome'
+					end
+					if pcs_stren >= 40 and pcs_dancero > 50:
+						act 'Learn poledancing (2:00)':
+							cla
+							*clr
+							albsportday = daystart
+							if pcs_inhib < 60:inhib_exp += rand(2,3)
+							timemult = 8
+							loopcount = 1
+							:timeloop1
+							gs 'exercise', 'tier2', 0, 'stren_exp', 'vital_exp', 'dancpol_exp'
+							if loopcount < timemult: loopcount += 1 & jump 'timeloop1'
+							loopcount = 0
+							timemult = 0
+							gs 'stat'
+							'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/poledance.jpg"></center>'
+
+							'Albina taught you various acrobatic moves on the pole.'
+
+							if pcs_dancpol >= 100:
+								'You could not learn anything new, you already know everything she could teach you.'
+							end
+
+							act 'Rest':gt 'albinahome'
+						end
+					elseif pcs_stren < 40:
+						'Albina grins "You''re still too weak for poledancing, we can practice developing your strength instead."'
+
+						act 'Develop strength (2:00)':
+							*clr & cla
+							albsportday = daystart
+							timemult = 8
+							loopcount = 1
+							:timeloop2
+							gs 'exercise', 'tier2', 0, 'stren_exp', 'vital_exp'
+							if loopcount < timemult: loopcount += 1 & jump 'timeloop2'
+							loopcount = 0
+							timemult = 0
+							gs 'stat'
+							'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/stren.jpg"></center>'
+							'Albina shows you how to develop your strength using various exercises.'
+
+							act 'Rest':gt 'albinahome'
+						end
+					end
+
+					act 'Tell Albina that you are not in the mood':albsportday = daystart & gt 'albinahome'
+				elseif albsportday = daystart:
+					if pcs_sweat <= 20:
+						if pcs_hairbsh <= 0:
+							pcs_hairbsh = 1
+							gs 'stat'
+							'Looking at your tousled hair, Albina smiles, picks up a comb and proceeds to do your hair.'
+						end
+
+						if albdinday ! daystart:
+							albdinday = daystart
+							temp = rand(0, 3)
+
+							if temp = 0:
+								'Albina offers to play a video game.'
+
+								gt 'albinahome', 'game'
+							elseif temp = 1:
+								'Albina offers to try on clothes with her.'
+
+								gt 'albinahome', 'dressing'
+							elseif temp = 2:
+								'Albina offers to chat.'
+
+								gt 'albinahome', 'chat'
+							else
+								'Albina offers a glass of wine.'
+
+								gt 'albinahome', 'vine'
+							end
+						end
+					elseif pcs_sweat > 20:
+						'Albina grins and says, "Go take a shower <<$pcs_nickname>>, you are all sweaty now."'
+
+						act 'Get in the shower (0:15)':
+							*clr & cla
+							dynamic $showerdin
+							minut += 15
+							! WD: Remove old Cheat code
+							pcs_horny += 1
+							pcs_hairbsh = 0
+							pcs_makeup = 1
+							if frost > 0:frost = 0
+
+							gs 'stat'
+							'<center><video autoplay loop src="images/shared/home/bathroom/dush.mp4"></video></center>'
+							'You get in the shower and begin to lather your body with a washcloth, and then shampoo your hair.'
+							'After washing off the soap and rinsing off the shampoo you feel completely clean.'
+
+							act 'Get out of the shower':gt 'albinahome'
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if hour >= 20 and week >= 5 and week < 7:
+		'Albina says that she wants to go to the disco.'
+
+		if money >= 25:act 'Go to the disco':money -= 25 & minut += 15 & gt 'gdkin'
+	end
+
+	act 'Say goodbye and go home':gt 'pavResidential'
+end
+
+if $ARGS[0] = 'game':
+	act 'Play':
+		*clr & cla
+		menu_off = 1
+		minut += 60
+		pcs_mood += 15
+		pcs_willpwr += 20
+		react_exp += rand(0, 1)
+		gs 'stat'
+
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/game.jpg"></center>'
+		'You and Albina laid down in front of a huge TV with a set-top box.'
+		'Albina turned on the game and you started playing together with her.'
+
+		if albsexday = daystart:
+			act 'Rest':gt 'albinahome'
+		else
+			'Albina winks at you and says "<<$pcs_firstname>>, let''s have a wager. If I win, I can do anything I want with you, and if you win you can do anything you want with me"'
+
+			act 'Refuse':gt 'albinahome'
+
+			act 'Bring it on':
+				*clr & cla
+				albsexday = daystart
+
+				gs 'stat'
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/game.jpg"></center>'
+
+				temp = rand(1, 100)
+				if pcs_react >= 75 and temp >= 40:
+					albplay = 1
+				elseif pcs_react >= 50 and temp >= 50:
+					albplay = 1
+				elseif pcs_react >= 25 and temp >= 75:
+					albplay = 1
+				else
+					albplay = 0
+				end
+
+				if albplay = 0:
+					'Although you tried your best, Albina proved a worthy opponent. Laughing like the villain of a theater play, she slaps you on the ass with the palm of her hand, saying "Show me your ass, <<$pcs_firstname>>! You are my bitch now!"'
+
+					if rand(0, 1) = 0:
+						gt 'albinahome', 'vag_strapon'
+					else
+						gt 'albinahome', 'anal_strapon'
+					end
+				else
+
+					'Looking slightly disappointed, Albina hands you a strap-on. "On, Bey do not regret Chapaya."'
+
+					gt 'albinahome', 'akt_vag'
+					gt 'albinahome', 'akt_anal'
+				end
+			end
+		end
+	end
+end
+
+
+if $ARGS[0] = 'dressing':
+	act 'Go try on some clothes':
+		*clr & cla
+		minut += 60
+		pcs_mood += 20
+		pcs_willpwr += 20
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/dressing.jpg"></center>'
+		'You and Albina open her huge wardrobe and begin digging into her various dresses.'
+		'As you rummage around in her wardrobe, you are amazed by how many different clothes she can fit in there. It feels like her wardrobe is a bottomless pit filled with dresses, leggings, jeans, and all kinds of other clothes!'
+		'You end up spending an hour trying on various dresses with Albina.'
+
+		if albsexday ! daystart:
+			act 'Rest':gt 'albinahome'
+		elseif albsexday = daystart:
+			act 'Rest':gt 'albinahome'
+		end
+	end
+end
+
+if $ARGS[0] = 'chat':
+	act 'Chat':
+		*clr & cla
+		menu_off = 1
+		minut += 60
+		pcs_mood += 10
+		pcs_willpwr += 20
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+		'You chat with Albina.'
+
+		if albsexday ! daystart:
+			act 'Rest':gt 'albinahome'
+		elseif albsexday = daystart:
+			act 'Rest':gt 'albinahome'
+		end
+	end
+end
+
+if $ARGS[0] = 'vine':
+	act 'Drink wine':
+		*clr & cla
+		menu_off = 1
+		minut += 60
+		gs 'drugs', 'alcohol', 'wine'
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/drink_wine.jpg"></center>'
+		'You drink a glass of wine with Albina.'
+
+		if albsexday ! daystart:
+			act 'Rest':gt 'albinahome'
+		elseif albsexday = daystart:
+			act 'Rest':gt 'albinahome'
+		end
+	end
+end
+
+if $ARGS[0] = 'vag_strapon':
+	act 'Get on all fours':
+		*clr & cla
+		menu_off = 1
+		albsexday = daystart
+		gs 'boystat', 'A23'
+
+		if pcs_vag < 10:gs 'boyStat', 'D1'
+		if pcs_vag >= 10:gs 'boyStat', 'D<<pcs_vag/7>>'
+		npc_sex['A23'] += 1
+		lesbian += 1
+		straponVagPass += 1
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/strapon.jpg"></center>'
+		'Albina takes a <<dick>> cm strap-on harness and attaches it to herself.'
+		'Having strapped herself in, you feel her hands gently stroking the inside of your thighs, slowly working their way to your pussy.'
+		gs 'dinsex2', 'd_strapon_vag', 15, 'sub', 'lesbian'
+		act 'Rest':gt 'albinahome'
+	end
+end
+
+if $ARGS[0] = 'anal_strapon':
+	act 'Get on all fours':
+		*clr & cla
+		menu_off = 1
+		albsexday = daystart
+		gs 'boystat', 'A23'
+		if pcs_ass < 10: gs 'boyStat', 'D1'
+		if pcs_ass >= 10:gs 'boyStat', 'D<<pcs_ass/7>>'
+		npc_Sex['A23'] += 1
+		lesbian += 1
+		straponAnalPass += 1
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/analstrapon.jpg"></center>'
+		'Albina takes a <<dick>> cm strap-on harness and attaches it to herself.'
+		'Having strapped herself in, you feel her hands gently stroking your butt, slowly working their way to your anus.'
+		gs 'dinsex2', 'd_strapon_anal', 15, 'sub', 'lesbian'
+
+		act 'Rest':gt 'albinahome'
+	end
+end
+
+if $ARGS[0] = 'akt_vag':
+	act 'Put Albina on all fours and fuck her pussy':
+		*clr & cla
+		menu_off = 1
+		albsexday = daystart
+
+		if npcSex[23] = 0:npcSex[23] = 1 & girl += 1
+		straponVagAkt += 1
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/straponakt.jpg"></center>'
+		'You begin gently probing Albina''s nether regions with the strap-on, and soon enough she''s moaning and bucking her hips.'
+		'Deciding it''s time to give her the real deal, you spit on your plastic phallus, give it a nice rub to coat it in saliva and line it up with Albina''s pussy.'
+		'As you enter her, you can see her tense up from pleasure and hear soft moans escape her mouth.'
+		'Slowly ramping up the speed of your thrusts, Albina''s moans get louder and louder and her butt moves in rhythm with you as she nears orgasm.'
+		'Finally Albina cums. Trying to stifle a scream, she grabs on to the sheets and shoves her face down into them as her body shakes slightly from the intense pleasure.'
+		'Done dispensing your punishment, you climb out of the strap-on harness and lie down next to Albina for a few seconds to catch your breath.'
+		
+		gs 'arousal', 'anal_strap_give', 15, 'dom', 'lesbian'
+		gs 'arousal', 'end'
+		gs 'stat'
+		act 'Rest':gt 'albinahome'
+	end
+end
+
+if $ARGS[0] = 'akt_anal':
+	act 'Put Albina on all fours and fuck her ass':
+		*clr & cla
+		menu_off = 1
+		albsexday = daystart
+		if npcSex[23] = 0:npcSex[23] = 1 & girl += 1
+		straponVagAkt += 1
+		gs 'stat'
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/girl/albina/sex/straponaktanal.jpg"></center>'
+		'You begin gently kneading Albina''s butt, letting your hands roam all over her supple butt-cheeks and grazing her tight anus.'
+		'As you explore her bum, you realize her anus might be too tight for the strap-on. You lick your index finger and insert it in Albina''s anus. Slowly pushing your finger further in, you can hear her moaning softly.'
+		'As you finger-fuck Albina''s anus, you slowly introduce more and more fingers until three of your fingers are inside her.'
+		'Deciding it''s time to give her the real deal, you spit on your plastic phallus, give it a nice rub to coat it in saliva and line it up with Albina''s anus.'
+		'As you enter her, you can see her tense up from pleasure and hear soft moans escape her mouth. You notice she is gently rubbing her clitoris with one of her hands.'
+		'Slowly ramping up the speed of your thrusts, Albina''s moans get louder and louder and her butt moves in rhythm with you as she nears orgasm.'
+		'Finally Albina cums. Trying to stifle a scream, she grabs on to the sheets and shoves her face down into them as her body shakes slightly from the intense pleasure.'
+		'Done dispensing your punishment, you climb out of the strap-on harness and lie down next to Albina for a few seconds to catch your breath.'
+		
+		gs 'arousal', 'anal_finger_give', 15, 'lesbian'
+		gs 'arousal', 'anal_strap_give', 15, 'dom', 'lesbian'
+		gs 'arousal', 'end'
+		minut -= 15
+		gs 'stat'
+		
+		act 'Rest':gt 'albinahome'
+	end
+end
+
+--- albinahome ---------------------------------
+

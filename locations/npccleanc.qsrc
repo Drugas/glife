@@ -1,0 +1,103 @@
+# npccleanc
+
+!! {This code should be called to purge a specific NPC. It expects an ARGS[0] of the code of the C array.}
+$tempcclean = $ARGS[0]
+
+$npc_firstname[$tempcclean] = ''
+$npc_nickname[$tempcclean] = ''
+$npc_lastname[$tempcclean] = ''
+$npc_usedname[$tempcclean] = ''
+$npc_notes[$tempcclean] = ''
+npc_dob[$tempcclean] = 0
+npc_vital[$tempcclean] = 0
+npc_stren[$tempcclean] = 0
+npc_intel[$tempcclean] = 0
+npc_agil[$tempcclean] = 0
+npc_sprt[$tempcclean] = 0
+npc_magik[$tempcclean] = 0
+npc_drunk[$tempcclean] = 0
+npc_pantys[$tempcclean] = 0
+npc_cyc[$tempcclean] = 0
+npc_fert[$tempcclean] = 0
+$npc_firstpart[$tempcclean] = ''
+$npc_lastpart[$tempcclean] = ''
+$npc_kidpater[$tempcclean] = ''
+npc_gender[$tempcclean] = 0
+$npc_thdick[$tempcclean] = ''
+npc_dick[$tempcclean] = 0
+npc_sexskill[$tempcclean] = 0
+npc_spermpot[$tempcclean] = 0
+npc_vag[$tempcclean] = 0
+npc_ass[$tempcclean] = 0
+npc_hymen[$tempcclean] = 0
+npc_horny[$tempcclean] = 0
+npc_Pavrep[$tempcclean] = 0
+npc_Godrep[$tempcclean] = 0
+npc_apprnc[$tempcclean] = 0
+npc_lipbalm[$tempcclean] = 0
+npc_makeup[$tempcclean] = 0
+npc_sweat[$tempcclean] = 0
+npc_dye[$tempcclean] = 0
+npc_hairbsh[$tempcclean] = 0
+npc_skin[$tempcclean] = 0
+npc_bodyhair[$tempcclean] = 0
+npc_breath[$tempcclean] = 0
+npc_hipcurv[$tempcclean] = 0
+npc_hgt[$tempcclean] = 0
+npc_bust[$tempcclean] = 0
+npc_nips[$tempcclean] = 0
+npc_fat[$tempcclean] = 0
+npc_pubes[$tempcclean] = 0
+npc_hairlng[$tempcclean] = 0
+npc_haircol[$tempcclean] = 0
+npc_haircurl[$tempcclean] = 0
+npc_tan[$tempcclean] = 0
+npc_lip[$tempcclean] = 0
+npc_lashes[$tempcclean] = 0
+npc_eyesize[$tempcclean] = 0
+npc_eyecol[$tempcclean] = 0
+npc_dom[$tempcclean] = 0
+npc_sub[$tempcclean] = 0
+npc_glasses[$tempcclean] = 0
+npc_grades[$tempcclean] = 0
+npc_run[$tempcclean] = 0
+npc_vball[$tempcclean] = 0
+npc_shoot[$tempcclean] = 0
+npc_sewing[$tempcclean] = 0
+npc_serving[$tempcclean] = 0
+npc_chess[$tempcclean] = 0
+npc_dance[$tempcclean] = 0
+npc_danceero[$tempcclean] = 0
+npc_jab[$tempcclean] = 0
+npc_punch[$tempcclean] = 0
+npc_kick[$tempcclean] = 0
+npc_def[$tempcclean] = 0
+npc_vokal[$tempcclean] = 0
+npc_teach[$tempcclean] = 0
+npc_QW[$tempcclean] = 0
+npc_rel[$tempcclean] = 0
+npc_love[$tempcclean] = 0
+npc_job[$tempcclean] = 0
+npc_cloc[$tempcclean] = 0
+$npc_dad[$tempcclean] = ''
+$npc_mom[$tempcclean] = ''
+$npc_pic[$tempcclean] = ''
+npc_herpes[$tempcclean] = 0
+npc_syth[$tempcclean] = 0
+npc_gon[$tempcclean] = 0
+npc_chlam[$tempcclean] = 0
+npc_genwart[$tempcclean] = 0
+npc_thrush[$tempcclean] = 0
+npc_malen[$tempcclean] = 0
+npc_chem[$tempcclean] = 0
+npc_clothpref[$tempcclean] = 0
+$npc_PersType[$tempcclean] = ''
+$npc_dna[$tempcclean] = ''
+
+i = arrsize('$cemptyarray')
+$cemptyarray[i] = $tempcclean
+
+killvar '$tempcclean'
+
+--- npccleanc ---------------------------------
+

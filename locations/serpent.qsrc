@@ -1,0 +1,42 @@
+# Serpent
+$metka = ''
+$loc = 'Serpent'
+$menu_loc = 'Serpent'
+$menu_arg = ''
+menu_off = 0
+$location_type = 'secluded'
+
+if findneck = 1:
+	cls
+	gs 'stat'
+	'<center><video autoplay loop src="images/locations/gadukino/serpent/serpentintro.mp4"></video></center>'
+	'You hear a whispered word coming from somewhere in the barn. "Ahhhh, I sseee the little fae mortal hasss s found my horcrux.  You hold in your handsss my greatessst prizzzzze."  You look around for who is talking, but don''t see anyone in the barn with you.'
+	'"Let usss make a deal, you and I.  You return my prizzzze and I will teeeach you muccch about the magicssss you possssessss."  You hear a scrapping sound coming from above you in the shadowy rafters.'
+	'"Who are you ?  Where are you?" you yell.  Looking for the owner of the strange sibilant voice.'
+	'"I am Zzathrezzz.  Lord of Ssserpentsss." as the voice continues from above you see a large snake emerge out of the shadows.  Outside the barn you hear Bandit start to loudly bark.  Zathrez hisses in anoyance.'
+	'"That dog isss a noicccenccce!"'
+	act 'You stand frozen as the snake''s head glides down towards you': gt $loc
+
+	cls
+	gs 'stat'
+	'<center><img <<$set_imgh>> src="images/locations/gadukino/serpent/serpent1_0.jpg"></center>'
+	'"Now, do we deal?" the sibilant voice continues.'
+
+	act '"Maybe, but first tell me more about what you can teach me." you place your hands on your hips and pose defiantly.':
+		serpent_path = 1
+		gt 'serpent'
+	end	
+
+	act '"No, leave me alone you freaky snake." you scream and throw the box aside as you run out of the barn':
+		serpent_path = 0
+		gt 'Gaddvor'
+	end
+end
+
+if serpent_path = 1:
+	cls
+	gs 'stat'
+end
+	
+--- Serpent ---------------------------------
+

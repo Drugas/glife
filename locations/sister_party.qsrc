@@ -1,0 +1,270 @@
+# sister_party
+
+if $ARGS[0] = 'sister_party':
+	*clr & cla
+	minut += 5
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'
+	if $metka = 'party_gost':
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_1.jpg"></center>'
+		''
+	else
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/resident/anya/sister2.jpg"></center>'
+		''
+	end
+	'Your cheerful sister Anya.'
+	if $metka = 'party_gost':'Is drunk and in good spirits.'
+	'"Oh <<$pcs_nickname>>, How do you like our humble party? It looks like your having a good time."'
+	act 'Move away':gt $loc,$metka
+	if alko < 6 and $metka = 'party_home': act 'Have a drink': gt'sbReksHome','party_drink'
+	if $metka = 'party_gost': act 'Drink':gt 'sister_party', 'drink'
+	if $metka = 'party_gost': act 'Chat about guys':gt 'sister_party', 'talk'
+end
+
+if $ARGS[0] = 'talk':
+	*clr & cla
+	minut += 5
+	sister_party_talk += 1
+	sister_party_talkQW += 1
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'
+	'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_1.jpg"></center>'
+	if sister_party_talk < 3:
+		if sister_party_talkQW = 1:
+			'"It is strange seeing you back together with Roma."'
+			'"We talked things out and decided to give it another chance.'
+		elseif sister_party_talkQW = 2:
+			'"You''re over it after all the curing, crying and yelling?"'
+			'"I know, I know, I got excited a little bit, but now everything is worked out."'
+		elseif sister_party_talkQW = 3:
+			'"So you just going to continue dating him, after everything that happened?"'
+			'"Well, little sister, he made mistakes. Now he and I have worked things out and I thank God everything is behind us."'
+		elseif sister_party_talkQW = 4:
+			'"I can not believe it, my sister letting him crawl back and taking him back, it''s not like you."'
+			'"Well <<$pcs_nickname>>, best to have a bird in the hand, especially now that we don''t have such a simple relationship anymore.'
+		elseif sister_party_talkQW = 5:
+			'"What do you mean you don''t have a simple relationship, I need more details."'
+			'"Yes I know, so pay attention, I''m not going to repeat this. In a sense we now have an open relationship."'
+		elseif sister_party_talkQW = 6:
+			'"Open relationship? You mean where you can both fuck anyone you want and you keep dating Roma?"'
+			'"Eh <<$pcs_nickname>>, it is something like that."'
+		elseif sister_party_talkQW = 7:
+			'"I understand you are a fool, I could not agree to that."'
+			'"Why? I know he loves me and he knows that I love him, but while we are young, we have fun."'
+		elseif sister_party_talkQW = 8:
+			'"I still say it''s crazy, how you can be in a loving relationship and fuck anyone."'
+			'"<<$pcs_nickname>>, I am a not complete, fool. Why with anyone? Look there is other nice guys here too, such as Rex.'
+		elseif sister_party_talkQW = 9 and Rex_Love = 1:
+			'"You want me to kill you, you know that I''m dating Rex."'
+			'"I know that you two are dating, I was joking, although I did let you fuck my boyfriend, why can''t I fuck yours?"'
+		elseif sister_party_talkQW = 9 and Rex_Love = 0:
+			'"Ok you''re right, I wouldn''t mind it myself but I don''t know if Rex would."'
+			'"Oh what a naughty girl, well then how about we lure him together?"'
+		elseif sister_party_talkQW = 10 and Rex_Love = 1:
+			'"I get what you''re you hinting at, but I''m not sure Rex would also agree. You and Roma both agreed ahead of time."'
+			'"The main thing is that you are not opposed <<$pcs_nickname>>, besides all men are all the same. You really think Rex could withstand both of our charms?"'
+		elseif sister_party_talkQW = 10 and Rex_Love = 0:
+			'"You want to seduce Rex? Haha I have fucked him, and you have no idea what he is like in bed.'
+			'"Wow what little minx you are, so that''s why you are always running around in his room, well then that will make this easier."'     
+		end
+		
+	else
+		i = rand(1,9)
+		if i = 1:'"<<$pcs_nickname>>, you still do not have a man?"'
+		if i = 2:'"Sometimes I can''t decide, what is more important, the size of their wallet or penis? What do you think, <<$pcs_nickname>>?"'
+		if i = 3:'"If you have a reputation as the town whore, the guys won''t let you come to the parties anymore."'
+		if i = 4:'"Its not good to come here when you''re in a bad mood, Rex hates miserable bastards in his house."'
+		if i = 5:'"Still going to the crap school? Idiot, find yourself a rich man and all your problems are solved."'
+		if i = 6:'"When I drink, I become like a man and constantly think about sex."'
+		if i = 7:'"Roma sends his greetings, he said he missed our threesomes, I slapped him across the face for it."'
+		if i = 8:'"What do you think of our host?"'
+		if i = 9:'"Get wild <<$pcs_nickname>>, everything that happens at Rex''s parties, stays at Rex''s parties."'
+
+	end
+	act 'Move away':gt $loc,$metka
+end
+
+if $ARGS[0] = 'drink':
+	minut += 5
+	*clr & cla
+	gs 'drugs', 'alcohol', 'beer'
+	drunk_sveta += 1
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'
+	'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_2.jpg"></center>'
+	'Anya hands you a bottle and you take a drink and start to hand it back. "Keep the bottle, sister. I won''t tell <<$npc_nickname[''A29'']>>."'
+	'You gladly drink more sharing it with your beloved sister.'
+	'Ridding high on your alcohol high you are ready to plunge into the wild debauchery.'
+	if alko >= 7:'Sudden severe head spinning and you are ready at any time...'
+	if alko >= 7:act 'Pass out':gt 'dinParty', 'sleep'
+	if alko < 7:act 'Dance topless':gt 'sister_party', 'fun'
+	if alko < 7:act 'Move away':gt $loc,$metka
+end
+
+if $ARGS[0] = 'fun':
+	*clr & cla
+	minut += 5
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'     
+	'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_3_' + rand(1,2) + '.mp4"></video></center>'
+	'Alcohol has hit you hard, you feel a little light headed but warm and happy.'
+	'"<<$pcs_nickname>>, lets dance like there''s no tomorrow." Pulling her top off, she helps you remove yours.'
+	'Before long Anya and you have both stripped down to just your panties, dancing and shaking your boobs for anyone that wants to watch.'
+	if Rex_Love = 1:'Rex watches you and your sister with great curiosity.'     
+	act 'Move away':gt $loc,$metka
+	act 'Kiss':
+		*clr & cla
+		gs'stat'
+		'<center><b><font color = maroon>Anya</font></b></center>'
+		'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_3_' + rand(3,4) + '.jpg"></center>'
+		'As you dance nearly naked with your sister the strong intoxication and excitement turns you on and you start kissing your sister.'
+		'She did not resist, instead she responds in kind with the kiss and soon you are both embraced in a deep passionate kiss, while your tongues explore each others mouths.'
+		if Rex_Love = 1:'Rex watches you and your sister with great curiosity.'
+		'Wild desire seizes you, as you continue to kiss, you pull her towards one of the bedrooms'
+		
+		gs 'arousal', 'kiss_give', 5, 'lesbian', 'incest'
+		gs 'stat'
+		
+		act 'Go to the Rex''s room':
+			*clr & cla
+			gs'stat'
+			'<center><b><font color = maroon>Anya</font></b></center>'
+			'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_3_' + rand(5,10) + '.jpg"></center>'
+			'Once in the room, you push the door close and then push Anya down on the bed, you quickly crawl on top of her as you continue to kiss and caress her.'
+			'Anya panting with excitement, caress your body in return and just as fiercely returns the kiss.'
+			
+			gs 'arousal', 'foreplay', 5, 'lesbian', 'incest'
+			gs 'stat'
+		
+			act 'Lick Anya''s pussy':
+				*clr & cla
+				sister_party_dom =1
+				gs'stat'
+				'<center><b><font color = maroon>Anya</font></b></center>'
+				'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_4_' + rand(1,3) + '.mp4"></video></center>'
+				'Kissing her breasts, stomach, down to her panties. You pull her panties down exposing her already soaking wet pussy, which you begin to lick.'
+				'Both of you moan in pleasure, you feel hot with desire, but can''t help think that despite all your sisters protest that she isn''t a lesbian, she is just kidding herself, she loves having lesbian sex, way to much.'
+				'Kissing, licking and sucking her clit. Your face is already wet with her desire. Her body twitches and she moans loudly from your actions.' 
+				'After her moaning starts getting louder you plunge your tongue inside of her eliciting a cry of pleasure from her as you tongue fuck her pussy, slipping your tongue in and out of her.'
+				
+				gs 'arousal', 'cuni_give', 5, 'lesbian', 'incest'
+				gs 'stat'
+		
+				act 'Caress Anya with your hand':gt 'sister_party', 'hand'
+     
+			end
+			act 'Lie on your back':
+				*clr & cla
+				sister_party_dom =2
+				gs'stat'
+				'<center><b><font color = maroon>Anya</font></b></center>'
+				'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_4_' + rand(1,3) + '.mp4"></video></center>'
+				'You roll over as Anya climbs on top of you, kissing her way down to your nipples, your body arches in pleasure as you feel your pussy getting wet with desire already.'
+				'Kissing and licking her way down your body she pulls off your panties, she gently kisses your clit, her tongue flicking your clit gentling eliciting deep moans of pleasure from you. You feel a full tremor run through your body as her tongue slips inside of you.'
+				'"mmm <<$pcs_nickname>>, you taste so sweet." Mumbles your sister, you can''t help but smile at the skill of her tongue on your pussy and think, yeah sis your no lesbian.'
+				'Anya''s tongue works wonders, filling you with mounting pleasure, her tongue stroking inside of you, penetrating you as deeply as her tongue will go. She starts to tongue fuck your pussy.' 
+				
+				gs 'arousal', 'cuni', 5, 'lesbian', 'incest'
+				gs 'stat'
+		
+				act 'Caress Anya with your hand':gt 'sister_party', 'hand'
+			end
+		end
+	end
+end
+
+if $ARGS[0] = 'hand':
+	*clr & cla
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'
+	'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_5_' + rand(1,3) + '.mp4"></video></center>'
+	if sister_party_dom = 1:
+		'After lick your sisters pussy for some time you pull your head away from her and slips your hand to her pussy, rubbing her clit with your fingers.'
+		'She moans and bucks her hips a bit against you hand, you slip several of your fingers inside of her pussy, fucking her pussy with your fingers, as they rapidly plunge in and out of her soaking twat.'
+		'Her moans get louder and she starts to fuck your fingers back as she pleads with you not to stop.'
+		
+		gs 'arousal', 'vaginal_finger_give', 5, 'lesbian', 'incest'
+		gs 'stat'
+				
+	elseif sister_party_dom =2:
+		'After playing plenty oral attention from Anya, her hand slowly slides to your pussy and starts rubbing it.'
+		'A little rubbing then she slips a finger into wet twat, then a second and finally a third, finger fucking you in earnest.'
+		'You start trying to hump her hand as you wither in pleasure, begging her not to stop.'
+		
+		gs 'arousal', 'vaginal_finger', 5, 'lesbian', 'incest'
+		gs 'stat'
+		
+	end
+	act 'Let her caress you too':
+		*clr & cla
+		gs'stat'
+		'<center><b><font color = maroon>Anya</font></b></center>'
+		i = rand(1,2)
+		if i = 1:
+			'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_6_' + rand(1,3) + '.mp4"></video></center>'
+			'Stopping a moment so you can both catch your breath, neither of you exactly eager for it to end but also desperate for release.'
+			'Anya smiles wickely to you, "Well little sister lets see who licks pussy better and bring the other to orgasm first."'
+			'With those words, you simultaneous seek out each other twat, licking, sucking, using your fingers and tongue to fuck the other. Both of you moaning and panting, close to both close to your sweet release.'
+			''
+			
+			gs 'arousal', 'vaginal_finger_give', 5, 'lesbian', 'incest'
+			gs 'arousal', 'vaginal_finger', 5, 'lesbian', 'incest'
+			gs 'arousal', 'cuni_give', 5, 'lesbian', 'incest'
+			gs 'arousal', 'cuni', 5, 'lesbian', 'incest'
+			minut -= 5
+			gs 'stat'
+			
+			act 'Cum':gt 'sister_party', 'cum'
+		else
+			i = rand(1,2)
+			if i = 1:'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_7_1.mp4"></video></center>'
+			if i = 2:'<center><img <<$set_imgh>> src="images/locations/pavlovsk/resident/rekshome/party/party_sister_7_2.jpg"></center>'
+			if sister_party_dom = 2:'You also wanted to caress her pussy with your fingers.'
+			if sister_party_dom = 1:'Anya also wanted to caress your pussy with her fingers.'
+			'With delicate and skillful hands you masturbate each others pussies, stroking thighs, clits and plunging your fingers into each other, at times pulling them out to lick and suck your wet fingers. Both of you moaning and panting, close to both close to your sweet release.'
+			''
+			
+			gs 'arousal', 'vaginal_finger_give', 5, 'lesbian', 'incest'
+			gs 'arousal', 'vaginal_finger', 5, 'lesbian', 'incest'
+			gs 'arousal', 'cuni_give', 5, 'lesbian', 'incest'
+			gs 'arousal', 'cuni', 5, 'lesbian', 'incest'
+			minut -= 5
+			gs 'stat'
+			
+			act 'Cum':gt 'sister_party', 'cum'
+		end
+	end
+
+	act 'Move to scissoring':
+		*clr & cla
+		gs'stat'
+		'<center><b><font color = maroon>Anya</font></b></center>'
+		'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_8_' + rand(1,4) + '.mp4"></video></center>'
+		'Opening up your legs you rub your pussies against one another in a slow motion, both moaning in pleasure as you look into each other eyes. Slowly picking up speed as you begin to grind your pussies against one another.'     
+		
+		gs 'arousal', 'trib', 5, 'lesbian', 'incest'
+		gs 'stat'
+		
+		act 'Cum':gt 'sister_party', 'cum'
+	end
+end
+
+if $ARGS[0] = 'cum':     
+	*clr & cla
+	minut += 5
+	gs'stat'
+	'<center><b><font color = maroon>Anya</font></b></center>'
+	'<center><video autoplay loop src="images/locations/pavlovsk/resident/rekshome/party/party_sister_9_' + rand(1,2) + '.mp4"></video></center>'
+	'Your bodies convulse and spasm at the same time as a pure wave of pleasure overwhelms you both. In time both of you will claim the other came first, but for now you are lost in the Ecstasy of the moment.'
+	'"Oh, <<$pcs_nickname>>, if you wasn''t my sister I would marry you." Mumbles your sister.'
+	'Your warm wet, limp bodies lay entangled in a moment of pure bliss, you fall asleep in each other arms.'    
+
+	$orgasm_or = 'yes'
+	gs 'arousal', 'end'
+	gs 'stat'
+	
+	act 'Fall asleep':gt 'dinParty', 'sleep'
+end
+
+--- sister_party ---------------------------------
+

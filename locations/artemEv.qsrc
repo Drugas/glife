@@ -1,0 +1,1275 @@
+# artemEv
+!! list of triggers
+!! artemBJQW .. number of blowjobs giving Artem
+!! artemsex  .. =1 when Pc had vaginal sex with Artem
+!! ArtemBeInHome .. =1 when Pc was in Artem''s apartment already
+!! artemtimes .. number of chats and lessons
+!! leghumpArtem .. > 0 Artem humps Pc already
+!! artemStripSee .. number of strips for Artem
+!! artemLernQW
+!! artemblok .. artem is blocked
+!! artQW =  1 .. Artem felt for Pc
+!! artQW =  2 .. Pc rejected Artems love
+!! artQW =  3 .. Pc accepted Artems love and jerked off him
+!! artQW =  4 .. Pc rejected Artems love roughly
+!! artQW =  5 .. Pc lied to artem about the dimka video, blocks love content and consenual petka content
+!! artQW = 10 .. Artem wants celebrate their longterm tutoring
+!! artQW = 20 .. Pc accepted Artems love and gave him a blowjob
+!! artQW = 21 .. Pc became know as a slut in Pavlovsk ... this part is not activated yet
+!! artQW = 22 .. Artem knows that Pc is a slut but they stay friends
+
+gs 'boyStat','A2'
+if $ARGS[0] = 'bj':
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/artombj.jpg"></center>'
+	npc_sex[$boy] += 1
+	gs 'dinSex','dinrandbj'
+	gs 'arousal','bj',5,'sub'
+	gs 'dinSex','dinrandswallow'
+	gs 'cum_call','mouth',$boy,1
+	artemBJQW += 1
+	swallow += 1
+	gs 'arousal','end'
+	gs 'stat'
+
+	act 'Continue':gt 'artemhome','inside'
+end
+
+if $ARGS[0] = 'leghump':
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/artomhump.jpg"></center>'
+	'You get down on all fours in front of Artem, still wearing all of your clothes. Artem carefully runs his hands over your ass cheeks, and you can feel him hesitating for a second. When you turn around to ask him what''s wrong, you see him rubbing his erect cock against your clothes, at the crack of your ass.'
+	'Mere moments later, you see him cum all over your butt, on your clothes! He''s embarrassed and tries to catch the rest of it in his hand, but there''s already some stains in your clothes.'
+	'After he finishes, he apologizes: "I''m sorry <<$pcs_nickname>>, I didn''t mean to soil your clothes. Just give me a minute, I''ll clean it up."'
+	'He quickly gets a bowl of water and washes out the cum stains with a piece of cloth. After a while, there are a few wet spots on your clothes but they''re clean otherwise. They should dry up soon enough, no one will notice.'
+	gs 'arousal','foreplay',5,'dom'
+	npc_sex[$boy] += 1
+	hump += 1
+	leghumpArtem += 1
+	gs 'cum_call','clothesgroin',$boy,1
+	!{he removes all cum from the players clothes after orgasming}
+	cumspclnt = 6
+	gs 'cum_cleanup'
+	artempower -= 1
+
+	gs 'arousal','end'
+	gs 'stat'
+
+	act 'Continue':gt 'artemhome','inside'
+end
+
+if $ARGS[0] = 'leghump2':
+	menu_off = 1
+	gs 'clothing','strip'
+	if $pantyworntype ! 'none':
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/artomhump2.jpg"></center>'
+		'You grin and tease him a little: "You like it when I wear nothing but panties for you... don''t you, Artem? Go on then, help yourself."'
+		'You undress and lay down on his bed, wearing nothing but a pair of fancy panties you brought just for the occasion.'
+		'You feel strangely empowered by the obsession he has with your ass, and encourage him: "Go on Artem... this is what you want, isn''t it? Jerk yourself off on me."'
+		'Artem sits down on top of your feet, and rubs his erect cock against your ass cheeks. He jerks himself off, rubbing his cock against your panty-clad ass, and soon he finishes on them.'
+		'The thought of you controlling a guy with your body like that turns you on a little. You give him a little smirk as you change back into your normal clothes.'
+		gs 'arousal','foreplay',5,'dom'
+		gs 'cum_call','pantyrear',$boy,1
+	else
+		'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/artomhump3.jpg"></center>'
+		'You grin and tease him a little: "You like it when I wear nothing for you... don''t you, Artem? Go on then, help yourself."'
+		'You undress and lay down on his bed, not wearing a stitch.'
+		'You feel strangely empowered by the obsession he has with your ass, and encourage him: "Go on Artem... this is what you want, isn''t it? Jerk yourself off on me."'
+		'Artem sits down on top of your feet, and rubs his erect cock against your ass cheeks. He jerks himself off, rubbing his cock against your ass, and soon he finishes on them.'
+		'The thought of you controlling a guy with your body like that turns you on a little. You give him a little smirk as you dress up.'
+		gs 'arousal','foreplay',5,'dom'
+		gs 'cum_call','butt',$boy,1
+	end
+	hump += 1
+	npc_sex[$boy] += 1
+	leghumpArtem += 1
+	gs 'stat'
+	gs 'clothing','wear_last_worn'
+	act 'Continue':gt 'artemhome','inside'
+end
+
+if $ARGS[0] = 'learn':
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+	'You spend an hour doing your homework together with Artem. He''s a very smart guy, and explains several things to you. At the end of the hour, you feel like you had a very productive homework session, and that you learned a lot from Artem''s tutoring.'
+	minut += 60
+	if artQW ! 5: npc_rel['A2'] += 10
+	lernHome = 0
+	lern += rand(3, 6)
+	intel_exp += rand(1, 2)
+	artemtimes += 1
+	if ArtemBeInHome = 0:ArtemBeInHome = 1
+	gs 'stat'
+	act 'Take a break from studying':gt 'artemhome','inside'
+
+	if npc_rel['A2'] >= 90:
+		'During your homework session, you notice Artem''s gaze wander a few times. He''s glancing at your feet and chest, whenever he thinks you''re not looking.'
+	end
+
+	if (pav_slut >= 125 and artemblag = 0) or artQW = 5:
+		if artemBJQW = 0 and (artemsex = 0 or artQW = 5):
+			cla
+			if artQW = 5:
+				'After you finish your homework, Artem has a serious look on his face when he says: "<<$pcs_nickname>>, with how much I''ve been helping you... We both know what you are willing to do. I think it''s only fair you give me a little something in return."'
+				act 'Suck him off': gt 'artemEv','bj'
+				
+				act '"No way!"':
+					cla
+					pcs_dom += 1
+					artemLernQW = -1
+					artemblok = 1
+					npc_rel['A2'] = 0
+					gs 'stat'
+	
+					'"No, I won''t do it again. It ends here."'
+					act 'Leave Artem''s apartment':gt 'artemhome','leave',5
+				end
+			else
+				'After you finish your homework, Artem has a serious look on his face when he says: "<<$pcs_nickname>>, everyone in the school is talking about how much of a slut you are. With how much I''ve been helping you... I think it''s only fair you give me a little something in return."'
+				act 'Suck him off': gt 'artemEv','bj'
+
+				act '"No way!"':
+					cla
+					pcs_dom += 1
+					artemLernQW = -1
+					artemblok = 1
+					npc_rel['A2'] = 0
+					gs 'stat'
+	
+					'You decline, and he''s very offended by that: "Look <<$pcs_nickname>>, I spent a lot of time and effort helping you out. Meanwhile, you... you suck off or fuck pretty much everyone who asks! But you won''t touch me? That''s so not fair! We''re done... find someone else to help you. Good luck, with that attitude."'
+					'You can tell Artem is seriously offended by your refusal, and won''t help you any further. Hopefully someone else can help you with your homework.'
+					act 'Leave Artem''s apartment':gt 'artemhome','leave',5
+				end
+			end
+		elseif (artemBJQW > 0 and artemBJQW < 10 and artemsex = 0) or (artemStripSee = 3 and artemsex = 0 and artemTouch > daystart) or (artemBJQW > 0 and artQW = 5):
+			cla
+			'Artem unbuttons his pants and pulls his stiff erection from his pants.'
+			'He looks at you expectantly: "You know our deal, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+
+			act 'Suck him off': gt 'artemEv','bj'
+		elseif artemBJQW = 10 and artemsex = 0 and artQW ! 5:
+			cla
+			'After you finish your homework with Artem, he says a little shyly: "You know... I''ve never seen a girl naked before. Only on pictures. Maybe you could..."'
+			if pcs_dom >= 30 and dimaFilm > 0 and arthakQW = 0 and pcs_vag > 0:
+				act 'Agree to strip, in exchange for a favor':
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy.jpg"></center>'
+					'You give him a serious look when you say: "You want me to get naked for you? You know what... I''ll show you what you want to see, but I need something in return."'
+					'Artem is mostly surprised you''re not ripping him a new one and nods enthusiastically, pretty much agreeing to whatever it is you want without even asking what it is.'
+					'You tell him: "But if you do not keep your promise, I know some guys that will break your nose. And that''d be just the beginning. Are we clear?"'
+					'You see him gulp, but he''s still interested in seeing you nude. You continue: "Now, about the service... Dimka Nosov has some video footage of me. I need it to disappear. I need you to break into his computer and remove it. Can you do that for me?"'
+					'Artem looks a bit unsure, but says: "Yea... I think I can do that. What''s on the recording?"'
+					'You smile at him and tell him a lie while you take off your clothes: "Oh, don''t worry about it. It''s just me dancing after I had a few drinks in the disco. My <<$npc_nickname[''A29'']>> doesn''t know I sometimes drink alcohol, and he threatened to show her."'
+					*pl
+					'Once you''re naked, Artem unbuttons his pants and looks at you expectantly: "You know our deal, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+					minut += 5
+					artemhakday = daystart
+					arthakQW = 1
+					gs 'stat'
+					artemStripSee = 1
+					dimaRevenge = 1
+
+					act 'Suck him off': gt 'artemEv','bj'
+				end
+			else
+				act 'Agree to strip, but ask for money':
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy.jpg"></center>'
+					'You think it over for a second, but realize Artem is not a very good negotiator. You figure you can probably get something in exchange.'
+					'You look at him, feigning doubt: "I don''t know, Artem. I guess I could give you some female anatomy lessons, but my family is kinda pressed for cash. You see, my sister really needs some medication, and we can''t afford it. If you''d give me 300 <b>₽</b>, that would go a long way... maybe we can help each other out?"'
+					'Artem readily agrees, and gives you the money without a second thought: "Of course, of course! That sounds fair. Here you go... now, your clothes?"'
+					'Well... fair''s fair, he paid for it. You slowly take off your clothes, making a little show out of it. When you''re completely naked you sit back and spread your legs, exposing your bare pussy to Artem.'
+					'You were clear he''s not allowed to touch you, but you spread your pussy lips and show him everything he wants to see.'
+					*pl
+					'Once you''re naked, Artem unbuttons his pants and looks at you expectantly: "Our previous deal still stands, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+					money += 300
+					artemStripSee = 1
+					minut += 5
+					gs 'stat'
+
+					act 'Suck him off': gt 'artemEv','bj'
+				end
+			end
+		elseif artemBJQW > 10 and artemStripSee < 2 and artQW ! 5:
+			artemRand = rand(0,5)
+			*clr & cla
+			if artemRand = 5:
+				'After you finish your homework with Artem, he puts 300 <b>₽</b> down on the table out of nowhere.'
+				'He has a greedy grin on his face when he says: "Let''s repeat that anatomy lesson you gave me... get rid of those clothes, <<$pcs_nickname>>."'
+				artemStripSee = 2
+				gs 'stat'
+
+				act 'Get naked for him':
+					*clr & cla
+					gs 'shortgs','undress'
+					minut += 5
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy2.jpg"></center>'
+					'You slowly take off your clothes, and spread your legs for Artem. He knows he doesn''t have the right to touch you, but he ogles your body greedily.'
+					money += 300
+					*pl
+					'Once you''re naked, Artem unbuttons his pants and looks at you expectantly: "Our previous deal still stands, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+					gs 'stat'
+
+					act 'Suck him off': gt 'artemEv','bj'
+				end
+			else
+				*clr & cla
+				'Artem unbuttons his pants and looks at you expectantly: "Our previous deal still stands, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+				gs 'stat'
+
+				act 'Suck him off': gt 'artemEv','bj'
+			end
+		elseif artemStripSee = 2 and artemsex = 0:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+			'When you finish your homework, you can see Artem think for a second. He then asks, with a blush on his cheeks: "Listen... I''ve thought about this for a long time. I want to touch you, down there. I have 500 <b>₽</b>, it''s my lunch money. Maybe you can help your sister with that?"'
+			'You smirk at him: "Are you sure? You''d be starving for a week!"'
+			'Artem is very serious, and gives you the money without any doubts.'
+			money += 500
+			minut += 5
+			artemTouch = daystart + 7
+			artemStripSee = 3
+			gs 'stat'
+			act 'Let him touch you':
+				if pcs_horny >= 80:
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy3_1.jpg"></center>'
+					'You smile at Artem as you take your clothes off, deciding you might as well enjoy this. You spread your legs and encourage him: "Go ahead... I''m all yours."'
+					'Artem carefully rubs one finger over your pussy lips. It feels surprisingly good, and you tell him to continue.'
+					'Your pussy is quite wet from his fondlings, and you explain to him: "You see that little button? That''s my clitoris... if you gently rub that, it''ll make a girl feel really good."'
+					'He follows your instructions and gently rubs one finger over your clitoris while his other hand is playing with your nipples.'
+					'He''s quite taken aback by your body: "You''re so warm and soft..."'
+					'You softly moan as you encourage him: "Don''t stop, Artem... just keep rubbing it."'
+					gs 'shortgs','undress'
+					gs 'arousal','vaginal_finger',5
+					gs 'stat'
+					act 'Enjoy his touch':
+						*clr & cla
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy3_2.jpg"></center>'
+						'Artem grows bolder, and sticks several of his fingers inside you.'
+						'He grins: "I bet this feels really good for you, too..."'
+						'He fucks your pussy with three of his fingers, teasing your clit with his thumb. After a little while, you can''t hold back any longer and just enjoy your orgasm.'
+						$orgasm_or = 'yes'
+						gs 'arousal','vaginal_finger',5
+						'When the feeling subsides, you feel a tinge of shame when you realize how loud you were.'
+						'You quietly ask him: "Where did you learn how to do that?"'
+						'With a proud grin he says: "I saw someone do it in a porn movie."'
+						'You''re a bit flustered by the situation, and quietly tell him the lesson is over. You quickly get dressed, and get ready to leave his apartment.'
+						artemHorny = 1
+						gs 'shortgs','dress'
+						gs 'stat'
+						act 'Leave Artem''s apartment':gt 'artemhome','leave',5
+					end
+				else
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anatomy3_1.jpg"></center>'
+					'You lie back and let him touch your pussy and breasts for a while. After a while, Artem pulls away from you. He unbuttons his pants and looks at you expectantly: "Our previous deal still stands, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+					minut += 5
+					gs 'stat'
+					artemHorny = 0
+
+					act 'Suck him off': gt 'artemEv','bj'
+				end
+			end
+		elseif artemStripSee = 3 and artemsex = 0 and artemTouch <= daystart:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+			'During a break in your study session, you have a chat with Artem. You end up talking about sex.'
+			artemStripSee = 4
+			if artemHorny = 1:
+				'Artem has a smug grin on his face when he asks you: "<<$pcs_nickname>>, when I touched you the other day... did you have an orgasm?"'
+				'With a slight blush you admit: "Yes, I came. Why?"'
+				'Artem blushes when he says: "I was hoping you could let me have sex with you... I want you to take my virginity."'
+				'You''re baffled. You quickly try to recuperate, and hesitate for a second before you tell him: "I don''t know, Artem. I like how things are between us."'
+				'Then you continue: "But... my family really needs money to help my sister. If I have sex with you, could you give me 1000 <b>₽</b>?"'
+				'Artem scoffs: "I see... I guess the rumors about you really are true. I could pay you, but I can''t go that high. How much would you really take?"'
+				'That stings. You shrug and tell him off: "You know what, forget it. I don''t want to talk about it any more. Shall we get back to our homework, or should I just go?"'
+				'Artem quickly apologizes: "No no, I''m sorry. I shouldn''t have brought it up. We can just do our homework."'
+				'The two of you continue your homework session. You feel rather awkward after his suggestion, and when you finish your homework you quickly gather your things and leave.'
+			else
+				'You smile at Artem seductively as you ask him: "Tell me, Artem... have you ever had sex yet? I don''t just mean oral, but actual sex with a girl?"'
+				'Artem grins: "I see what you''re getting at, <<$pcs_nickname>>. How much would it cost me?"'
+				'You think it over for a second, and suggest: "Two weeks of being hungry during lunch at school, 1000 <b>₽</b>."'
+				'He reels back: "That much!? I heard from other people that you''ve had sex with guys for 50 <b>₽</b>!"'
+				'"Who the hell told you that?" you exclaim, pretending to be insulted. "That''s such a lie! You know what... forget about sex, let''s just do our homework and leave it at that."'
+				'The two of you continue your homework session. You feel rather awkward after his insinuation, and when you finish your homework you quickly gather your things and leave.'
+			end
+			minut += 5
+			gs 'stat'
+			act 'Leave Artem''s apartment': gt 'artemhome','leave',5
+		elseif artemStripSee = 4 and artemAndPetja = 0:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+			'After you finish your homework, Artem suggests: "<<$pcs_nickname>>, I''ve been thinking. How about we meet up with a friend of mine next time after homework? He wants to touch you too... we will give you 500 <b>₽</b> each, so you get the 1000 <b>₽</b> you wanted."'
+			'You indignantly respond: "Artem! Are you out of your mind? I did those things with you in confidence, and you tell all your friends and invite them to a gangbang!?"'
+			'Artem quickly reponds: "No, nothing like group sex or anything! Let me explain."'
+			'"I accidentally boasted to him about you giving me a blowjob. Then when he asked for details, I told him about your... extracurricular anatomy lessons. He''s my best friend, <<$pcs_nickname>>! You can trust him. He has no experience with girls, and was hoping you could help him... kind of like the same way you helped me? I promised him I would ask you. We won''t tell anyone, it''d be our secret!"'
+			'You doubtfully look at Artem: "I don''t know... I need to think about it. You couldn''t keep what we did quiet either."'
+			'Artem pressures you: "Come on... you need the money, right? We would both pay you."'
+			minut += 5
+			gs 'stat'
+			act 'Refuse to meet his friend':
+				cla
+				'You can''t do it. You tell him: "It''s not about the money. Sorry Artem, but I don''t feel comfortable doing that."'
+				'Artem is deeply insulted: "Really, <<$pcs_nickname>>? Plenty of other guys have sex with you, a lot of them not even offering you anything in return, but we''re not good enough for you? Despite me always helping you out with school, and making you a very fair offer?"'
+				'He continues: "If you''re not willing to help, pack up your stuff and get out. And find someone else to help you with your homework, I''m not doing it any more."'
+				pcs_dom += 1
+				artemLernQW = -1
+				artemblok = 1
+				npc_rel['A2'] = 0
+				gs 'stat'
+
+				act 'Leave Artem''s apartment':gt 'artemhome','leave',15
+			end
+			act 'Agree to meet his friend':
+				cla
+				artemAndPetja = 1
+				artemStripSee = 5
+				'You think about it for a while. You could definitely use the money, and the lessons you have been giving Artem were actually kind of fun sometimes.'
+				'You nod at Artem and tell him: "Okay, we can give it a try. Tell your friend we''ll meet him, after we finish our homework next time."'
+				'As you pack your books, you see Artem quickly grab his phone and send a text message with a big smile on his face.'
+				act 'Continue':gt 'artemhome','inside'
+			end
+		elseif artemAndPetja = 1:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+			'After class Artem leads you to the his parents'' garage. It''s not far from where you live.'
+			'As you walk, he explains: "My parents might walk in, at home. I figured we''d be safer in the garage, no one will bother us there. My friend is Petka Klyuyev by the way... he''s in our class. You remember him, right?"'
+			'When you enter the garage with Artem, you find Peter already waiting there. He looks at you eagerly, but you can tell he''s quite nervous.'
+			'Artem smiles at the both of you and says: "Shall we begin the anatomy lesson? Petka, what would you like to see?"'
+			'Petka looks at you, unsure what he''s supposed to say now. He''s still afraid you''ll get angry if he suggests anything out of line.'
+			'Artem notices his reluctance and suggests: "Maybe start with her breasts? <<$pcs_nickname>>, show Petka your boobs."'
+			minut += 5
+			gs 'stat'
+
+			act 'Show him your boobs':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy1_1.jpg"></center>'
+				'You''re a bit confused... is Artem going to order you around like this the whole time in front of Peter? Or is he just trying to make his friend feel comfortable?'
+				'Nevertheless... they''re paying you, and if you''re truly honest you don''t find the idea of teaching these boys about your body all that bad. You slowly peel away your clothes and expose your boobs for the guys.'
+				'It''s not going quick enough for Artem''s taste, and he says: "Just take your clothes off completely. We need to be able to see your body, remember?"'
+				'With some doubt, you do as he says and take off your clothes, putting them on a neat pile on a shelf nearby. Your nipples are rock hard; partially from the cold, but also from your arousal.'
+				'Artem gives you a satisfied nod: "Very nice. Now turn your back to us and show us your pussy and ass."'
+				'You do as he says, still not used to the idea that Artem can be so commanding. He continues: "Good. Now spread your pussy lips wide, we need to be able to see inside."'
+				gs 'arousal', 'flashlite', 3, 'group', 'sub'
+				gs 'clothing','strip'
+				gs 'arousal', 'flash', 2, 'group', 'sub'
+				gs 'arousal', 'flash', 3, 'group', 'sub'
+				gs 'stat'
+
+				act 'Spread your pussy lips':
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy1_2.jpg"></center>'
+					'You rub your fingers over your pussy lips, slightly embarrassed at how wet you are. You take them by the edges and pull them apart. Suddenly, you feel a hand on your ass. When you turn around, you see both of the boys standing right behind you.'
+					'You slap the hand away and tell them: "Hey, no touching!"'
+					'Peter innocently says: "Isn''t the customer always right, <<$pcs_nickname>>?"'
+					'He certainly grew a lot bolder. You scold him: "No. I''m warning you, if either of you touch me again, I''m walking. Then you can go touch each other for all I care."'
+					'The boys apologize and step away from you. You get back to what you were doing, and pull your pussy wide open.'
+					'Artem keeps giving you orders: "Wider! Very good. Now shove your fingers in there and masturbate for us."'
+					'You nod and shove two fingers inside your pussy, and skilfully try to bring yourself to orgasm. It doesn''t take long at all, and soon you lie shaking and quivering on the sofa.'
+					$orgasm_or = 'yes'
+					gs 'arousal','masturbate',10,'group','sub','exhibitionism'					
+					'When you glance over at the boys, you can see their erections clearly through their pants. Peter thanks Artem for the lesson and talks for a while, before leaving the two of you alone.'
+					gs 'stat'
+
+					act 'Collect your money':
+						*clr & cla
+						'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+						'As you get dressed again, Artem tells you: "Petka liked it. He would like to join us for your lessons more regularly. He''s willing to keep paying, and so am I. 1000 <b>₽</b> per session in total, just like today. We do want to see and do more, though. Your lessons should be more... interactive."'
+						'You see the greedy grin on his face, and realize: they want to fuck you. Together.'
+						'"I don''t know, Artem", you sigh. "I appreciate you helping me with my homework, and I could definitely use the money. But if word of this comes out... I''ll think about it, okay?"'
+						'He happily nods, and offers you the 1000 <b>₽</b> as promised. After you put the money away you leave the garage, waving Artem goodbye.'
+						pcs_mood = 100
+						minut += 10
+						money += 1000
+						artemAndPetja = 2
+						gs 'clothing','wear_last_worn'
+						gs 'stat'
+
+						act 'Leave the garage':minut += 10 & gt 'pavResidential'
+					end
+				end
+			end
+		elseif artemAndPetja >= 2 and artemAndPetja <= 10:
+			if artemAndPetja >= 3:
+				artemAndPetjaRand = rand(0,1)
+			else
+				artemAndPetjaRand = rand(0,5)
+			end
+			if artemAndPetjaRand ! 0:
+				'Artem unbuttons his pants and looks at you expectantly: "Our previous deal still stands, <<$pcs_nickname>>. If you want my help, I want your mouth."'
+
+				act 'Suck him off': gt 'artemEv','bj'
+			else
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy2_1.jpg"></center>'
+				'When you finish your homework session with Artem, he takes you by the hand and guides you to his parents'' garage again. Peter is already waiting there.'
+				'Artem looks at you expectantly: "Remember your promise, <<$pcs_nickname>>? If I kept helping you in school, you would teach Petka and me other things in return. Here, take these."'
+				'He holds out his hand, and gives you two condoms.'
+				'You nod: "I remember..."'
+				'The guys enthusiastically take off their pants, exposing their hard cocks to you. You sit down on the couch between them, and begin to masturbate them both. Then you take their cocks in your mouth in turns, first Artem''s, then Peter''s.'
+				gs 'shortgs','undress'
+				gs 'boystat','A2',1
+				gs 'boystat','A6',2
+				npc_sex['A2'] += 1
+				npc_sex['A6'] += 1
+				gs 'arousal','hj',2,'dick[1]','group'
+				gs 'arousal','hj',2,'dick[2]','group'
+				gs 'arousal','bj',2,'dick[1]','group'
+				gs 'arousal','bj',2,'dick[2]','group'
+				gs 'stat'
+
+				act 'Demonstrate the cowgirl position':
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy2_2.jpg"></center>'
+					'After you''ve given them a blowjob for a little while, you tell Artem: "Artem, sit down here. Petka, you stay where you are."'
+					'You quickly put the condom on Artem''s cock and straddle him. You guide his dick towards your pussy and slowly lower yourself on it, until he is all the way inside you.'
+					'As you take Peter''s cock back into your hand, you explain: "This is called the ''cowgirl'' position. Do you like it, Artem?"'
+					'Artem can only grunt in response. You smile smugly and slowly ride Artem, while you take Peter''s cock back into your mouth and continue to suck him off.'
+					gs 'arousal','vaginal',7,'dick[1]','dom','group'
+					gs 'arousal','bj',5,'dick[2]','dom','group'
+					minut -= 5
+					gs 'stat'
+
+					act 'Make them change places':
+						*clr & cla
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy2_3.jpg"></center>'
+						'After a few minutes you hand Peter a condom and tell the guys: "Alright boys, let''s change places. Petka, put on your condom and sit down here."'
+						'He fumbles a bit with the condom, but finally manages to get it on. You turn your back towards him and lower your hips towards his groin as you explain:'
+						'"The girl can also face the other way, that''s called the ''reverse cowgirl'' position."'
+						'You take the condom off Artem''s cock and give him a vigorous blowjob, while you slowly grind your hips against Peter''s. Within seconds you feel Peter''s grip tighten around your waist, and he groans as he shoots his load into the condom.'
+						gs 'arousal','vaginal',7,'dick[2]','dom','group'
+						gs 'cum_call','','A6',1,3
+						'You release Artem for a second and smile at Peter: "That was fast! Don''t worry, Petka... it''s completely normal for inexperienced guys. You''ll last longer the next time, you''ll see. We''ll keep practising until you can hold it back for as long as you need". You then turn to Artem: "How about you Artem, are you getting close yet?"'
+						'You give him a devious smile as you redouble your efforts, and soon you can feel his jets of sperm hitting the back of your mouth."'
+						gs 'arousal','bj',5,'dick[1]'
+						gs 'cum_call','mouth','A2',1
+						'The guys take a while to recover, and then give you 1000 <b>₽</b> after you get dressed. You wink at them as you leave: "See you next time, boys!"'
+						artemBJQW += 1
+						swallow += 1
+						money += 1000
+						artemAndPetja += 1
+						gs 'arousal','end'
+						gs 'shortgs','dress'
+						gs 'stat'
+
+						act 'Leave the garage':minut += 10 & gt 'pavResidential'
+					end
+				end
+			end
+		elseif artemAndPetja = 11:
+			*clr & cla
+			gs 'shortgs','undress'
+			gs 'boystat','A2',1
+			gs 'boystat','A6',2
+			npc_sex['A2'] += 1
+			npc_sex['A6'] += 1
+			'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy3.jpg"></center>'
+			'When you finish your homework session with Artem, he takes you by the hand and guides you to his parents'' garage again. Peter is already waiting there.'
+			'You decide to take the initiative this time and explain: "Petka, last time you lasted quite long and nearly brought me to an orgasm when you fucked me. It''s time for a new position: today you''re going to fuck me from behind. It''s kind of like doggy style, but we''ll be standing up."'
+			'Artem offers you some condoms, but you wave them away: "No need as far as I''m concerned, I''m on birth control. You can use them if you want to, but it feels better without. Just don''t come inside me, okay boys?"'
+			'The guys happily agree and Artem tosses them aside. Artem gets behind you, rubbing his cock against your pussy before shoving it in. You lean forward and take Peter''s dick into your mouth. After a few minutes they swap places, and Peter pounds you from behind while you give Artem a skilful blowjob. Since the beginning of your lessons, they both have really come a long way.'
+			'You give Peter some instructions: "That feels great, Petka. Take my boobs in your hands. Good... now play with my nipples. And fuck me harder!"'
+			gs 'arousal','bj',5,'dick[1]','sub'
+			gs 'arousal','vaginal',5,'dick[1]','sub'
+			gs 'arousal','bj',5,'dick[2]','sub'
+			gs 'arousal','vaginal',5,'dick[2]','sub'
+			minut -= 5
+			gs 'cum_call','butt','A6',1
+			gs 'cum_call','back','A2',1
+			'He comes close to giving you an orgasm, but doesn''t quite manage. When he''s about to burst Peter pulls out and jerks himself off, his warm jets of sperm landing on your ass cheeks. Artem does the same, and cums on your lower back.'
+			gang += 1
+			gs 'arousal','end'
+			gs 'shortgs','dress'
+			gs 'stat'
+
+			act 'Finish the lesson':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+				'The three of you sit down for a minute and catch your breath. You smile at them: "That was nice, boys. Next time we''ll be trying cunnilingus, do you know what that is?"'
+				'Artem''s nose wrinkles, and he says: "Eww! I don''t know <<$pcs_nickname>>, I don''t want to lick a pussy! That sounds disgusting!"'
+				'You look at him with disbelief... you''ve taken his cock in your mouth many times already, and he refuses to reciprocate? You sternly say: "You asked me to teach you about the female body, and that''s what I''m doing. If you find a nice girl some day, you''ll need to know how to satisfy her! You already know how to please a girl with your cock, but you also need to know how to do it with your tongue."'
+				'Artem still has his doubts, but caves: "Well, alright. I guess we can try. If you say girls like it that much."'
+				'You put on a confident smile, and ask Peter the same thing: "And you, Petka? How do you feel about cunnilingus?"'
+				'"I''ve always wanted to taste a girl, I''m in!" Peter says enthusiastically.'
+				'Artem gives you 1,000 <b>₽</b> after you get dressed. You wink at them as you leave: "See you next time, boys! Better get those tongues ready!"'
+				minut += 5
+				money += 1000
+				gs 'stat'
+				artemAndPetja = 12
+				act 'Leave the garage':minut += 15 & gt 'pavResidential'
+			end
+		elseif artemAndPetja = 12:
+			*clr & cla
+			gs 'shortgs','undress'
+			gs 'boystat','A2',1
+			gs 'boystat','A6',2
+			npc_sex['A2'] += 1
+			npc_sex['A6'] += 1
+			'<center><img <<$set_imgh>> src="images/locations/shared/sex/sexrand/kuni53.jpg"></center>'
+			'When you finish your homework session with Artem, he takes you by the hand and guides you to his parents'' garage again. Peter is already waiting there, eager to get started.'
+			'You sit down on the couch between them, and explain: "Alright, boys. You''ve seen my pussy, you''ve fucked it... today it''s time you kiss it."'
+			'You take off your clothes, and spread your legs wide. Smiling at Artem, you encourage him: "Go on, Artem. Close your eyes and have a taste. I''ll tell you what to do."'
+			'Artem drops to his knees in front of you, and hesitantly licks your pussy lips.'
+			'You smile and run your hand through his hair as you encourage him: "Go on, you can be bolder. Thrust your tongue inside me. Notice that little pea? Focus on that..."'
+			'Even though you can tell his heart is not really into it, he does his best to make you feel good. Following your instructions, you can feel yourself soon approaching orgasm.'
+			gs 'arousal','cuni',5,'dick[1]','dom'
+			gs 'stat'
+
+			act 'Make them change places':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/locations/shared/sex/sexrand/kuni17.jpg"></center>'
+				'You know Artem isn''t into this that much, and you also don''t want to orgasm before Peter had a turn. You quickly stop him: "Stop! That was good... your turn, Petka. Artem, come here, I''ll suck you off while Petka licks me."'
+				'Artem did his best, and you try to reward him by giving him a good blowjob. Peter is doing a great job on your pussy though, and you can''t hold your orgasm back any longer.'
+				'You scream: "Petka! Don''t stop! Aaaaahhh!"'
+				$orgasm_or = 'yes'
+				gs 'arousal','cuni',5,'dick[2]','dom'
+				gs 'arousal','bj',5,'dick[1]','sub'
+				gs 'cum_call','face','A2',1
+				'Artem cums all over your face, just as you have the strongest orgasm you''ve had in quite a while. You lick up Artem''s cum automatically in your current state of euphoria, not even realizing what you''re doing until you already swallowed most of it.'
+				'When you recover, you praise them: "Wow boys, that felt great! In fact... it felt so good, I''d feel bad taking your money. Today''s lesson is on me."'
+				'Peter seems to be in shock, and you reassure him: "Petka, I know that must''ve looked strange, but that''s what it looks like when a girl has an orgasm. You did great!"'
+				'He smiles shyly, and you get dressed again. You quickly gather your things and wave the boys goodbye as you get ready to leave the garage.'
+				artemBJQW += 1
+				swallow += 1
+				gang += 1
+				gs 'arousal','end'
+				gs 'shortgs','dress'
+				gs 'stat'
+				artemAndPetja = 13
+				act 'Leave the garage':minut += 15 & gt 'pavResidential'
+			end
+		elseif artemAndPetja = 13:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+			'When you finish your homework session with Artem, he takes you by the hand and guides you to his parents'' garage again. Peter is already waiting there, eager to get started.'
+			'Artem smiles shyly as he asks: "You know, <<$pcs_nickname>>... me and Petka have been wanting to fuck your ass. It would only make sense, as the next step in our anatomy class... what do you say?"'
+			'You laugh: "You both have assholes... why don''t you practise on each other, and I''ll just watch today?"'
+			'Seeing their distraught faces, you smile: "Fine, fine... you should''ve seen your faces! But jokes aside, when you want to have anal sex, the girl should first clean herself. Do you have an enema kit, Artem?"'
+			'He quickly nods: "Yes, we have one in the bathroom at my house you can use."'
+			minut += 5
+			gs 'stat'
+			act 'Go give yourself an enema':
+				*clr & cla
+				gs 'shortgs','undress'
+				gs 'boystat','A2',1
+				gs 'boystat','A6',2
+				cumspclnt = 7
+				gs 'cum_cleanup'
+				npc_sex['A2'] += 1
+				npc_sex['A6'] += 1
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy5.jpg"></center>'
+				'You quickly walk back to Artem''s apartment with him, and give yourself an enema in the bathroom.'
+				'When you return to the garage, you get down on your hand and feet on the couch and wiggle your ass at them. You ask Artem: "So, now that I''m clean... do you have something we can use as lubricant? Maybe some petroleum jelly, or vegetable oil?"'
+				'Artem comes back with a jar of Vaseline. You smile at him and say: "That will do just fine. Now put some on your finger and slowly put it in my ass... don''t be stingy, use lots of it. It''ll feel much better for both of us."'
+				gs 'dinSex','boy_wants_anal','A2','lubri'
+				'He does as you say, and testily slides his finger inside your ass a few times. When he''s satisfied it''s going smooth enough, he adds a second finger and fucks your ass carefully.'
+				'"Very good, Artem... now take some more and smear it all over your cock". When you see he''s using good amounts, you nod: "Alright, now put it in slowly."'
+				'Artem slowly guides his dick into your tight asshole. Once the head is in, he groans: "Wow... it''s so tight, and so warm! I feel like I''m going to cum already!"'
+				gs 'arousal','anal',8,'dick[1]'
+				gs 'arousal','anal',7,'dick[2]'
+				gs 'arousal','bj',5,'dick[1]','sub'
+				'You quickly tell him to stop: "Okay, pull out! I''ll give you a blowjob to finish, can''t have you shooting your load inside me when Petka hasn''t even had a turn yet! Your turn, Petka... it should be easier, now that Artem has warmed me up. Just go slow, okay?"'
+				'Peter nods and carefully slides his cock in. He slowly fucks your ass, making sure he''s not hurting you while you suck Artem off, ignoring the taste of your ass on his cock.'
+				'Neither of them last long, and soon you feel Peter shooting his load in your ass while Artem cums inside your mouth.'
+				minut -= 5
+				gs 'cum_call','mouth','A2',1
+				gs 'cum_call','anus','A6',1
+				gang += 1
+				artemBJQW += 1
+				swallow += 1
+				gs 'stat'
+
+				act 'Finish the lesson':
+					*clr & cla
+					minut += 10
+					money += 1000
+					gs 'arousal','end'
+					gs 'shortgs','dress'
+					gs 'stat'
+					'After they take a moment to catch their breath, you tell him: "You see why I had you wait so long to fuck my ass? It''s much more intense back there, for both of us... you had to build up some stamina before you could handle it. I guess that''s it for today."'
+					if pain['asshole'] + (agape * 10) > 40: gs 'dinSex','after_anal','no_plug' else gs 'dinSex', 'after_anal','pc'
+					'The guys definitely liked today''s lesson, and Artem thanks you heartily when he gives you the 1000 <b>₽</b>. The boys are staying around in the garage for a while, talking enthusiastically as they wave you goodbye. You hear your name a lot in their conversation, and you wonder what they could be talking about.'
+
+					artemAndPetja = 14
+					act 'Leave the garage':minut += 15 & gt 'pavResidential'
+				end
+			end
+		elseif artemAndPetja = 14:
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy6_1.jpg"></center>'
+			'When you finish your homework session with Artem, he takes you by the hand and guides you to his parents'' garage again. When you reach the garage, you see Peter has prepared a table with two bottles of wine, some glasses and several fruits.'
+			'Artem smiles at you: "You''ve done so much for us... we just wanted to say thank you, for all the lessons you''ve taught us!"'
+			'Peter pours the wine in some glasses and proposes a toast: "To expanding our horizons!"'
+			'You happily toast with them, and drink the wine. As soon as your glass is empty, Peter refills it for you. Half-way into your third glass, you feel quite drunk.'
+			'The boys noticed as well, and offer you one more glass for good measure. Once they''re positive you''re hammered, Artem pulls out his phone and begins to record.'
+			minut += 5
+			pcs_horny += 10
+			gs 'drugs', 'alcohol', 'wine', 2
+			gs 'stat'
+
+			act 'See what happens next':
+				*clr & cla
+				gs 'boystat','A2',1
+				gs 'boystat','A6',2
+				npc_sex['A2'] += 1
+				npc_sex['A6'] += 1
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy6_2.jpg"></center>'
+				'Artem commands you: <<$pcs_nickname>>, suck us off."'
+				'You obediently take his cock in your mouth, and jerk off Peter. After a while you switch, making sure both guys get the attention they desire.'
+				gs 'arousal','bj',5,'dick[1]','sub'
+				gs 'arousal','hj',5,'dick[2]','sub'
+				gs 'arousal','bj',5,'dick[2]','sub'
+				gs 'arousal','hj',5,'dick[1]','sub'
+				minut -= 10
+				'Peter then says: "<<$pcs_nickname>> <<$pcs_lastname>>, take off your clothes. We''re going to fuck you now."'
+				gs 'shortgs','undress'
+				gs 'arousal','',5,'dick[1]','sub'
+				gs 'arousal','anal',5,'dick[2]','sub'
+				gs 'arousal','',5,'dick[2]','sub'
+				gs 'arousal','anal',5,'dick[1]','sub'
+				'You wonder why he was so explicit in using your full name, but don''t think much of it. Again, you do as he says and take off your clothes. For the next half hour, the boys fuck you in all of your holes. While you''re too drunk to care, Artem makes sure he catches all of it on film."'
+				gs 'cum_call','mouth','A2',1
+				gs 'cum_call','mouth','A6',1
+				'They cum in your mouth, but tell you not to swallow just yet. You sit there on your haunches, your mouth full of sperm, obediently waiting for their next order.'
+				'Peter takes a glass and pisses in it... then Artem does the same. They offer you the glass, and tell you to drink it while you swallow their sperm.'
+				artemBJQW += 1
+				swallow += 2
+				sub += 10
+				gang += 1
+				gs 'stat'
+				
+				act 'Drink it all':
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/ap_anatomy6_3.jpg"></center>'
+					'You obediently swallow their sperm, and then drink the glass of urine the guys offered you without even wincing. Artem makes sure he films all of that too.'
+					gs 'dinSex', 'after_anal','boy',$boydesc[1]
+					'Both the boys have an evil grin on their faces, and you slowly realize they had been planning this for some time.'
+					'Artem arrogantly tells you: "So... <<$pcs_nickname>>. As you probably realize, there are going to be some changes now. I won''t have time to help you with your homework any more, next time we will go to the garage immediately after school. We have lots of plans with you. As long as you do what we say, no one will see the video of you getting drilled in all of your holes by the biggest nerds in school."'
+					'You quietly get dressed, and quietly leave the garage, You know this is probably just the beginning.'
+					minut += 5
+					pcs_hydra += 10
+					pcs_breath = 0
+					cumspclnt = 2
+					gs 'cum_cleanup'
+					gs 'arousal','end'
+					gs 'shortgs','dress'
+					gs 'stat'
+					artemAndPetja = 15
+					arthakQW = 10
+					artemblok = 1
+					act 'Leave the garage':minut += 15 & gt 'pavResidential'
+				end
+			end
+		end
+	end
+
+	if (artQW = 3 or artQW = 20) and artemkissday ! daystart and (pav_slut < 125 or artemblag = 1):
+		'After you finish doing your homework with Artem, he closes his eyes and puckers his lips as he leans towards you. He wants to kiss you.'
+		act 'Kiss Artem': gt 'artemEv','kiss'
+	end
+end
+
+if $ARGS[0] = 'kiss':
+	*clr & cla
+	menu_off = 1
+	pcs_horny += 10
+	minut += 5
+	gs 'stat'
+	artemkissday = daystart
+
+	if pav_slut < 125:
+		'<center><img <<$set_imgh>> src="images/shared/sex/kiss/kiss.jpg"></center>'
+		'You smile, and slowly move your face towards Artem''s. Artem reads your signal and leans in, softly kissing your <<$liptalk3>>.'
+		'When you finally end the kiss, he shyly says: "<<$pcs_nickname>>, I really like you."'
+	end
+	
+	act 'Just hang out':gt 'artemhome','inside'
+
+	if artemtimes >= 20 and leghumpArtem = 0:
+		'Artem trips over his words when he tries to suggest something: "<<$pcs_nickname>>, maybe we could... maybe I... I really want you... can I touch your ass? Please?"'
+		act 'Let him caress your ass': gt 'artemEv','leghump'
+	elseif leghumpArtem >= 1:
+		'Artem looks at you with embarrassment, but gathers the courage to ask: "<<$pcs_nickname>>, you''re the best thing that''s ever happened to me. I enjoyed last time so much... could we play like that again?"'
+		act 'Let him caress your ass': gt 'artemEv','leghump'
+		if pcs_dom > 0:
+			act 'Strip and let Artem rub his dick against your ass': gt 'artemEv','leghump2'
+		end
+	end
+
+	if artQW = 3:
+		if pcs_horny < 50:
+			act 'Reluctantly masturbate Artem':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/shared/sex/handjob/hj1.jpg"></center>'
+				'Well... you don''t feel particularly aroused, but you''d feel bad saying no to the guy. You reluctantly nod and tell him to take his pants off, which he joyfully does.'
+				'Without much enthusiasm you rub your hand over his foreskin for a second, before pulling it back and slowly spreading his precum out with your fingers. You then clasp your fingers around the head of his cock, and slowly jerk him off. Within minutes you see Artem tense up, and he groans your name right as he shoots his warm load over your hand.'
+				'You give him a few more strokes to make sure he''s finished, and then quickly go wash his cum off your hand in the bathroom. You return to his room with a slightly faked smile. He''s completely oblivious to the fact that you didn''t really want to do it, and seems happy.'
+				npc_sex['A2'] += 1
+				hja += 1
+				gs 'arousal','hj',15,'sub'
+				if pcs_mood > 50:pcs_mood = 50
+				gs 'cum_call','hands',$boy,1
+				cumspclnt = 9
+				gs 'cum_cleanup'
+				gs 'arousal','end'
+				gs 'stat'
+
+				act 'Continue':gt 'artemhome','inside'
+			end
+		else
+			act 'Jerk off Artem':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/shared/sex/handjob/hj1.jpg"></center>'
+				'You smile at him and tell him to take off his pants, which he happily does.'
+				'Rubbing your hand over his foreskin for a second, you then pull it back and slowly spread his precum out with your fingers. You then clasp your fingers around the head of his cock and slowly jerk him off, whispering how badly you need him to cum for you. Almost instantly you see Artem tense up, and he groans your name right as he finishes in your hand.'
+				'You give him a few more strokes to make sure he''s satisfied, and then give him a quick kiss on the cheek before you go wash his cum off your hands in the bathroom. When you return, Artem has a blissful smile on his face.'
+				npc_sex['A2'] += 1
+				hja += 1
+				gs 'arousal','hj',5,'dom'
+				if pcs_mood > 50:pcs_mood = 50
+				gs 'cum_call','hands',$boy,1
+				cumspclnt = 9
+				gs 'cum_cleanup'
+				gs 'arousal','end'
+				gs 'stat'
+
+				act 'Continue':gt 'artemhome','inside'
+			end
+		end
+	end
+
+	if artQW = 20:
+		if pcs_horny >= 30:
+			act 'Jerk off Artem':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/shared/sex/handjob/hj1.jpg"></center>'
+				'You smile at him and tell him to take off his pants, which he happily does.'
+				'Rubbing your hand over his foreskin for a second, you then pull it back and slowly spread his precum out with your fingers. You then clasp your fingers around the head of his cock and slowly jerk him off, whispering how badly you need him to cum for you. Almost instantly you see Artem tense up, and he groans your name right as he finishes in your hand.'
+				'You give him a few more strokes to make sure he''s satisfied, and then give him a quick kiss on the cheek before you go wash his cum off your hands in the bathroom. When you return, Artem has a blissful smile on his face.'
+				npc_sex['A2'] += 1
+				hja += 1
+				gs 'arousal','hj',15
+				if pcs_mood > 50:pcs_mood = 50
+				gs 'cum_call','hands',$boy,1
+				cumspclnt = 9
+				gs 'cum_cleanup'
+				gs 'arousal','end'
+				gs 'stat'
+
+				act 'Continue':gt 'artemhome','inside'
+			end
+			act 'Give him a blowjob':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/shared/sex/blowjob/bj42.jpg"></center>'
+				'You kiss him again, and impatiently tug at his clothes. He puts his hands on your <<$titsize>> boobs, and massages them through your clothes.'
+				'You finally manage to unbutton his pants, and when you reach for his cock you can feel it''s already fully erect. You keep kissing him while you masturbate him.'
+				'Then, you drop to your knees and take his cock in your mouth. You suck him off enthusiastically, and do everything you can to make him feel good.'
+				'After a few minutes you hear him mutter: "<<$pcs_nickname>>, I want you..."'
+				'He gathered all his courage and looks at you expectantly. You can tell from the greedy look in his eyes that he wants to fuck you now.'
+				npc_sex['A2'] += 1
+				bja += 1
+				gs 'arousal','bj',5
+				gs 'stat'
+
+				if mesec > 0:
+					if artemanal > 0:
+						'You take his dick out of your mouth for a second and quickly tell him: "Sorry Artem... it''s that time of the month, we can''t."'
+						'He immediately replies: "How about your ass then, <<$pcs_nickname>>?"'
+
+						act 'Agree to have anal sex instead':
+							*clr & cla
+							'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anal.jpg"></center>'
+							'You grin despite yourself... there''s no way he would''ve ever dared to say that, if you hadn''t introduced him to it yourself.'
+							'You smile and tell him: "Alright, you perv... I just need an enema real quick in that case, give me a minute."'
+							gs 'dinSex','enema','You quickly go to the bathroom and give yourself an enema, and walk back to his room.'
+							'When you get back, you drop to your knees on the couch and put up your ass without saying another word, simply giving him a lewd wink to let him know you''re ready for him.'
+							gs 'dinSex','boy_wants_anal','lubri'
+							anala += 1
+							artemanal += 1
+							gs 'dinSex','analsex'
+							if pain['asshole'] + (agape * 10) > 40: gs 'dinSex','after_anal','no_plug' else gs 'dinSex', 'after_anal','pc'
+							gs 'arousal','end'
+							gs 'stat'
+
+							act 'Continue':gt 'artemhome','inside'
+						end
+					elseif artemsex >= 10 and artemanal = 0:
+						act 'Tell him you''re on your period':
+							*clr & cla
+							'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+							'You smile at him a bit apologetically and say: "Sorry, Artem. I''d love to, but it''s that time of the month, you know? I bet I could still make you feel good with my mouth."'
+							'Artem blushes, but presses on and asks: "Maybe I can try your ass then? I heard it would feel really good, for both of us..."'
+							minut += 5
+							gs 'stat'
+
+							act 'Reject and finish him with your mouth':
+								*clr & cla
+								'<center><img <<$set_imgh>> src="images/shared/sex/cum/mouth/cum48.jpg"></center>'
+								'You take his dick out of your mouth and look at him wide-eyed: "What!? I love that you''re feeling more confident since we met, but this... maybe I should just go home."'
+								'He quickly apologizes: "Sorry! Don''t go, please!"'
+								'Artem takes your hand and kisses it, slowly working his way upwards. You smirk as you enjoy him kissing your neck gently... damn, you can''t stay mad at him. You drop back down to your knees and take his cock in your mouth again, sucking him off slowly.'
+								'Even though you''re doing your best to tease him and not make him cum to punish him for that suggestion, it''s not working. After mere seconds you can feel his hand gripping your head, keeping your mouth in place as he shoots his load onto your tongue. You quickly swallow it, giving his cock a quick kiss before getting back up.'
+								'Artem apologizes: "I''m sorry <<$pcs_nickname>>... I wanted too much. I''ll never bring it up again."'
+								'You take his hand in yours and reassure him: "It''s okay, babe. Just... don''t pressure me for anal, okay? I will let you know when I''m ready and in the mood for it."'
+								'He nods hopefully, very happy with the fact that you still gave him a blowjob after his blunder <b>and</b> that you''re still open to the prospect of having anal sex with him some day.'
+								gs 'arousal','bj',5
+								swallow += 1
+								gs 'cum_call','mouth',$boy,1
+								gs 'arousal','end'
+								gs 'stat'
+
+								act 'Continue':gt 'artemhome','inside'
+							end
+							act 'Agree to have anal sex':
+								*clr & cla
+								'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/anal.jpg"></center>'
+								'You give him your best surprised look, and ask: "My ass, Artem? Really!?"'
+								'When you see him panic, you grin and say: "Just kidding, you pervert... alright, we can try. I''ll need to clean myself first though... do you have anything for that?"'
+								'Artem nods as he hands you something: "I have an enema kit... here."'
+								gs 'dinSex','enema','You quickly go to the bathroom and give yourself an enema.'
+								'When you return to his room, you get down on the couch and offer him your bare ass with a smile.'
+								'You ask him: "We need some lubricant also... do you have any? Maybe some petroleum jelly, or oil? Check the medicine cabinet, there might be something in there."'
+								gs 'dinSex','boy_wants_anal','lubri'
+								anala += 1
+								artemanal += 1
+								gs 'dinSex','analsex'
+								if pain['asshole'] + (agape * 10) > 40: gs 'dinSex','after_anal','no_plug' else gs 'dinSex', 'after_anal','boy',$boydesc
+								gs 'arousal','end'
+								gs 'stat'
+
+								act 'Continue':gt 'artemhome','inside'
+							end
+						end
+					end
+				else
+					act 'Get down on your back':
+						*clr & cla
+						'<center><img <<$set_imgh>> src="images/shared/sex/vag/miss/sex2.jpg"></center>'
+						'You quickly take off your clothes and lean back on the couch, offering yourself to him.'
+						gs 'shortgs','undress'
+						minut += 5
+						sexa += 1
+						pose = 0
+						if artemsex >= 1:artemsex += 1
+						gs 'dinSex', 'boy_puts_his_condom'
+						gs 'dinSex','vaginal_sex',10
+						gs 'dinSex','sexcum'
+						gs 'arousal','end'
+						gs 'stat'
+						if artemsex = 0:
+							artemsex = 1
+							'After he finishes, you run your hand over his chest and smile at him: "So... you''re a man now..."'
+							'Artem is not sure what to say, and mutters: "<<$pcs_nickname>>... I... I love you..."'
+							'You don''t say anything, but just cuddle with him for a while. You can tell it means a lot to him.'
+						end
+
+						act 'Continue':gt 'artemhome','inside'
+					end
+				end
+
+				act 'Just keep sucking':
+					*clr & cla
+					if pcs_horny < 90:
+						$timeorgart = 'You swallow his sperm obediently, and carefully lick his member clean.'
+					else
+						$orgasm_or = 'yes'
+						$timeorgart = 'Without ever taking his cock out of your mouth, you quickly rub one out and have an orgasm when he does. You do your best to swallow his load during your orgasm, and carefully lick his member clean when you recover from it.'
+					end
+					'<center><img <<$set_imgh>> src="images/shared/sex/cum/mouth/cum48.jpg"></center>'
+					'You ignore his pleas and pick up the pace, trying to get him to cum in your mouth while you fondle yourself.'
+					'Sure enough, a few seconds later he warns you: "<<$pcs_nickname>>... I''m going to cum..."'
+					'You redouble your efforts, and a few seconds later you feel his cock erupt in your mouth. <<$timeorgart>>'
+					gs 'arousal','bj',5,'dom'
+					gs 'cum_call','mouth',$boy,1
+					swallow += 1
+					gs 'arousal','end'
+					gs 'stat'
+					'You give him a sweet smile as you give his cock a kiss, and ask him: "I know it''s not what you wanted, but did you enjoy it?"'
+					'He happily nods: "It was great! Thanks <<$pcs_nickname>>, you''re the best."'
+
+					act 'Continue':gt 'artemhome','inside'
+				end
+			end
+		end
+	end
+	
+	if pav_slut >= 125 and artemblag = 0:
+		*clr & cla
+		menu_off = 1
+		'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+		'Artem stops you when you try to kiss him: "I don''t think so <<$pcs_nickname>>, I''ve heard way too many stories about where that mouth has been. You can still use it on me, though..."'
+		'He lets those words linger in the air for a second, and then unbuttons his pants and pulls out his erect cock.'
+		act 'Suck him off': gt 'artemEv','bj'
+	end
+end
+
+
+if $ARGS[0] = 'artemBibl':
+	*clr & cla
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/library.jpg"></center>'
+	'You do your homework in the library with Artem, and he sometimes goes to collect a book to explain something. It''s a very efficient study session, and you feel like you learned a lot in this short time.'
+	if lernHome > 0:lernHome = 0
+	minut += 30
+	lern += RAND(3,6)
+	intel_exp += RAND(2,4)
+	gs 'stat'
+	act 'Go back to Artem''s place':gt 'artemhome','inside'
+end &! --- artemBibl ---
+
+if $ARGS[0] = 'artemSkver':
+	*clr & cla
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/locations/shared/park/walk_<<rand(1,2)>>.jpg"></center>'
+	'You enjoy a pleasant walk in the park, sharing all kinds of small talk with Artem.'
+	'After a while you end up near the movie theater. When Artem sees it, he suggests: "Hey, let''s go see a movie!"'
+	minut += 15
+	gs 'stat'
+	gs 'artemEv','artemGopSkver'
+
+	act '"A movie sounds like fun!"':
+		*clr & cla
+		'<center><img <<$set_imgh>> src="images/locations/shared/cinema/kino_<<rand(1,3)>>.jpg"></center>'
+		'You enter the movie theater with Artem. After he buys tickets for the both of you, you find some nice seats in the back row and watch the movie.'
+		minut += 30
+		artemKino += 1
+		gs 'stat'
+
+		if artemKino > 3 : 
+			act 'You are attracted more to Artem then to the movie':
+				if artemKino > 3 and artemKinoKiss < 5:
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/shared/sex/kiss/kinokiss_<<rand(1,2)>>.jpg"></center>'
+					'You enter the movie theater with Artem. After he buys tickets for the both of you, you find some nice seats in the back row and watch the movie.'
+					'The movie turns out to be quite dull. You lean over towards Artem and ask him what he thinks of the movie.'
+					'He''s not impressed either. You kind of like him... maybe there are better ways for you to spend your time in a dark movie theater?'
+					'You lean over towards Artem again and say: "Hey Artem...", and kiss him on the lips when he turns to look at you. The rest of the movie results in being one long make-out session for the two of you. Neither of you have any clue what the movie was actually about, by the time the lights go back on.'
+					artemKinoKiss += 1
+					minut += 10
+				elseif artemKinoKiss >= 5:
+					*clr & cla
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/kinobj_<<rand(1,3)>>.jpg"></center>'
+					'By now, ''going to the movie theater'' usually equals an hour long make-out session with Artem. Nevertheless, you get into your usual seats and wait for the lights to go out.'
+					'You like Artem... he''s a genuinely nice guy, and he treats you with respect. You bet there''s something else you could do, that would probably make him feel even better than just kissing him.'
+					'When Artem moves closer to you and tries to put his arm around your shoulders, you push him back.'
+					'Just when he''s about to ask if something''s wrong, you put your hand on his thigh and slowly begin to work your way up, while you whisper to him: "Relax, sit back and enjoy the movie. Just let me know what it''s about afterwards."'
+					'For the next few minutes, you gently massage the growing bulge in his pants, and then open his zipper and take it in your hand. After you take a quick look around to ensure for yourself that no one can see you, you lean over and take the head of his erect cock inside your mouth.'
+					'You know you have nearly an hour before the movie is over, so you take your sweet time with him. You lick his cock teasingly slow, play with his balls and only barely put your lips around it, backing off every time you think he''s getting close.'
+					'Finally you decide you''ve teased him enough, and you let him finish in your mouth. You do have to swallow his load; you can''t spit it out anywhere, so it''s the only way to not stain your clothes. After making sure you didn''t miss a drop, you give the head of his dick a light kiss before getting back into your seat like nothing happened. The movie is just about over.'
+					gs 'arousal','bj',10
+					gs 'cum_call','mouth',$boy,1
+					bja += 1
+					swallow += 1
+					artemKinoKiss += 1
+				end
+				gs 'stat'
+				act 'Watch the movie':
+					cla
+					minut += 20
+					'When the movie ends, you and Artem decide to go back to his apartment.'
+					gs 'stat'
+
+					act 'Go to Artem''s apartment':gt 'artemhome','inside'
+				end
+			end
+		end
+		act 'Watch the movie':
+			cla
+			'When the movie ends, you and Artem decide to go back to his apartment.'
+			minut += 30
+			gs 'stat'
+
+			act 'Go to Artem''s apartment':gt 'artemhome','inside'
+		end
+	end
+	act '"Let''s just keep walking"':
+		cla
+		'You don''t really feel like going the cinema, and tell him: "Nah, let''s just enjoy the walk we''re on."'
+		'Artem is happy enough to just spend time with you, regardless of what the two of you are doing.'
+		'He nods and takes your hand in his as you continue on your walk, talking about everyday things.'
+		minut += 10
+		if rand(0,10) < 2: gt 'artemEv','artemGopSkver'
+		minut += 20
+		'After a good half hour of walking, the two of you decide you''ve had enough and walk back to Artem''s apartment.'
+		gs 'stat'
+
+		act 'Go inside with Artem':gt 'artemhome','inside'
+	end
+
+end &! --- artemSkver ---
+
+if $ARGS[0] = 'artemGopSkver':
+	*clr & cla
+	menu_off = 1
+	'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop.jpg"></center>'
+	'As you enjoy a pleasant walk in the park, some Gopniks suddenly stop you. They don''t look familiar to you.'
+	'Somehow, one of them knows your name. They look at you with disdain and the leader of their group says: "<<$pcs_nickname>>? What are you doing with this bitch?"'
+	minut += 5
+	gs 'stat'
+
+	act 'Ignore them and keep walking':
+		cla
+		'You hold Artem''s hand tightly and pick up the pace, pretending you didn''t hear the Gopniks as you quickly walk away from them. Fortunately, they leave you alone.' 
+		minut += 15
+		'You moved into safer part of the park and after about quarter hour of walking, the two of you decide you''ve had enough and walk back to Artem''s apartment.'
+		gs 'stat'
+
+		act 'Go inside with Artem':gt 'artemhome','inside'
+	end
+	act 'Stand up to them':
+		cla
+		'You indignantly reply: "He''s not a bitch, Artem is my friend!"'
+		'The Gopnik walks up to Artem, and pokes him in the chest with his finger. He asks: "Oh really... what do you think, bitch? Are you a bitch or what?"'
+		act 'Get between them':
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_knee.jpg"></center>'
+			'You quickly get inbetween Artem and the Gopnik, shielding him with your body. You threaten them: Don''t touch him! I''ll call the police!"'
+			'The Gopnik is not impressed. He pulls out a knife and puts it against your throat: "Why are you wasting your time with this loser, <<$pcs_nickname>>?"'
+			'You can see his friends slowly encroaching around you. There''s no way you can run away now.'
+			'You look into his eyes and sigh: "Come on... just let us leave. Please? You can take my money."'
+			'The Gopnik is satisfied with that prospect, and lowers the knife. After you give him all your money, he lets you and Artem leave. You feel bad for getting robbed like that, but you still feel you did the right thing. Who knows what they would''ve done to Artem, if you didn''t get involved!'
+			minut += 5
+			money = 0
+			gs 'stat'
+
+			act 'Go to Artem''s apartment':gt 'artemhome','inside'
+		end
+		act 'Watch in silence':
+			*clr & cla
+			'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_udar.jpg"></center>'
+			'"I''m not a bitch", Artyom says quietly.'
+			'The Gopnik grins: "We''ll see about that!"'
+			'He hits Artem hard in the stomach. Artem buckles over and falls to his knees. The Gopnik and his friends laugh while Artem lies groaning on the ground.'
+			'He turns to you: "Everyone can see he''s a bitch, <<$pcs_nickname>>. What do you even see him him? Seriously..."'
+			'Then he continues, with an evil smirk on his face: "So... you really like him? Enough to help him out of this mess he talked himself into? There is one thing you could do..."'
+			'The other Gopniks are all laughing when their leader suggests: "Do a striptease! If it''s a good one, we''ll leave him alone. Someone, play some music."'
+			minut += 5
+			gs 'stat'
+
+			act 'Refuse':
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_udar2.jpg"></center>'
+				'Wait, what!?'
+				'You answer: "No way, you perverts! Just leave us alone!"'
+				'The Gopnik walks back over to Artem and kicks him in the face. A few seconds later, one of his friends also kicks Artem in the back. You quickly throw yourself on top of Artem and hug him, so they can''t kick him any more.'
+				'The Gopnik looks down at the two of you, and spits on the ground. He sighs: "Whatever..."'
+				'The Gopniks leave you alone and go deeper into the park, probably to go drink some beer or something. You help Artem up on his feet, carefully.'
+				'Artem wipes the blood from his face, deeply embarrassed you have to see him like this. You walk in silence as you help him get home.'
+				minut += 5
+				gs 'stat'
+				act 'Put him in bed and leave':gt 'artemhome','leave',15
+			end
+			act 'Dance for them':
+				inhib_exp += rand(0,1)
+				*clr & cla
+				'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_strip.jpg"></center>'
+				'Well, if that''s what you have to do to get out of here...'
+				'You begin to dance to the music a bit awkwardly, and immediately get boo''d.'
+				'The Gopnik threatens: "We said striptease, <<$pcs_nickname>>! Not dance!"'
+				'You nod and slowly begin to undress to the music, trying to avoid their greedy looks.'
+				'Artem noticed their looks as well and shouts: "<<$pcs_nickname>>, stop! You don''t have to do this!"'
+				'The Gopnik punches him in the ribs and tells him: "Shut up, bitch! She''s saving your ass, show some respect."'
+				'Artem is too afraid to argue with them, and soon the only thing you''re still wearing is your boots.'
+				'All of the Gopniks gather around you. Their leader grins and gives you a choice: "Not bad <<$pcs_nickname>>, nice tits. It''s a shame you''re wasting them on him. And now, you''re going to suck us all off. If you do a good job, we''ll let you go."'
+				minut += 5
+				gs 'shortgs','undress'
+				gs 'stat'
+
+				act 'Get down on your knees':
+					*clr & cla
+					gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+					gs 'boyStat', $npclastgenerated,1
+					npc_sex[$npclastgenerated] += 1
+					gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+					gs 'boyStat', $npclastgenerated,2
+					npc_sex[$npclastgenerated] += 1
+					gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+					gs 'boyStat', $npclastgenerated,3
+					npc_sex[$npclastgenerated] += 1
+
+					gs 'arousal','bj','dick[1]',5,'sub','group','rough'
+					gs 'arousal','bj','dick[2]',5,'sub','group','rough'
+					gs 'arousal','bj','dick[3]',5,'sub','group','rough'
+					gs 'cum_call','face',$boy[1],0
+					gs 'cum_call','face',$boy[2],0
+					gs 'cum_call','face',$boy[3],0
+
+					gs 'stat'
+					'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_bj.jpg"></center>'
+					'You quickly glance around you and realize there''s no way you can get past them and outrun them all. With a deep sigh, you drop to your knees and reach out for one of the exposed cocks the Gopniks are already shoving in your face.'
+					'Three of the Gopniks leave you and go keep an eye out, satisfied that you can''t run away from this position without their friends easily stopping you. The other three all offer you their cocks.'
+					'For a few seconds you try to give the first guy a blowjob, but it''s quite obvious they don''t need your cooperation. The guy roughly shoves his dick down your throat and then begins to thrust his hips against your face, roughly fucking his throat while he keeps your head in place by grabbing onto your hair.'
+					'They run a train on your face, and you''re never without a cock in your mouth for long. As soon as one guy finishes, the next takes over. After what feels like forever the third guy finally finishes, and your face is completely covered with their sperm. You can hardly open your eyes and your throat feels sore.'
+					'The Gopniks all gather around for one last laugh, and then leave you and Artem be. Artem quietly helps you put your clothes back on before walking you home.'
+					act 'Go home':
+						gs 'shortgs','dress'
+						*clr & cla
+						gs 'stat'
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/walk_slap.jpg"></center>'
+						'You can see Artem is mulling something over, while you walk back home.'
+						'Once you reach your apartment building, Artem says: "<<$pcs_nickname>>... I don''t think we should see each other any more, after what just happened. That was gross!"'
+						'That fucking bastard... you did that to save him! Too angry to say anything, you slap him in the face as hard as you can and then storm off, vowing to never speak to him again.'
+						act 'Leave':
+							minut += 15
+							artemblok = 1
+							artemLernQW = -1
+							gt 'artemhome','leave',5
+						end
+					end
+				end
+				act 'Run away':
+					*clr & cla
+					minut += 5
+					gs 'stat'
+					artemGopRange = speed + pcs_agil + pcs_run
+					if artemGopRange < 50:
+						artemRand = rand(0,1)
+					elseif artemGopRange >= 50 and artemGopRange < 100:
+						artemRand = rand(0,2)
+					elseif artemGopRange >= 100 and artemGopRange < 150:
+						artemRand = rand(0,5)
+					elseif artemGopRange >= 150 and artemGopRange < 200:
+						artemRand = rand(0,10)
+					else
+						artemRand = rand(0,20)
+					end
+
+					if artemRand ! 0:
+						pcs_dom += 5
+						gs 'stat'
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/walk_save.jpg"></center>'
+						'You look around you, and suddenly shout in a random direction: "Dad, I''m over here!"'
+						'As the Gopniks turn around to see who you''re shouting at, you quickly grab Artem by the arm and start running. When you''re satisfied the Gopniks are no longer following you, you find a quiet area and put your clothes back on.'
+						act 'Go back to Artem''s apartment':gt 'artemhome','inside'
+					else
+						*clr & cla
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,1
+						npc_sex[$npclastgenerated] += 1
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,2
+						npc_sex[$npclastgenerated] += 1
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,3
+						npc_sex[$npclastgenerated] += 1
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,4
+						npc_sex[$npclastgenerated] += 1
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,5
+						npc_sex[$npclastgenerated] += 1
+						gs 'npcgeneratec', 0, 'Gopnik', rand(16,24)
+						gs 'boyStat', $npclastgenerated,6
+						npc_sex[$npclastgenerated] += 1
+
+						rape += 1
+						gang += 1
+						gs 'arousal','anal','dick[1]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[2]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[3]',5,'sub','group','rough'
+						gs 'arousal','','dick[4]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[5]',5,'sub','group','rough'
+						gs 'arousal','','dick[6]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[1]',5,'sub','group','rough'
+						gs 'arousal','','dick[2]',5,'sub','group','rough'
+						gs 'arousal','anal','dick[3]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[4]',5,'sub','group','rough'
+						gs 'arousal','','dick[5]',5,'sub','group','rough'
+						gs 'arousal','bj','dick[6]',5,'sub','group','rough'
+						minut -= 20
+						gs 'cum_call','anus',$boy[1],0
+						gs 'cum_call','face',$boy[2],0
+						gs 'cum_call','mouth',$boy[3],0
+						gs 'cum_call','face',$boy[4],0
+						gs 'cum_call','face',$boy[5],0
+						gs 'cum_call','face',$boy[6],0
+
+						gs 'stat'
+						'<center><img <<$set_imgh>> src="images/characters/pavlovsk/school/boy/artem/sex/park/walkgop_rape.jpg"></center>'
+						'You look around you, and suddenly shout: "Dad, I''m over here!"'
+						'As the Gopniks turn around to see who you''re shouting at, you quickly grab Artem by the arm and start running. Unfortunately, one of the Gopniks wasn''t fooled by your diversion, and you trip over his foot when he tackles you.'
+						'The guy drops to his knees and grabs you by the hair while you lie flat on your stomach: "We warned you, <<$pcs_nickname>>. You''re all ours now."'
+						'One of them takes off his pants and drops to his knees in front of you, while the other holds his knife to your neck. He threatens: "Open up whore, or we''ll be spilling your guts all over the ground."'
+						'Two of them go stand watch, while the other four gather around you. Two of them hold you down, while the third fucks your throat and the last one fucks your pussy. They keep switching places, fucking your helpless body relentlessly while Artem watches, unable to assist you in any way.'
+						'By this point you''re too tired to resist and just let them have their way with you, and just groan through the pain when one of them puts you on your hands and knees and fucks your tight asshole. Several more follow his example, and after what feels like forever they tell you to get up to your knees.'
+						'You do as they say, and meekly open your mouth while they jerk themselves off over your face one by one. Then they all spit into your mouth, and force you to swallow it.'
+						'To add insult to injury, several of them finish it off by urinating all over you. They laugh as they get dressed again, and their leader grins benevolently: "Go home and get cleaned up. We have nothing against you, but remember this lesson, <<$pcs_nickname>>... if you keep hanging out with bitches, people will treat you like one too. You know where to find us, when you decide you want a real man". Then they leave.'
+						'Artem quietly helps you get dressed, and quietly walks you home. When you get home he finally says something: "<<$pcs_nickname>>, I''m so sorry. I know what you did for me and... I owe you. Big time. I don''t know what I can do to repay you, but if you ever need anything... please. I''m there for you."'
+						gs 'shortgs','dress'
+						act 'Leave': artemblag = 1 & gt 'artemhome','leave',15
+					end
+				end
+			end
+		end
+	end
+end &! --- artemgopSkver ---
+
+if $ARGS[0] = 'start':
+	*clr & cla
+	menu_off = 1
+	'<center><b><font color="maroon"><<$npc_firstname[''A2'']>> <<$npc_lastname[''A2'']>></font></b></center>'
+	'<center><img <<$set_imgh>> src="images/pc/npc_headshots/big2.jpg"></center>'
+	if kotovLoveQW > 0 and artemVitokQW = 0:
+		'You walk across the school courtyard to meet up with Artem. He gives you a friendly nod as you approach, and asks: "You ready to go?"'
+		'Just when you leave the courtyard with Artem to go study at his house, you run into Vitek Kotov. He doesn''t look pleased.'
+		'Vitek looks at Artem disdainfully and sneers: "Where are you going with that four-eyed loser, <<$pcs_nickname>>?"'
+		'You smile at him and reassure him: "Relax Vitek, Artem is tutoring me a bit after class. My school performance needs a boost, and he kindly offered to help me out."'
+		'Vitek frowns though, and says: "He ''kindly offered''... right. I don''t trust that freak! Just look at him, he''s eyeing you up and down constantly!"'
+		'Artem is getting quite nervous, and tries to appease Vitek: "Vitek, come on man! You know I would never do that! I''m only helping <<$pcs_nickname>> out with her studies, I swear!"'
+		'You can see Vitek''s body tense. He''s not buying Artem''s story at all, and looks at Artem with distrust.'
+
+		if pcs_dom >= 10:
+			act 'Reassure Vitek he can trust you':
+				cla
+				sub += 10
+				artemVitokQW = 1
+				gs 'stat'
+				'You decide that you should step up for Artem, but also reassure Vitek you''re still with him. You need to be delicate about it, though.'
+				'You know Vitek well enough to know that he''s seething right now, so you try to placate him: "Come on baby, don''t you trust me? You know I''m your girl... Artem is only helping me get better grades, that''s all. We can still hang out later?"'
+				'That makes Vitek feel a bit better, and you can see his body relax a little.'
+				'Still, he drives his point home by punching Artem in the shoulder. He sneers: "You''re lucky, four-eyes. Still... if I even suspect that you''ve laid a finger on <<$pcs_nickname>>, I''ll put you in a wheelchair and have you pissing blood for the rest of your life! Got that?"'
+				'Artem is terrified, and quickly nods while he rubs his painful shoulder: "Yes, yes! I understand!"'
+				'Vitek leaves you be, and you go to Artem''s home with him to study. You can see Artem''s body still trembling as you walk down the streets.'
+				act 'Do homework with Artem': gt 'artemEv','learn'
+			end
+		end
+
+		act 'Say nothing':
+			cla
+			artemVitokQW = 2
+			'You silently watch the two of them, and wonder if you should help Artem.'
+			'Suddenly, Vitek punches Artem in the chest, knocking the wind out of him.'
+			'Artem curls up into a ball and squeals like a girl: "Vitek, please! Don''t hit me again, please!"'
+			'Vitek leans over Artem''s prone body and scoffs: "Walk away, now. If I ever see you near <<$pcs_nickname>> again, I''m knocking your teeth out! Got that?"'
+			'Artem, still curled up on the ground, wails: "Okay, okay! I''ll leave her alone! Just please, let me go!"'
+			'Vitek gives him one more kick in the ass, just as Artem gets up. He growls: "Now get the fuck out of here, freak... before I change my mind!"'
+			'The terrified Artem quickly gathers his things and runs away from you, deciding it''s not worth the risk to help you. Vitek spits on the ground with a pleased grin on his face, and walks away.'
+			gs 'stat'
+
+			act 'Continue':gs 'gschool_grounds','main'
+		end
+	elseif fedorKozlovQW >= 10 and FedorArtemTalk = 0:
+		cla
+		FedorArtemTalk = 1
+		'As you leave the school courtyard with Artem to go study, Fedor stops you.'
+		'He looks questioningly at Artem and asks: "Artem, what''s going on? Are you taking <<$pcs_nickname>> somewhere? She''s with me, you know..."'
+		'Artem blushes, and says: "I know she is, Fedor. We''re just going to do our homework together. I''m tutoring <<$pcs_nickname>>, to help her school performance a little. She asked me to help her, by the way!"'
+		'You smile at Fedor, and pitch in: "I did ask him, Fedor. I really need the help for school, and Artem was friendly enough to help me out. We''re just studying together, nothing more."'
+		'Fedor sighs, but concedes: "Well... alright, <<$pcs_nickname>>. I don''t like you going with <b>him</b>, but I trust you."'
+		'After that he walks away, and you and Artem leave the schoolyard.'
+		gs 'stat'
+
+		act 'Do homework with Artem': gt 'artemEv','learn'
+	else 
+		cla
+		'You walk across the school courtyard to meet up with Artem and go study at his place. He gives you a friendly nod as you approach, and asks: "You ready to go?"'
+		'You smile: "Let''s go study!"'
+		'The two of you don''t have much to talk about on the way there, and after a few minutes just decide to walk in silence.'
+		gs 'stat'
+		
+		act 'Go to Artem''s home':gt 'artemhome','inside'
+	end
+end
+
+--- artemEv ---------------------------------
